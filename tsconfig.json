@@ -6,14 +6,14 @@
     "outDir": "./dist",
     "module": "commonjs",
     "target": "esnext",
-    "types": [],
+    "types": ["node"],
     "lib": ["esnext"],
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
 
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
+    "exactOptionalPropertyTypes": false,
 
     "strict": true,
     "jsx": "react-jsx",
