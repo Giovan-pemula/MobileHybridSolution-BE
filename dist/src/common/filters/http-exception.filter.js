@@ -8,6 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HttpExceptionFilter = void 0;
 const common_1 = require("@nestjs/common");
+/**
+ * Global exception filter.
+ * Catches ALL exceptions and returns a consistent error envelope:
+ * { success: false, message: string, errors?: unknown }
+ *
+ * This preserves the response format from the original Express implementation.
+ */
 let HttpExceptionFilter = class HttpExceptionFilter {
     catch(exception, host) {
         const ctx = host.switchToHttp();
@@ -28,6 +35,7 @@ let HttpExceptionFilter = class HttpExceptionFilter {
             }
         }
         else if (exception instanceof Error) {
+            console.error(exception);
             message = exception.message;
         }
         response.status(status).json({

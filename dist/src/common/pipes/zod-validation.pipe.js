@@ -2,6 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ZodValidationPipe = void 0;
 const common_1 = require("@nestjs/common");
+/**
+ * A generic NestJS pipe that validates the incoming value against a Zod schema.
+ * Use it with @Body(), @Query(), or @Param() decorators.
+ *
+ * @example
+ * @Post('login')
+ * async login(@Body(new ZodValidationPipe(loginSchema)) body: LoginDto) { ... }
+ */
 class ZodValidationPipe {
     schema;
     constructor(schema) {

@@ -13,12 +13,20 @@ export interface ApiResponse<T> {
   data: T;
 }
 
+/**
+ * Global response interceptor.
+ * Wraps all successful controller return values into:
+ * { success: true, message: string, data: T }
+ *
+ * Controllers can return:
+ * - { data, message } → uses the provided message
+ * - any other value  → wraps it with message: 'success'
+ */
 @Injectable()
 export class ResponseInterceptor<T> implements NestInterceptor<T, ApiResponse<T>> {
   intercept(_context: ExecutionContext, next: CallHandler): Observable<ApiResponse<T>> {
     return next.handle().pipe(
       map((value: any) => {
-        // If handler returns { data, message } shape, use it; otherwise wrap directly
         if (
           value !== null &&
           typeof value === 'object' &&
@@ -31,6 +39,7 @@ export class ResponseInterceptor<T> implements NestInterceptor<T, ApiResponse<T>
             data: value.data,
           };
         }
+
         return {
           success: true as const,
           message: 'success',

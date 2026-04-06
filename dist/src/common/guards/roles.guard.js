@@ -23,6 +23,7 @@ let RolesGuard = class RolesGuard {
             context.getHandler(),
             context.getClass(),
         ]);
+        // No roles required — allow through
         if (!requiredRoles || requiredRoles.length === 0) {
             return true;
         }

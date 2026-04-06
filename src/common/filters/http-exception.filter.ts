@@ -7,6 +7,13 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 
+/**
+ * Global exception filter.
+ * Catches ALL exceptions and returns a consistent error envelope:
+ * { success: false, message: string, errors?: unknown }
+ *
+ * This preserves the response format from the original Express implementation.
+ */
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: unknown, host: ArgumentsHost) {
@@ -29,6 +36,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
         errors = resp['errors'];
       }
     } else if (exception instanceof Error) {
+      console.error(exception);
       message = exception.message;
     }
 

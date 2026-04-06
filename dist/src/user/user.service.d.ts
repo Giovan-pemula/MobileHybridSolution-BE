@@ -8,8 +8,8 @@ export declare class UserService {
     }): Promise<{
         data: {
             id: number;
-            email: string;
             name: string;
+            email: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
             createdAt: Date;
@@ -24,8 +24,8 @@ export declare class UserService {
     }>;
     getUserById(id: number): Promise<{
         id: number;
-        email: string;
         name: string;
+        email: string;
         role: import("../../generated/prisma/enums").UserRole;
         avatar: string | null;
         createdAt: Date;
@@ -37,8 +37,8 @@ export declare class UserService {
         avatar?: string;
     }): Promise<{
         id: number;
-        email: string;
         name: string;
+        email: string;
         role: import("../../generated/prisma/enums").UserRole;
         avatar: string | null;
         createdAt: Date;
