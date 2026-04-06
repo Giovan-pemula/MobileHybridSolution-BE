@@ -3,19 +3,19 @@ export declare class RatingRepository {
     private readonly prisma;
     constructor(prisma: PrismaService);
     findByUserAndCourse(userId: number, courseId: number): Promise<{
-        rating: number;
         id: number;
         createdAt: Date;
-        userId: number;
         courseId: number;
+        userId: number;
+        rating: number;
         review: string | null;
     } | null>;
     findById(id: number): Promise<{
-        rating: number;
         id: number;
         createdAt: Date;
-        userId: number;
         courseId: number;
+        userId: number;
+        rating: number;
         review: string | null;
     } | null>;
     findByCourse(courseId: number): Promise<({
@@ -25,11 +25,11 @@ export declare class RatingRepository {
             avatar: string | null;
         };
     } & {
-        rating: number;
         id: number;
         createdAt: Date;
-        userId: number;
         courseId: number;
+        userId: number;
+        rating: number;
         review: string | null;
     })[]>;
     create(data: {
@@ -44,11 +44,11 @@ export declare class RatingRepository {
             avatar: string | null;
         };
     } & {
-        rating: number;
         id: number;
         createdAt: Date;
-        userId: number;
         courseId: number;
+        userId: number;
+        rating: number;
         review: string | null;
     }>;
     update(id: number, data: {
@@ -61,19 +61,19 @@ export declare class RatingRepository {
             avatar: string | null;
         };
     } & {
-        rating: number;
         id: number;
         createdAt: Date;
-        userId: number;
         courseId: number;
+        userId: number;
+        rating: number;
         review: string | null;
     }>;
     delete(id: number): Promise<{
-        rating: number;
         id: number;
         createdAt: Date;
-        userId: number;
         courseId: number;
+        userId: number;
+        rating: number;
         review: string | null;
     }>;
 }

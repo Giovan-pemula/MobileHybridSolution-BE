@@ -17,8 +17,8 @@ export declare class CourseService {
             };
             trainer: {
                 id: number;
-                email: string;
                 name: string;
+                email: string;
                 avatar: string | null;
             };
             id: number;
@@ -55,25 +55,25 @@ export declare class CourseService {
         };
         trainer: {
             id: number;
-            email: string;
             name: string;
+            email: string;
             avatar: string | null;
         };
         sections: ({
             lessons: {
-                order: number;
                 id: number;
                 title: string;
+                order: number;
                 youtubeUrl: string | null;
                 duration: number | null;
                 isPreview: boolean;
                 sectionId: number;
             }[];
         } & {
-            order: number;
             id: number;
             title: string;
             courseId: number;
+            order: number;
         })[];
         id: number;
         createdAt: Date;
@@ -97,8 +97,8 @@ export declare class CourseService {
         };
         trainer: {
             id: number;
-            email: string;
             name: string;
+            email: string;
             avatar: string | null;
         };
     } & {
@@ -124,8 +124,8 @@ export declare class CourseService {
         };
         trainer: {
             id: number;
-            email: string;
             name: string;
+            email: string;
             avatar: string | null;
         };
     } & {
@@ -147,15 +147,15 @@ export declare class CourseService {
         data: ({
             user: {
                 id: number;
-                email: string;
                 name: string;
+                email: string;
                 avatar: string | null;
             };
         } & {
             id: number;
             createdAt: Date;
-            userId: number;
             courseId: number;
+            userId: number;
             progress: number;
             completed: boolean;
         })[];

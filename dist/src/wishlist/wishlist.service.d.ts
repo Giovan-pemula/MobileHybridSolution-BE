@@ -34,8 +34,8 @@ export declare class WishlistService {
         };
     } & {
         id: number;
-        userId: number;
         courseId: number;
+        userId: number;
     })[]>;
     addToWishlist(userId: number, courseId: number): Promise<{
         course: {
@@ -66,8 +66,8 @@ export declare class WishlistService {
         };
     } & {
         id: number;
-        userId: number;
         courseId: number;
+        userId: number;
     }>;
     removeFromWishlist(userId: number, courseId: number): Promise<void>;
 }

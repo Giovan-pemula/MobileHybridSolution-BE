@@ -42,9 +42,9 @@ export declare class OrderController {
         } & {
             id: number;
             createdAt: Date;
-            total: number;
             status: import("../../generated/prisma/enums").OrderStatus;
             userId: number;
+            total: number;
         })[];
         message: string;
     }>;
@@ -81,9 +81,9 @@ export declare class OrderController {
         } & {
             id: number;
             createdAt: Date;
-            total: number;
             status: import("../../generated/prisma/enums").OrderStatus;
             userId: number;
+            total: number;
         };
         message: string;
     }>;

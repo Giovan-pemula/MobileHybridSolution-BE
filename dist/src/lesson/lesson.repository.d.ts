@@ -19,15 +19,15 @@ export declare class LessonRepository {
                 trainerId: number;
             };
         } & {
-            order: number;
             id: number;
             title: string;
             courseId: number;
+            order: number;
         };
     } & {
-        order: number;
         id: number;
         title: string;
+        order: number;
         youtubeUrl: string | null;
         duration: number | null;
         isPreview: boolean;
@@ -41,9 +41,9 @@ export declare class LessonRepository {
         sectionId: number;
         order?: number;
     }): Promise<{
-        order: number;
         id: number;
         title: string;
+        order: number;
         youtubeUrl: string | null;
         duration: number | null;
         isPreview: boolean;
@@ -56,18 +56,18 @@ export declare class LessonRepository {
         isPreview?: boolean;
         order?: number;
     }): Promise<{
-        order: number;
         id: number;
         title: string;
+        order: number;
         youtubeUrl: string | null;
         duration: number | null;
         isPreview: boolean;
         sectionId: number;
     }>;
     delete(id: number): Promise<{
-        order: number;
         id: number;
         title: string;
+        order: number;
         youtubeUrl: string | null;
         duration: number | null;
         isPreview: boolean;

@@ -13,11 +13,11 @@ export declare class RatingController {
                 avatar: string | null;
             };
         } & {
-            rating: number;
             id: number;
             createdAt: Date;
-            userId: number;
             courseId: number;
+            userId: number;
+            rating: number;
             review: string | null;
         })[];
         message: string;
@@ -30,11 +30,11 @@ export declare class RatingController {
                 avatar: string | null;
             };
         } & {
-            rating: number;
             id: number;
             createdAt: Date;
-            userId: number;
             courseId: number;
+            userId: number;
+            rating: number;
             review: string | null;
         };
         message: string;
@@ -47,11 +47,11 @@ export declare class RatingController {
                 avatar: string | null;
             };
         } & {
-            rating: number;
             id: number;
             createdAt: Date;
-            userId: number;
             courseId: number;
+            userId: number;
+            rating: number;
             review: string | null;
         };
         message: string;

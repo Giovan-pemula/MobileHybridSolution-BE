@@ -9,11 +9,11 @@ export declare class RatingService {
             avatar: string | null;
         };
     } & {
-        rating: number;
         id: number;
         createdAt: Date;
-        userId: number;
         courseId: number;
+        userId: number;
+        rating: number;
         review: string | null;
     })[]>;
     createRating(userId: number, courseId: number, data: {
@@ -26,11 +26,11 @@ export declare class RatingService {
             avatar: string | null;
         };
     } & {
-        rating: number;
         id: number;
         createdAt: Date;
-        userId: number;
         courseId: number;
+        userId: number;
+        rating: number;
         review: string | null;
     }>;
     updateRating(id: number, userId: number, data: {
@@ -43,11 +43,11 @@ export declare class RatingService {
             avatar: string | null;
         };
     } & {
-        rating: number;
         id: number;
         createdAt: Date;
-        userId: number;
         courseId: number;
+        userId: number;
+        rating: number;
         review: string | null;
     }>;
     deleteRating(id: number, userId: number): Promise<void>;
