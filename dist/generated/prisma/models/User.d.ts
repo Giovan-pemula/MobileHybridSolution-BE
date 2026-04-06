@@ -1,4 +1,5 @@
 import type * as runtime from "@prisma/client/runtime/client";
+import type * as $Enums from "../enums";
 import type * as Prisma from "../internal/prismaNamespace";
 /**
  * Model User
@@ -20,22 +21,31 @@ export type UserSumAggregateOutputType = {
 };
 export type UserMinAggregateOutputType = {
     id: number | null;
-    email: string | null;
     name: string | null;
+    email: string | null;
+    password: string | null;
+    role: $Enums.UserRole | null;
+    avatar: string | null;
     createdAt: Date | null;
     updatedAt: Date | null;
 };
 export type UserMaxAggregateOutputType = {
     id: number | null;
-    email: string | null;
     name: string | null;
+    email: string | null;
+    password: string | null;
+    role: $Enums.UserRole | null;
+    avatar: string | null;
     createdAt: Date | null;
     updatedAt: Date | null;
 };
 export type UserCountAggregateOutputType = {
     id: number;
-    email: number;
     name: number;
+    email: number;
+    password: number;
+    role: number;
+    avatar: number;
     createdAt: number;
     updatedAt: number;
     _all: number;
@@ -48,22 +58,31 @@ export type UserSumAggregateInputType = {
 };
 export type UserMinAggregateInputType = {
     id?: true;
-    email?: true;
     name?: true;
+    email?: true;
+    password?: true;
+    role?: true;
+    avatar?: true;
     createdAt?: true;
     updatedAt?: true;
 };
 export type UserMaxAggregateInputType = {
     id?: true;
-    email?: true;
     name?: true;
+    email?: true;
+    password?: true;
+    role?: true;
+    avatar?: true;
     createdAt?: true;
     updatedAt?: true;
 };
 export type UserCountAggregateInputType = {
     id?: true;
-    email?: true;
     name?: true;
+    email?: true;
+    password?: true;
+    role?: true;
+    avatar?: true;
     createdAt?: true;
     updatedAt?: true;
     _all?: true;
@@ -146,8 +165,11 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 };
 export type UserGroupByOutputType = {
     id: number;
+    name: string;
     email: string;
-    name: string | null;
+    password: string;
+    role: $Enums.UserRole;
+    avatar: string | null;
     createdAt: Date;
     updatedAt: Date;
     _count: UserCountAggregateOutputType | null;
@@ -164,17 +186,41 @@ export type UserWhereInput = {
     OR?: Prisma.UserWhereInput[];
     NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[];
     id?: Prisma.IntFilter<"User"> | number;
+    name?: Prisma.StringFilter<"User"> | string;
     email?: Prisma.StringFilter<"User"> | string;
-    name?: Prisma.StringNullableFilter<"User"> | string | null;
+    password?: Prisma.StringFilter<"User"> | string;
+    role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole;
+    avatar?: Prisma.StringNullableFilter<"User"> | string | null;
     createdAt?: Prisma.DateTimeFilter<"User"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string;
+    courses?: Prisma.CourseListRelationFilter;
+    enrollments?: Prisma.EnrollmentListRelationFilter;
+    ratings?: Prisma.RatingListRelationFilter;
+    wishlists?: Prisma.WishlistListRelationFilter;
+    discussions?: Prisma.DiscussionListRelationFilter;
+    replies?: Prisma.ReplyListRelationFilter;
+    orders?: Prisma.OrderListRelationFilter;
+    trainerRequest?: Prisma.XOR<Prisma.TrainerRequestNullableScalarRelationFilter, Prisma.TrainerRequestWhereInput> | null;
+    lessonCompletions?: Prisma.LessonCompletionListRelationFilter;
 };
 export type UserOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
+    name?: Prisma.SortOrder;
     email?: Prisma.SortOrder;
-    name?: Prisma.SortOrderInput | Prisma.SortOrder;
+    password?: Prisma.SortOrder;
+    role?: Prisma.SortOrder;
+    avatar?: Prisma.SortOrderInput | Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
+    courses?: Prisma.CourseOrderByRelationAggregateInput;
+    enrollments?: Prisma.EnrollmentOrderByRelationAggregateInput;
+    ratings?: Prisma.RatingOrderByRelationAggregateInput;
+    wishlists?: Prisma.WishlistOrderByRelationAggregateInput;
+    discussions?: Prisma.DiscussionOrderByRelationAggregateInput;
+    replies?: Prisma.ReplyOrderByRelationAggregateInput;
+    orders?: Prisma.OrderOrderByRelationAggregateInput;
+    trainerRequest?: Prisma.TrainerRequestOrderByWithRelationInput;
+    lessonCompletions?: Prisma.LessonCompletionOrderByRelationAggregateInput;
 };
 export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: number;
@@ -182,14 +228,29 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
     AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[];
     OR?: Prisma.UserWhereInput[];
     NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[];
-    name?: Prisma.StringNullableFilter<"User"> | string | null;
+    name?: Prisma.StringFilter<"User"> | string;
+    password?: Prisma.StringFilter<"User"> | string;
+    role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole;
+    avatar?: Prisma.StringNullableFilter<"User"> | string | null;
     createdAt?: Prisma.DateTimeFilter<"User"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string;
+    courses?: Prisma.CourseListRelationFilter;
+    enrollments?: Prisma.EnrollmentListRelationFilter;
+    ratings?: Prisma.RatingListRelationFilter;
+    wishlists?: Prisma.WishlistListRelationFilter;
+    discussions?: Prisma.DiscussionListRelationFilter;
+    replies?: Prisma.ReplyListRelationFilter;
+    orders?: Prisma.OrderListRelationFilter;
+    trainerRequest?: Prisma.XOR<Prisma.TrainerRequestNullableScalarRelationFilter, Prisma.TrainerRequestWhereInput> | null;
+    lessonCompletions?: Prisma.LessonCompletionListRelationFilter;
 }, "id" | "email">;
 export type UserOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
+    name?: Prisma.SortOrder;
     email?: Prisma.SortOrder;
-    name?: Prisma.SortOrderInput | Prisma.SortOrder;
+    password?: Prisma.SortOrder;
+    role?: Prisma.SortOrder;
+    avatar?: Prisma.SortOrderInput | Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
     _count?: Prisma.UserCountOrderByAggregateInput;
@@ -203,61 +264,124 @@ export type UserScalarWhereWithAggregatesInput = {
     OR?: Prisma.UserScalarWhereWithAggregatesInput[];
     NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[];
     id?: Prisma.IntWithAggregatesFilter<"User"> | number;
+    name?: Prisma.StringWithAggregatesFilter<"User"> | string;
     email?: Prisma.StringWithAggregatesFilter<"User"> | string;
-    name?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null;
+    password?: Prisma.StringWithAggregatesFilter<"User"> | string;
+    role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole;
+    avatar?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null;
     createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string;
     updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string;
 };
 export type UserCreateInput = {
+    name: string;
     email: string;
-    name?: string | null;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateInput = {
     id?: number;
+    name: string;
     email: string;
-    name?: string | null;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionUncheckedCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserUpdateInput = {
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
     email?: Prisma.StringFieldUpdateOperationsInput | string;
-    name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
     email?: Prisma.StringFieldUpdateOperationsInput | string;
-    name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUncheckedUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUncheckedUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
 };
 export type UserCreateManyInput = {
     id?: number;
+    name: string;
     email: string;
-    name?: string | null;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
 };
 export type UserUpdateManyMutationInput = {
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
     email?: Prisma.StringFieldUpdateOperationsInput | string;
-    name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 export type UserUncheckedUpdateManyInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
     email?: Prisma.StringFieldUpdateOperationsInput | string;
-    name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 export type UserCountOrderByAggregateInput = {
     id?: Prisma.SortOrder;
-    email?: Prisma.SortOrder;
     name?: Prisma.SortOrder;
+    email?: Prisma.SortOrder;
+    password?: Prisma.SortOrder;
+    role?: Prisma.SortOrder;
+    avatar?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
 };
@@ -266,23 +390,36 @@ export type UserAvgOrderByAggregateInput = {
 };
 export type UserMaxOrderByAggregateInput = {
     id?: Prisma.SortOrder;
-    email?: Prisma.SortOrder;
     name?: Prisma.SortOrder;
+    email?: Prisma.SortOrder;
+    password?: Prisma.SortOrder;
+    role?: Prisma.SortOrder;
+    avatar?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
 };
 export type UserMinOrderByAggregateInput = {
     id?: Prisma.SortOrder;
-    email?: Prisma.SortOrder;
     name?: Prisma.SortOrder;
+    email?: Prisma.SortOrder;
+    password?: Prisma.SortOrder;
+    role?: Prisma.SortOrder;
+    avatar?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
 };
 export type UserSumOrderByAggregateInput = {
     id?: Prisma.SortOrder;
 };
+export type UserScalarRelationFilter = {
+    is?: Prisma.UserWhereInput;
+    isNot?: Prisma.UserWhereInput;
+};
 export type StringFieldUpdateOperationsInput = {
     set?: string;
+};
+export type EnumUserRoleFieldUpdateOperationsInput = {
+    set?: $Enums.UserRole;
 };
 export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null;
@@ -297,42 +434,1026 @@ export type IntFieldUpdateOperationsInput = {
     multiply?: number;
     divide?: number;
 };
+export type UserCreateNestedOneWithoutCoursesInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutCoursesInput, Prisma.UserUncheckedCreateWithoutCoursesInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutCoursesInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutCoursesNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutCoursesInput, Prisma.UserUncheckedCreateWithoutCoursesInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutCoursesInput;
+    upsert?: Prisma.UserUpsertWithoutCoursesInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCoursesInput, Prisma.UserUpdateWithoutCoursesInput>, Prisma.UserUncheckedUpdateWithoutCoursesInput>;
+};
+export type UserCreateNestedOneWithoutEnrollmentsInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutEnrollmentsInput, Prisma.UserUncheckedCreateWithoutEnrollmentsInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutEnrollmentsInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutEnrollmentsNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutEnrollmentsInput, Prisma.UserUncheckedCreateWithoutEnrollmentsInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutEnrollmentsInput;
+    upsert?: Prisma.UserUpsertWithoutEnrollmentsInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEnrollmentsInput, Prisma.UserUpdateWithoutEnrollmentsInput>, Prisma.UserUncheckedUpdateWithoutEnrollmentsInput>;
+};
+export type UserCreateNestedOneWithoutRatingsInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutRatingsInput, Prisma.UserUncheckedCreateWithoutRatingsInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutRatingsInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutRatingsNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutRatingsInput, Prisma.UserUncheckedCreateWithoutRatingsInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutRatingsInput;
+    upsert?: Prisma.UserUpsertWithoutRatingsInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRatingsInput, Prisma.UserUpdateWithoutRatingsInput>, Prisma.UserUncheckedUpdateWithoutRatingsInput>;
+};
+export type UserCreateNestedOneWithoutWishlistsInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutWishlistsInput, Prisma.UserUncheckedCreateWithoutWishlistsInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutWishlistsInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutWishlistsNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutWishlistsInput, Prisma.UserUncheckedCreateWithoutWishlistsInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutWishlistsInput;
+    upsert?: Prisma.UserUpsertWithoutWishlistsInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutWishlistsInput, Prisma.UserUpdateWithoutWishlistsInput>, Prisma.UserUncheckedUpdateWithoutWishlistsInput>;
+};
+export type UserCreateNestedOneWithoutTrainerRequestInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutTrainerRequestInput, Prisma.UserUncheckedCreateWithoutTrainerRequestInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutTrainerRequestInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutTrainerRequestNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutTrainerRequestInput, Prisma.UserUncheckedCreateWithoutTrainerRequestInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutTrainerRequestInput;
+    upsert?: Prisma.UserUpsertWithoutTrainerRequestInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTrainerRequestInput, Prisma.UserUpdateWithoutTrainerRequestInput>, Prisma.UserUncheckedUpdateWithoutTrainerRequestInput>;
+};
+export type UserCreateNestedOneWithoutDiscussionsInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutDiscussionsInput, Prisma.UserUncheckedCreateWithoutDiscussionsInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutDiscussionsInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutDiscussionsNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutDiscussionsInput, Prisma.UserUncheckedCreateWithoutDiscussionsInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutDiscussionsInput;
+    upsert?: Prisma.UserUpsertWithoutDiscussionsInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDiscussionsInput, Prisma.UserUpdateWithoutDiscussionsInput>, Prisma.UserUncheckedUpdateWithoutDiscussionsInput>;
+};
+export type UserCreateNestedOneWithoutRepliesInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutRepliesInput, Prisma.UserUncheckedCreateWithoutRepliesInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutRepliesInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutRepliesNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutRepliesInput, Prisma.UserUncheckedCreateWithoutRepliesInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutRepliesInput;
+    upsert?: Prisma.UserUpsertWithoutRepliesInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRepliesInput, Prisma.UserUpdateWithoutRepliesInput>, Prisma.UserUncheckedUpdateWithoutRepliesInput>;
+};
+export type UserCreateNestedOneWithoutLessonCompletionsInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutLessonCompletionsInput, Prisma.UserUncheckedCreateWithoutLessonCompletionsInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutLessonCompletionsInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutLessonCompletionsNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutLessonCompletionsInput, Prisma.UserUncheckedCreateWithoutLessonCompletionsInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutLessonCompletionsInput;
+    upsert?: Prisma.UserUpsertWithoutLessonCompletionsInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutLessonCompletionsInput, Prisma.UserUpdateWithoutLessonCompletionsInput>, Prisma.UserUncheckedUpdateWithoutLessonCompletionsInput>;
+};
+export type UserCreateNestedOneWithoutOrdersInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutOrdersInput, Prisma.UserUncheckedCreateWithoutOrdersInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrdersInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutOrdersNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutOrdersInput, Prisma.UserUncheckedCreateWithoutOrdersInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrdersInput;
+    upsert?: Prisma.UserUpsertWithoutOrdersInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOrdersInput, Prisma.UserUpdateWithoutOrdersInput>, Prisma.UserUncheckedUpdateWithoutOrdersInput>;
+};
+export type UserCreateWithoutCoursesInput = {
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutCoursesInput = {
+    id?: number;
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionUncheckedCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutCoursesInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutCoursesInput, Prisma.UserUncheckedCreateWithoutCoursesInput>;
+};
+export type UserUpsertWithoutCoursesInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutCoursesInput, Prisma.UserUncheckedUpdateWithoutCoursesInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutCoursesInput, Prisma.UserUncheckedCreateWithoutCoursesInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutCoursesInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutCoursesInput, Prisma.UserUncheckedUpdateWithoutCoursesInput>;
+};
+export type UserUpdateWithoutCoursesInput = {
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutCoursesInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUncheckedUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUncheckedUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+};
+export type UserCreateWithoutEnrollmentsInput = {
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
+    ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutEnrollmentsInput = {
+    id?: number;
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
+    ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionUncheckedCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutEnrollmentsInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutEnrollmentsInput, Prisma.UserUncheckedCreateWithoutEnrollmentsInput>;
+};
+export type UserUpsertWithoutEnrollmentsInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutEnrollmentsInput, Prisma.UserUncheckedUpdateWithoutEnrollmentsInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutEnrollmentsInput, Prisma.UserUncheckedCreateWithoutEnrollmentsInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutEnrollmentsInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutEnrollmentsInput, Prisma.UserUncheckedUpdateWithoutEnrollmentsInput>;
+};
+export type UserUpdateWithoutEnrollmentsInput = {
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
+    ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutEnrollmentsInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
+    ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUncheckedUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUncheckedUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+};
+export type UserCreateWithoutRatingsInput = {
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutRatingsInput = {
+    id?: number;
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionUncheckedCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutRatingsInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutRatingsInput, Prisma.UserUncheckedCreateWithoutRatingsInput>;
+};
+export type UserUpsertWithoutRatingsInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutRatingsInput, Prisma.UserUncheckedUpdateWithoutRatingsInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutRatingsInput, Prisma.UserUncheckedCreateWithoutRatingsInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutRatingsInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutRatingsInput, Prisma.UserUncheckedUpdateWithoutRatingsInput>;
+};
+export type UserUpdateWithoutRatingsInput = {
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutRatingsInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUncheckedUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUncheckedUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+};
+export type UserCreateWithoutWishlistsInput = {
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutWishlistsInput = {
+    id?: number;
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionUncheckedCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutWishlistsInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutWishlistsInput, Prisma.UserUncheckedCreateWithoutWishlistsInput>;
+};
+export type UserUpsertWithoutWishlistsInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutWishlistsInput, Prisma.UserUncheckedUpdateWithoutWishlistsInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutWishlistsInput, Prisma.UserUncheckedCreateWithoutWishlistsInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutWishlistsInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutWishlistsInput, Prisma.UserUncheckedUpdateWithoutWishlistsInput>;
+};
+export type UserUpdateWithoutWishlistsInput = {
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutWishlistsInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUncheckedUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUncheckedUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+};
+export type UserCreateWithoutTrainerRequestInput = {
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutTrainerRequestInput = {
+    id?: number;
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionUncheckedCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutTrainerRequestInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutTrainerRequestInput, Prisma.UserUncheckedCreateWithoutTrainerRequestInput>;
+};
+export type UserUpsertWithoutTrainerRequestInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutTrainerRequestInput, Prisma.UserUncheckedUpdateWithoutTrainerRequestInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutTrainerRequestInput, Prisma.UserUncheckedCreateWithoutTrainerRequestInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutTrainerRequestInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutTrainerRequestInput, Prisma.UserUncheckedUpdateWithoutTrainerRequestInput>;
+};
+export type UserUpdateWithoutTrainerRequestInput = {
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutTrainerRequestInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUncheckedUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUncheckedUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+};
+export type UserCreateWithoutDiscussionsInput = {
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutDiscussionsInput = {
+    id?: number;
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutDiscussionsInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutDiscussionsInput, Prisma.UserUncheckedCreateWithoutDiscussionsInput>;
+};
+export type UserUpsertWithoutDiscussionsInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutDiscussionsInput, Prisma.UserUncheckedUpdateWithoutDiscussionsInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutDiscussionsInput, Prisma.UserUncheckedCreateWithoutDiscussionsInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutDiscussionsInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutDiscussionsInput, Prisma.UserUncheckedUpdateWithoutDiscussionsInput>;
+};
+export type UserUpdateWithoutDiscussionsInput = {
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutDiscussionsInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUncheckedUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+};
+export type UserCreateWithoutRepliesInput = {
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutRepliesInput = {
+    id?: number;
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionUncheckedCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutRepliesInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutRepliesInput, Prisma.UserUncheckedCreateWithoutRepliesInput>;
+};
+export type UserUpsertWithoutRepliesInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutRepliesInput, Prisma.UserUncheckedUpdateWithoutRepliesInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutRepliesInput, Prisma.UserUncheckedCreateWithoutRepliesInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutRepliesInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutRepliesInput, Prisma.UserUncheckedUpdateWithoutRepliesInput>;
+};
+export type UserUpdateWithoutRepliesInput = {
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutRepliesInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUncheckedUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+};
+export type UserCreateWithoutLessonCompletionsInput = {
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutLessonCompletionsInput = {
+    id?: number;
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionUncheckedCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutLessonCompletionsInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutLessonCompletionsInput, Prisma.UserUncheckedCreateWithoutLessonCompletionsInput>;
+};
+export type UserUpsertWithoutLessonCompletionsInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutLessonCompletionsInput, Prisma.UserUncheckedUpdateWithoutLessonCompletionsInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutLessonCompletionsInput, Prisma.UserUncheckedCreateWithoutLessonCompletionsInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutLessonCompletionsInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutLessonCompletionsInput, Prisma.UserUncheckedUpdateWithoutLessonCompletionsInput>;
+};
+export type UserUpdateWithoutLessonCompletionsInput = {
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutLessonCompletionsInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUncheckedUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUncheckedUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
+};
+export type UserCreateWithoutOrdersInput = {
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutOrdersInput = {
+    id?: number;
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionUncheckedCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutOrdersInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutOrdersInput, Prisma.UserUncheckedCreateWithoutOrdersInput>;
+};
+export type UserUpsertWithoutOrdersInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutOrdersInput, Prisma.UserUncheckedUpdateWithoutOrdersInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutOrdersInput, Prisma.UserUncheckedCreateWithoutOrdersInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutOrdersInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutOrdersInput, Prisma.UserUncheckedUpdateWithoutOrdersInput>;
+};
+export type UserUpdateWithoutOrdersInput = {
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutOrdersInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUncheckedUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUncheckedUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+};
+/**
+ * Count Type UserCountOutputType
+ */
+export type UserCountOutputType = {
+    courses: number;
+    enrollments: number;
+    ratings: number;
+    wishlists: number;
+    discussions: number;
+    replies: number;
+    orders: number;
+    lessonCompletions: number;
+};
+export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    courses?: boolean | UserCountOutputTypeCountCoursesArgs;
+    enrollments?: boolean | UserCountOutputTypeCountEnrollmentsArgs;
+    ratings?: boolean | UserCountOutputTypeCountRatingsArgs;
+    wishlists?: boolean | UserCountOutputTypeCountWishlistsArgs;
+    discussions?: boolean | UserCountOutputTypeCountDiscussionsArgs;
+    replies?: boolean | UserCountOutputTypeCountRepliesArgs;
+    orders?: boolean | UserCountOutputTypeCountOrdersArgs;
+    lessonCompletions?: boolean | UserCountOutputTypeCountLessonCompletionsArgs;
+};
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null;
+};
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCoursesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.CourseWhereInput;
+};
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountEnrollmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.EnrollmentWhereInput;
+};
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRatingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.RatingWhereInput;
+};
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountWishlistsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.WishlistWhereInput;
+};
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDiscussionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.DiscussionWhereInput;
+};
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRepliesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.ReplyWhereInput;
+};
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.OrderWhereInput;
+};
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountLessonCompletionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.LessonCompletionWhereInput;
+};
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
-    email?: boolean;
     name?: boolean;
+    email?: boolean;
+    password?: boolean;
+    role?: boolean;
+    avatar?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
+    courses?: boolean | Prisma.User$coursesArgs<ExtArgs>;
+    enrollments?: boolean | Prisma.User$enrollmentsArgs<ExtArgs>;
+    ratings?: boolean | Prisma.User$ratingsArgs<ExtArgs>;
+    wishlists?: boolean | Prisma.User$wishlistsArgs<ExtArgs>;
+    discussions?: boolean | Prisma.User$discussionsArgs<ExtArgs>;
+    replies?: boolean | Prisma.User$repliesArgs<ExtArgs>;
+    orders?: boolean | Prisma.User$ordersArgs<ExtArgs>;
+    trainerRequest?: boolean | Prisma.User$trainerRequestArgs<ExtArgs>;
+    lessonCompletions?: boolean | Prisma.User$lessonCompletionsArgs<ExtArgs>;
+    _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["user"]>;
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
-    email?: boolean;
     name?: boolean;
+    email?: boolean;
+    password?: boolean;
+    role?: boolean;
+    avatar?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
 }, ExtArgs["result"]["user"]>;
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
-    email?: boolean;
     name?: boolean;
+    email?: boolean;
+    password?: boolean;
+    role?: boolean;
+    avatar?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
 }, ExtArgs["result"]["user"]>;
 export type UserSelectScalar = {
     id?: boolean;
-    email?: boolean;
     name?: boolean;
+    email?: boolean;
+    password?: boolean;
+    role?: boolean;
+    avatar?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
 };
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>;
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "avatar" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>;
+export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    courses?: boolean | Prisma.User$coursesArgs<ExtArgs>;
+    enrollments?: boolean | Prisma.User$enrollmentsArgs<ExtArgs>;
+    ratings?: boolean | Prisma.User$ratingsArgs<ExtArgs>;
+    wishlists?: boolean | Prisma.User$wishlistsArgs<ExtArgs>;
+    discussions?: boolean | Prisma.User$discussionsArgs<ExtArgs>;
+    replies?: boolean | Prisma.User$repliesArgs<ExtArgs>;
+    orders?: boolean | Prisma.User$ordersArgs<ExtArgs>;
+    trainerRequest?: boolean | Prisma.User$trainerRequestArgs<ExtArgs>;
+    lessonCompletions?: boolean | Prisma.User$lessonCompletionsArgs<ExtArgs>;
+    _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
+};
+export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
+export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     name: "User";
-    objects: {};
+    objects: {
+        courses: Prisma.$CoursePayload<ExtArgs>[];
+        enrollments: Prisma.$EnrollmentPayload<ExtArgs>[];
+        ratings: Prisma.$RatingPayload<ExtArgs>[];
+        wishlists: Prisma.$WishlistPayload<ExtArgs>[];
+        discussions: Prisma.$DiscussionPayload<ExtArgs>[];
+        replies: Prisma.$ReplyPayload<ExtArgs>[];
+        orders: Prisma.$OrderPayload<ExtArgs>[];
+        trainerRequest: Prisma.$TrainerRequestPayload<ExtArgs> | null;
+        lessonCompletions: Prisma.$LessonCompletionPayload<ExtArgs>[];
+    };
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: number;
+        name: string;
         email: string;
-        name: string | null;
+        password: string;
+        role: $Enums.UserRole;
+        avatar: string | null;
         createdAt: Date;
         updatedAt: Date;
     }, ExtArgs["result"]["user"]>;
@@ -664,6 +1785,15 @@ export interface UserDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
+    courses<T extends Prisma.User$coursesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$coursesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    enrollments<T extends Prisma.User$enrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    ratings<T extends Prisma.User$ratingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ratingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    wishlists<T extends Prisma.User$wishlistsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$wishlistsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WishlistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    discussions<T extends Prisma.User$discussionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$discussionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DiscussionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    replies<T extends Prisma.User$repliesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$repliesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReplyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    orders<T extends Prisma.User$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    trainerRequest<T extends Prisma.User$trainerRequestArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$trainerRequestArgs<ExtArgs>>): Prisma.Prisma__TrainerRequestClient<runtime.Types.Result.GetResult<Prisma.$TrainerRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    lessonCompletions<T extends Prisma.User$lessonCompletionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$lessonCompletionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LessonCompletionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -690,8 +1820,11 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
  */
 export interface UserFieldRefs {
     readonly id: Prisma.FieldRef<"User", 'Int'>;
-    readonly email: Prisma.FieldRef<"User", 'String'>;
     readonly name: Prisma.FieldRef<"User", 'String'>;
+    readonly email: Prisma.FieldRef<"User", 'String'>;
+    readonly password: Prisma.FieldRef<"User", 'String'>;
+    readonly role: Prisma.FieldRef<"User", 'UserRole'>;
+    readonly avatar: Prisma.FieldRef<"User", 'String'>;
     readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>;
     readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>;
 }
@@ -707,6 +1840,10 @@ export type UserFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Internal
      * Omit specific fields from the User
      */
     omit?: Prisma.UserOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.UserInclude<ExtArgs> | null;
     /**
      * Filter, which User to fetch.
      */
@@ -725,6 +1862,10 @@ export type UserFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.I
      */
     omit?: Prisma.UserOmit<ExtArgs> | null;
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.UserInclude<ExtArgs> | null;
+    /**
      * Filter, which User to fetch.
      */
     where: Prisma.UserWhereUniqueInput;
@@ -741,6 +1882,10 @@ export type UserFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalA
      * Omit specific fields from the User
      */
     omit?: Prisma.UserOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.UserInclude<ExtArgs> | null;
     /**
      * Filter, which User to fetch.
      */
@@ -789,6 +1934,10 @@ export type UserFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.In
      */
     omit?: Prisma.UserOmit<ExtArgs> | null;
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.UserInclude<ExtArgs> | null;
+    /**
      * Filter, which User to fetch.
      */
     where?: Prisma.UserWhereInput;
@@ -835,6 +1984,10 @@ export type UserFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
      * Omit specific fields from the User
      */
     omit?: Prisma.UserOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.UserInclude<ExtArgs> | null;
     /**
      * Filter, which Users to fetch.
      */
@@ -883,6 +2036,10 @@ export type UserCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
      */
     omit?: Prisma.UserOmit<ExtArgs> | null;
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.UserInclude<ExtArgs> | null;
+    /**
      * The data needed to create a User.
      */
     data: Prisma.XOR<Prisma.UserCreateInput, Prisma.UserUncheckedCreateInput>;
@@ -927,6 +2084,10 @@ export type UserUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
      * Omit specific fields from the User
      */
     omit?: Prisma.UserOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.UserInclude<ExtArgs> | null;
     /**
      * The data needed to update a User.
      */
@@ -991,6 +2152,10 @@ export type UserUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
      */
     omit?: Prisma.UserOmit<ExtArgs> | null;
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.UserInclude<ExtArgs> | null;
+    /**
      * The filter to search for the User to update in case it exists.
      */
     where: Prisma.UserWhereUniqueInput;
@@ -1016,6 +2181,10 @@ export type UserDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
      */
     omit?: Prisma.UserOmit<ExtArgs> | null;
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.UserInclude<ExtArgs> | null;
+    /**
      * Filter which User to delete.
      */
     where: Prisma.UserWhereUniqueInput;
@@ -1034,6 +2203,208 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
     limit?: number;
 };
 /**
+ * User.courses
+ */
+export type User$coursesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Course
+     */
+    select?: Prisma.CourseSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Course
+     */
+    omit?: Prisma.CourseOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.CourseInclude<ExtArgs> | null;
+    where?: Prisma.CourseWhereInput;
+    orderBy?: Prisma.CourseOrderByWithRelationInput | Prisma.CourseOrderByWithRelationInput[];
+    cursor?: Prisma.CourseWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.CourseScalarFieldEnum | Prisma.CourseScalarFieldEnum[];
+};
+/**
+ * User.enrollments
+ */
+export type User$enrollmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Enrollment
+     */
+    select?: Prisma.EnrollmentSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Enrollment
+     */
+    omit?: Prisma.EnrollmentOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.EnrollmentInclude<ExtArgs> | null;
+    where?: Prisma.EnrollmentWhereInput;
+    orderBy?: Prisma.EnrollmentOrderByWithRelationInput | Prisma.EnrollmentOrderByWithRelationInput[];
+    cursor?: Prisma.EnrollmentWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.EnrollmentScalarFieldEnum | Prisma.EnrollmentScalarFieldEnum[];
+};
+/**
+ * User.ratings
+ */
+export type User$ratingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Rating
+     */
+    select?: Prisma.RatingSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Rating
+     */
+    omit?: Prisma.RatingOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.RatingInclude<ExtArgs> | null;
+    where?: Prisma.RatingWhereInput;
+    orderBy?: Prisma.RatingOrderByWithRelationInput | Prisma.RatingOrderByWithRelationInput[];
+    cursor?: Prisma.RatingWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.RatingScalarFieldEnum | Prisma.RatingScalarFieldEnum[];
+};
+/**
+ * User.wishlists
+ */
+export type User$wishlistsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Wishlist
+     */
+    select?: Prisma.WishlistSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Wishlist
+     */
+    omit?: Prisma.WishlistOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.WishlistInclude<ExtArgs> | null;
+    where?: Prisma.WishlistWhereInput;
+    orderBy?: Prisma.WishlistOrderByWithRelationInput | Prisma.WishlistOrderByWithRelationInput[];
+    cursor?: Prisma.WishlistWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.WishlistScalarFieldEnum | Prisma.WishlistScalarFieldEnum[];
+};
+/**
+ * User.discussions
+ */
+export type User$discussionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Discussion
+     */
+    select?: Prisma.DiscussionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Discussion
+     */
+    omit?: Prisma.DiscussionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.DiscussionInclude<ExtArgs> | null;
+    where?: Prisma.DiscussionWhereInput;
+    orderBy?: Prisma.DiscussionOrderByWithRelationInput | Prisma.DiscussionOrderByWithRelationInput[];
+    cursor?: Prisma.DiscussionWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.DiscussionScalarFieldEnum | Prisma.DiscussionScalarFieldEnum[];
+};
+/**
+ * User.replies
+ */
+export type User$repliesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reply
+     */
+    select?: Prisma.ReplySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Reply
+     */
+    omit?: Prisma.ReplyOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.ReplyInclude<ExtArgs> | null;
+    where?: Prisma.ReplyWhereInput;
+    orderBy?: Prisma.ReplyOrderByWithRelationInput | Prisma.ReplyOrderByWithRelationInput[];
+    cursor?: Prisma.ReplyWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.ReplyScalarFieldEnum | Prisma.ReplyScalarFieldEnum[];
+};
+/**
+ * User.orders
+ */
+export type User$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Order
+     */
+    select?: Prisma.OrderSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Order
+     */
+    omit?: Prisma.OrderOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.OrderInclude<ExtArgs> | null;
+    where?: Prisma.OrderWhereInput;
+    orderBy?: Prisma.OrderOrderByWithRelationInput | Prisma.OrderOrderByWithRelationInput[];
+    cursor?: Prisma.OrderWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[];
+};
+/**
+ * User.trainerRequest
+ */
+export type User$trainerRequestArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrainerRequest
+     */
+    select?: Prisma.TrainerRequestSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the TrainerRequest
+     */
+    omit?: Prisma.TrainerRequestOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.TrainerRequestInclude<ExtArgs> | null;
+    where?: Prisma.TrainerRequestWhereInput;
+};
+/**
+ * User.lessonCompletions
+ */
+export type User$lessonCompletionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LessonCompletion
+     */
+    select?: Prisma.LessonCompletionSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the LessonCompletion
+     */
+    omit?: Prisma.LessonCompletionOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.LessonCompletionInclude<ExtArgs> | null;
+    where?: Prisma.LessonCompletionWhereInput;
+    orderBy?: Prisma.LessonCompletionOrderByWithRelationInput | Prisma.LessonCompletionOrderByWithRelationInput[];
+    cursor?: Prisma.LessonCompletionWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.LessonCompletionScalarFieldEnum | Prisma.LessonCompletionScalarFieldEnum[];
+};
+/**
  * User without action
  */
 export type UserDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1045,5 +2416,9 @@ export type UserDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
      * Omit specific fields from the User
      */
     omit?: Prisma.UserOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.UserInclude<ExtArgs> | null;
 };
 //# sourceMappingURL=User.d.ts.map

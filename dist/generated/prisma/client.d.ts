@@ -26,4 +26,69 @@ export { Prisma };
  *
  */
 export type User = Prisma.UserModel;
+/**
+ * Model Category
+ *
+ */
+export type Category = Prisma.CategoryModel;
+/**
+ * Model Course
+ *
+ */
+export type Course = Prisma.CourseModel;
+/**
+ * Model Section
+ *
+ */
+export type Section = Prisma.SectionModel;
+/**
+ * Model Lesson
+ *
+ */
+export type Lesson = Prisma.LessonModel;
+/**
+ * Model Enrollment
+ *
+ */
+export type Enrollment = Prisma.EnrollmentModel;
+/**
+ * Model Rating
+ *
+ */
+export type Rating = Prisma.RatingModel;
+/**
+ * Model Wishlist
+ *
+ */
+export type Wishlist = Prisma.WishlistModel;
+/**
+ * Model TrainerRequest
+ *
+ */
+export type TrainerRequest = Prisma.TrainerRequestModel;
+/**
+ * Model Discussion
+ *
+ */
+export type Discussion = Prisma.DiscussionModel;
+/**
+ * Model Reply
+ *
+ */
+export type Reply = Prisma.ReplyModel;
+/**
+ * Model LessonCompletion
+ *
+ */
+export type LessonCompletion = Prisma.LessonCompletionModel;
+/**
+ * Model Order
+ *
+ */
+export type Order = Prisma.OrderModel;
+/**
+ * Model OrderItem
+ *
+ */
+export type OrderItem = Prisma.OrderItemModel;
 //# sourceMappingURL=client.d.ts.map

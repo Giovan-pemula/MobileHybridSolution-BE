@@ -48,7 +48,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.OrderItemScalarFieldEnum = exports.OrderScalarFieldEnum = exports.LessonCompletionScalarFieldEnum = exports.ReplyScalarFieldEnum = exports.DiscussionScalarFieldEnum = exports.TrainerRequestScalarFieldEnum = exports.WishlistScalarFieldEnum = exports.RatingScalarFieldEnum = exports.EnrollmentScalarFieldEnum = exports.LessonScalarFieldEnum = exports.SectionScalarFieldEnum = exports.CourseScalarFieldEnum = exports.CategoryScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/client"));
 /**
  * Prisma Errors
@@ -103,7 +103,20 @@ exports.JsonNull = runtime.JsonNull;
  */
 exports.AnyNull = runtime.AnyNull;
 exports.ModelName = {
-    User: 'User'
+    User: 'User',
+    Category: 'Category',
+    Course: 'Course',
+    Section: 'Section',
+    Lesson: 'Lesson',
+    Enrollment: 'Enrollment',
+    Rating: 'Rating',
+    Wishlist: 'Wishlist',
+    TrainerRequest: 'TrainerRequest',
+    Discussion: 'Discussion',
+    Reply: 'Reply',
+    LessonCompletion: 'LessonCompletion',
+    Order: 'Order',
+    OrderItem: 'OrderItem'
 };
 /**
  * Enums
@@ -116,10 +129,112 @@ exports.TransactionIsolationLevel = runtime.makeStrictEnum({
 });
 exports.UserScalarFieldEnum = {
     id: 'id',
-    email: 'email',
     name: 'name',
+    email: 'email',
+    password: 'password',
+    role: 'role',
+    avatar: 'avatar',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
+};
+exports.CategoryScalarFieldEnum = {
+    id: 'id',
+    name: 'name',
+    slug: 'slug',
+    createdAt: 'createdAt'
+};
+exports.CourseScalarFieldEnum = {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    price: 'price',
+    isFree: 'isFree',
+    thumbnail: 'thumbnail',
+    previewYoutubeUrl: 'previewYoutubeUrl',
+    status: 'status',
+    categoryId: 'categoryId',
+    trainerId: 'trainerId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.SectionScalarFieldEnum = {
+    id: 'id',
+    title: 'title',
+    courseId: 'courseId',
+    order: 'order'
+};
+exports.LessonScalarFieldEnum = {
+    id: 'id',
+    title: 'title',
+    youtubeUrl: 'youtubeUrl',
+    duration: 'duration',
+    isPreview: 'isPreview',
+    sectionId: 'sectionId',
+    order: 'order'
+};
+exports.EnrollmentScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    courseId: 'courseId',
+    progress: 'progress',
+    completed: 'completed',
+    createdAt: 'createdAt'
+};
+exports.RatingScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    courseId: 'courseId',
+    rating: 'rating',
+    review: 'review',
+    createdAt: 'createdAt'
+};
+exports.WishlistScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    courseId: 'courseId'
+};
+exports.TrainerRequestScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    cvUrl: 'cvUrl',
+    bio: 'bio',
+    experience: 'experience',
+    status: 'status',
+    createdAt: 'createdAt'
+};
+exports.DiscussionScalarFieldEnum = {
+    id: 'id',
+    lessonId: 'lessonId',
+    userId: 'userId',
+    comment: 'comment',
+    createdAt: 'createdAt'
+};
+exports.ReplyScalarFieldEnum = {
+    id: 'id',
+    discussionId: 'discussionId',
+    userId: 'userId',
+    comment: 'comment',
+    createdAt: 'createdAt'
+};
+exports.LessonCompletionScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    lessonId: 'lessonId',
+    completed: 'completed',
+    completedAt: 'completedAt'
+};
+exports.OrderScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    total: 'total',
+    status: 'status',
+    createdAt: 'createdAt'
+};
+exports.OrderItemScalarFieldEnum = {
+    id: 'id',
+    orderId: 'orderId',
+    courseId: 'courseId',
+    price: 'price'
 };
 exports.SortOrder = {
     asc: 'asc',

@@ -1,0 +1,29 @@
+import { PrismaService } from '../common/prisma/prisma.service';
+export declare class AuthRepository {
+    private readonly prisma;
+    constructor(prisma: PrismaService);
+    findByEmail(email: string): Promise<{
+        id: number;
+        email: string;
+        name: string;
+        password: string;
+        role: import("../../generated/prisma/enums").UserRole;
+        avatar: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+    } | null>;
+    create(data: {
+        name: string;
+        email: string;
+        password: string;
+    }): Promise<{
+        id: number;
+        email: string;
+        name: string;
+        role: import("../../generated/prisma/enums").UserRole;
+        avatar: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
+}
+//# sourceMappingURL=auth.repository.d.ts.map

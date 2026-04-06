@@ -126,6 +126,149 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
     get user(): Prisma.UserDelegate<ExtArgs, {
         omit: OmitOpts;
     }>;
+    /**
+     * `prisma.category`: Exposes CRUD operations for the **Category** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Categories
+      * const categories = await prisma.category.findMany()
+      * ```
+      */
+    get category(): Prisma.CategoryDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.course`: Exposes CRUD operations for the **Course** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Courses
+      * const courses = await prisma.course.findMany()
+      * ```
+      */
+    get course(): Prisma.CourseDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.section`: Exposes CRUD operations for the **Section** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Sections
+      * const sections = await prisma.section.findMany()
+      * ```
+      */
+    get section(): Prisma.SectionDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.lesson`: Exposes CRUD operations for the **Lesson** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Lessons
+      * const lessons = await prisma.lesson.findMany()
+      * ```
+      */
+    get lesson(): Prisma.LessonDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.enrollment`: Exposes CRUD operations for the **Enrollment** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Enrollments
+      * const enrollments = await prisma.enrollment.findMany()
+      * ```
+      */
+    get enrollment(): Prisma.EnrollmentDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.rating`: Exposes CRUD operations for the **Rating** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Ratings
+      * const ratings = await prisma.rating.findMany()
+      * ```
+      */
+    get rating(): Prisma.RatingDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.wishlist`: Exposes CRUD operations for the **Wishlist** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Wishlists
+      * const wishlists = await prisma.wishlist.findMany()
+      * ```
+      */
+    get wishlist(): Prisma.WishlistDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.trainerRequest`: Exposes CRUD operations for the **TrainerRequest** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more TrainerRequests
+      * const trainerRequests = await prisma.trainerRequest.findMany()
+      * ```
+      */
+    get trainerRequest(): Prisma.TrainerRequestDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.discussion`: Exposes CRUD operations for the **Discussion** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Discussions
+      * const discussions = await prisma.discussion.findMany()
+      * ```
+      */
+    get discussion(): Prisma.DiscussionDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.reply`: Exposes CRUD operations for the **Reply** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Replies
+      * const replies = await prisma.reply.findMany()
+      * ```
+      */
+    get reply(): Prisma.ReplyDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.lessonCompletion`: Exposes CRUD operations for the **LessonCompletion** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more LessonCompletions
+      * const lessonCompletions = await prisma.lessonCompletion.findMany()
+      * ```
+      */
+    get lessonCompletion(): Prisma.LessonCompletionDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.order`: Exposes CRUD operations for the **Order** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Orders
+      * const orders = await prisma.order.findMany()
+      * ```
+      */
+    get order(): Prisma.OrderDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.orderItem`: Exposes CRUD operations for the **OrderItem** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more OrderItems
+      * const orderItems = await prisma.orderItem.findMany()
+      * ```
+      */
+    get orderItem(): Prisma.OrderItemDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
 }
 export declare function getPrismaClientClass(): PrismaClientConstructor;
 //# sourceMappingURL=class.d.ts.map

@@ -12,11 +12,13 @@
     "declaration": true,
     "declarationMap": true,
 
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": false,
 
     "strict": true,
-    "jsx": "react-jsx",
     "esModuleInterop": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
