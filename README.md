@@ -1,4 +1,4 @@
-# Mobile Hybrid Solution WHB (E-Learning / LMS API)
+# BRAINUP (E-Learning / LMS API)
 
 This is a robust backend API built with **NestJS**, **Prisma ORM**, and **PostgreSQL** for an E-Learning platform. The API supports courses management, student enrollments, trainer features, lesson tracking, discussions, and an ordering system.
 
