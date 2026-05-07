@@ -1,10 +1,14 @@
 import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
 import { CourseRepository, CourseFilters } from './course.repository';
+import { R2Service } from '../common/storage/r2.service';
 import { parsePagination, paginatedResponse } from '../utils/pagination';
 
 @Injectable()
 export class CourseService {
-  constructor(private readonly courseRepository: CourseRepository) {}
+  constructor(
+    private readonly courseRepository: CourseRepository,
+    private readonly r2Service: R2Service,
+  ) {}
 
   async getAllCourses(query: Record<string, any>) {
     const pagination = parsePagination(query);
@@ -57,5 +61,21 @@ export class CourseService {
     const pagination = parsePagination(query);
     const { enrollments, total } = await this.courseRepository.getStudents(courseId, pagination.skip, pagination.limit);
     return paginatedResponse(enrollments, total, pagination.page, pagination.limit);
+  }
+
+  async uploadThumbnail(courseId: number, userId: number, userRole: string, file: Express.Multer.File) {
+    const course = await this.courseRepository.findById(courseId);
+    if (!course) throw new NotFoundException('Course not found');
+    if (userRole !== 'ADMIN' && course.trainerId !== userId) {
+      throw new ForbiddenException('You can only update your own courses');
+    }
+
+    // Delete old thumbnail from R2 if it exists
+    if (course.thumbnail) {
+      await this.r2Service.deleteFile(course.thumbnail).catch(() => null);
+    }
+
+    const thumbnailUrl = await this.r2Service.uploadFile(file, 'thumbnails');
+    return this.courseRepository.update(courseId, { thumbnail: thumbnailUrl });
   }
 }

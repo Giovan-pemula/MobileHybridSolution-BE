@@ -1,10 +1,14 @@
 import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 import { UserRepository } from './user.repository';
+import { R2Service } from '../common/storage/r2.service';
 import { parsePagination, paginatedResponse } from '../utils/pagination';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly r2Service: R2Service,
+  ) {}
 
   async getAllUsers(query: { page?: string; limit?: string }) {
     const pagination = parsePagination(query);
@@ -33,5 +37,18 @@ export class UserService {
     const user = await this.userRepository.findById(id);
     if (!user) throw new NotFoundException('User not found');
     await this.userRepository.delete(id);
+  }
+
+  async uploadAvatar(id: number, file: Express.Multer.File) {
+    const user = await this.userRepository.findById(id);
+    if (!user) throw new NotFoundException('User not found');
+
+    // Delete old avatar from R2 if it exists
+    if (user.avatar) {
+      await this.r2Service.deleteFile(user.avatar).catch(() => null);
+    }
+
+    const avatarUrl = await this.r2Service.uploadFile(file, 'avatars');
+    return this.userRepository.update(id, { avatar: avatarUrl });
   }
 }

@@ -5,7 +5,7 @@ import { RatingService } from './rating.service';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { CurrentUser, CurrentUserPayload } from '../common/decorators/current-user.decorator';
 import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe';
-import { createRatingSchema, updateRatingSchema } from '../validations/rating.validation';
+import { createRatingSchema, updateRatingSchema } from './rating.validation';
 import { z } from 'zod';
 
 @Controller()

@@ -5,7 +5,7 @@ import { DiscussionService } from './discussion.service';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { CurrentUser, CurrentUserPayload } from '../common/decorators/current-user.decorator';
 import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe';
-import { createDiscussionSchema, createReplySchema } from '../validations/discussion.validation';
+import { createDiscussionSchema, createReplySchema } from './discussion.validation';
 import { z } from 'zod';
 
 @Controller()
