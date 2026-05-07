@@ -38,9 +38,9 @@ export declare class OrderRepository {
     } & {
         id: number;
         createdAt: Date;
+        total: number;
         status: import("../../generated/prisma/enums").OrderStatus;
         userId: number;
-        total: number;
     })[]>;
     create(userId: number, items: {
         courseId: number;
@@ -77,9 +77,9 @@ export declare class OrderRepository {
     } & {
         id: number;
         createdAt: Date;
+        total: number;
         status: import("../../generated/prisma/enums").OrderStatus;
         userId: number;
-        total: number;
     }>;
 }
 //# sourceMappingURL=order.repository.d.ts.map

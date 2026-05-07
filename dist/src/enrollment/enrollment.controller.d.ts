@@ -40,8 +40,8 @@ export declare class EnrollmentController {
             };
             id: number;
             createdAt: Date;
-            courseId: number;
             userId: number;
+            courseId: number;
         }[];
         message: string;
     }>;
@@ -76,8 +76,8 @@ export declare class EnrollmentController {
         } & {
             id: number;
             createdAt: Date;
-            courseId: number;
             userId: number;
+            courseId: number;
             progress: number;
             completed: boolean;
         };

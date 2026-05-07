@@ -42,8 +42,8 @@ export declare class EnrollmentService {
         };
         id: number;
         createdAt: Date;
-        courseId: number;
         userId: number;
+        courseId: number;
     }[]>;
     enrollInCourse(userId: number, courseId: number): Promise<{
         course: {
@@ -75,8 +75,8 @@ export declare class EnrollmentService {
     } & {
         id: number;
         createdAt: Date;
-        courseId: number;
         userId: number;
+        courseId: number;
         progress: number;
         completed: boolean;
     }>;

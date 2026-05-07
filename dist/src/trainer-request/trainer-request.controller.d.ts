@@ -9,8 +9,8 @@ export declare class TrainerRequestController {
         data: {
             user: {
                 id: number;
-                name: string;
                 email: string;
+                name: string;
             };
         } & {
             id: number;
@@ -27,8 +27,8 @@ export declare class TrainerRequestController {
         data: ({
             user: {
                 id: number;
-                name: string;
                 email: string;
+                name: string;
                 role: import("../../generated/prisma/enums").UserRole;
                 avatar: string | null;
             };
@@ -47,8 +47,8 @@ export declare class TrainerRequestController {
         data: {
             user: {
                 id: number;
-                name: string;
                 email: string;
+                name: string;
                 role: import("../../generated/prisma/enums").UserRole;
             };
         } & {

@@ -34,13 +34,13 @@ export declare class WishlistRepository {
         };
     } & {
         id: number;
-        courseId: number;
         userId: number;
+        courseId: number;
     })[]>;
     findByUserAndCourse(userId: number, courseId: number): Promise<{
         id: number;
-        courseId: number;
         userId: number;
+        courseId: number;
     } | null>;
     create(userId: number, courseId: number): Promise<{
         course: {
@@ -71,13 +71,13 @@ export declare class WishlistRepository {
         };
     } & {
         id: number;
-        courseId: number;
         userId: number;
+        courseId: number;
     }>;
     delete(userId: number, courseId: number): Promise<{
         id: number;
-        courseId: number;
         userId: number;
+        courseId: number;
     }>;
 }
 //# sourceMappingURL=wishlist.repository.d.ts.map

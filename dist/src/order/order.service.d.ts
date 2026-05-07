@@ -42,9 +42,9 @@ export declare class OrderService {
     } & {
         id: number;
         createdAt: Date;
+        total: number;
         status: import("../../generated/prisma/enums").OrderStatus;
         userId: number;
-        total: number;
     })[]>;
     createOrder(userId: number, courseIds: number[]): Promise<{
         items: ({
@@ -78,9 +78,9 @@ export declare class OrderService {
     } & {
         id: number;
         createdAt: Date;
+        total: number;
         status: import("../../generated/prisma/enums").OrderStatus;
         userId: number;
-        total: number;
     }>;
 }
 //# sourceMappingURL=order.service.d.ts.map

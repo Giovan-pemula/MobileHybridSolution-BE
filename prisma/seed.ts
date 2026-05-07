@@ -1,4 +1,4 @@
-import prisma from '../src/config/database';
+import prisma from '../src/common/prisma/prisma.service';
 import seedAdmin from '../src/seeders/admin.seeder';
 import seedCategories from '../src/seeders/categories.seeder';
 

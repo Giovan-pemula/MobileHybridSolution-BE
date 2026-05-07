@@ -11,8 +11,8 @@ export declare class UserController {
         data: {
             data: {
                 id: number;
-                name: string;
                 email: string;
+                name: string;
                 role: import("../../generated/prisma/enums").UserRole;
                 avatar: string | null;
                 createdAt: Date;
@@ -30,8 +30,8 @@ export declare class UserController {
     getUser(id: number): Promise<{
         data: {
             id: number;
-            name: string;
             email: string;
+            name: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
             createdAt: Date;
@@ -42,8 +42,8 @@ export declare class UserController {
     updateUser(id: number, body: z.infer<typeof updateUserSchema>): Promise<{
         data: {
             id: number;
-            name: string;
             email: string;
+            name: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
             createdAt: Date;

@@ -5,8 +5,8 @@ export declare class EnrollmentRepository {
     findByUserAndCourse(userId: number, courseId: number): Promise<{
         id: number;
         createdAt: Date;
-        courseId: number;
         userId: number;
+        courseId: number;
         progress: number;
         completed: boolean;
     } | null>;
@@ -43,8 +43,8 @@ export declare class EnrollmentRepository {
     } & {
         id: number;
         createdAt: Date;
-        courseId: number;
         userId: number;
+        courseId: number;
         progress: number;
         completed: boolean;
     })[]>;
@@ -78,16 +78,16 @@ export declare class EnrollmentRepository {
     } & {
         id: number;
         createdAt: Date;
-        courseId: number;
         userId: number;
+        courseId: number;
         progress: number;
         completed: boolean;
     }>;
     updateProgress(userId: number, courseId: number, progress: number, completed: boolean): Promise<{
         id: number;
         createdAt: Date;
-        courseId: number;
         userId: number;
+        courseId: number;
         progress: number;
         completed: boolean;
     }>;
