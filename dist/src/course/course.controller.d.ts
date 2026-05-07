@@ -21,8 +21,8 @@ export declare class CourseController {
                 };
                 trainer: {
                     id: number;
-                    name: string;
                     email: string;
+                    name: string;
                     avatar: string | null;
                 };
                 id: number;
@@ -62,25 +62,25 @@ export declare class CourseController {
             };
             trainer: {
                 id: number;
-                name: string;
                 email: string;
+                name: string;
                 avatar: string | null;
             };
             sections: ({
                 lessons: {
+                    order: number;
                     id: number;
                     title: string;
-                    order: number;
                     youtubeUrl: string | null;
                     duration: number | null;
                     isPreview: boolean;
                     sectionId: number;
                 }[];
             } & {
+                order: number;
                 id: number;
                 title: string;
                 courseId: number;
-                order: number;
             })[];
             id: number;
             createdAt: Date;
@@ -107,8 +107,8 @@ export declare class CourseController {
             };
             trainer: {
                 id: number;
-                name: string;
                 email: string;
+                name: string;
                 avatar: string | null;
             };
         } & {
@@ -137,8 +137,8 @@ export declare class CourseController {
             };
             trainer: {
                 id: number;
-                name: string;
                 email: string;
+                name: string;
                 avatar: string | null;
             };
         } & {
@@ -166,15 +166,15 @@ export declare class CourseController {
             data: ({
                 user: {
                     id: number;
-                    name: string;
                     email: string;
+                    name: string;
                     avatar: string | null;
                 };
             } & {
                 id: number;
                 createdAt: Date;
-                courseId: number;
                 userId: number;
+                courseId: number;
                 progress: number;
                 completed: boolean;
             })[];

@@ -11,8 +11,8 @@ export declare class TrainerRequestService {
     }): Promise<{
         user: {
             id: number;
-            name: string;
             email: string;
+            name: string;
         };
     } & {
         id: number;
@@ -26,8 +26,8 @@ export declare class TrainerRequestService {
     getAllRequests(status?: string): Promise<({
         user: {
             id: number;
-            name: string;
             email: string;
+            name: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
         };
@@ -43,8 +43,8 @@ export declare class TrainerRequestService {
     verifyTrainer(requestId: number, status: string): Promise<{
         user: {
             id: number;
-            name: string;
             email: string;
+            name: string;
             role: import("../../generated/prisma/enums").UserRole;
         };
     } & {

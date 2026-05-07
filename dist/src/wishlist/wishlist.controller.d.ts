@@ -36,8 +36,8 @@ export declare class WishlistController {
             };
         } & {
             id: number;
-            courseId: number;
             userId: number;
+            courseId: number;
         })[];
         message: string;
     }>;
@@ -73,8 +73,8 @@ export declare class WishlistController {
             };
         } & {
             id: number;
-            courseId: number;
             userId: number;
+            courseId: number;
         };
         message: string;
     }>;

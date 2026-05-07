@@ -26,8 +26,8 @@ export declare class CourseRepository {
             };
             trainer: {
                 id: number;
-                name: string;
                 email: string;
+                name: string;
                 avatar: string | null;
             };
             id: number;
@@ -61,25 +61,25 @@ export declare class CourseRepository {
         };
         trainer: {
             id: number;
-            name: string;
             email: string;
+            name: string;
             avatar: string | null;
         };
         sections: ({
             lessons: {
+                order: number;
                 id: number;
                 title: string;
-                order: number;
                 youtubeUrl: string | null;
                 duration: number | null;
                 isPreview: boolean;
                 sectionId: number;
             }[];
         } & {
+            order: number;
             id: number;
             title: string;
             courseId: number;
-            order: number;
         })[];
     } & {
         id: number;
@@ -114,8 +114,8 @@ export declare class CourseRepository {
         };
         trainer: {
             id: number;
-            name: string;
             email: string;
+            name: string;
             avatar: string | null;
         };
     } & {
@@ -141,8 +141,8 @@ export declare class CourseRepository {
         };
         trainer: {
             id: number;
-            name: string;
             email: string;
+            name: string;
             avatar: string | null;
         };
     } & {
@@ -177,15 +177,15 @@ export declare class CourseRepository {
         enrollments: ({
             user: {
                 id: number;
-                name: string;
                 email: string;
+                name: string;
                 avatar: string | null;
             };
         } & {
             id: number;
             createdAt: Date;
-            courseId: number;
             userId: number;
+            courseId: number;
             progress: number;
             completed: boolean;
         })[];
