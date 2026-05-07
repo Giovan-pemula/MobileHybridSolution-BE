@@ -1,13 +1,16 @@
 import {
-  Controller, Get, Post, Patch, Delete, Param, Body, Query, ParseIntPipe, UseGuards,
+  Controller, Get, Post, Patch, Delete, Param, Body, Query,
+  ParseIntPipe, UseGuards, UseInterceptors, UploadedFile,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { CourseService } from './course.service';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
 import { CurrentUser, CurrentUserPayload } from '../common/decorators/current-user.decorator';
 import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe';
-import { createCourseSchema, updateCourseSchema } from '../validations/course.validation';
+import { createCourseSchema, updateCourseSchema } from './course.validation';
+import { imageUploadOptions } from '../common/multer/multer.config';
 import { z } from 'zod';
 
 @Controller('courses')
@@ -70,5 +73,23 @@ export class CourseController {
   ) {
     const result = await this.courseService.getCourseStudents(courseId, query, user.id, user.role);
     return { data: result, message: 'Students fetched successfully' };
+  }
+
+  /**
+   * PATCH /courses/:id/thumbnail
+   * Upload or replace the course thumbnail image.
+   * Only TRAINER (owner) or ADMIN can update.
+   */
+  @Patch(':id/thumbnail')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('TRAINER', 'ADMIN')
+  @UseInterceptors(FileInterceptor('thumbnail', imageUploadOptions()))
+  async uploadThumbnail(
+    @Param('id', ParseIntPipe) id: number,
+    @CurrentUser() user: CurrentUserPayload,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    const course = await this.courseService.uploadThumbnail(id, user.id, user.role, file);
+    return { data: course, message: 'Thumbnail uploaded successfully' };
   }
 }

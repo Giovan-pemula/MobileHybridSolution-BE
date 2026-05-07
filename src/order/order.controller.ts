@@ -3,7 +3,7 @@ import { OrderService } from './order.service';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { CurrentUser, CurrentUserPayload } from '../common/decorators/current-user.decorator';
 import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe';
-import { createOrderSchema } from '../validations/order.validation';
+import { createOrderSchema } from './order.validation';
 import { z } from 'zod';
 
 @Controller('orders')

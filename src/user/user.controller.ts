@@ -1,12 +1,16 @@
 import {
-  Controller, Get, Patch, Delete, Param, Body, Query, ParseIntPipe, UseGuards,
+  Controller, Get, Patch, Delete, Param, Body, Query, ParseIntPipe,
+  UseGuards, UseInterceptors, UploadedFile,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { UserService } from './user.service';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
+import { CurrentUser, CurrentUserPayload } from '../common/decorators/current-user.decorator';
 import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe';
-import { updateUserSchema } from '../validations/user.validation';
+import { updateUserSchema } from './user.validation';
+import { imageUploadOptions } from '../common/multer/multer.config';
 import { z } from 'zod';
 
 @Controller('users')
@@ -41,5 +45,21 @@ export class UserController {
   async deleteUser(@Param('id', ParseIntPipe) id: number) {
     await this.userService.deleteUser(id);
     return { data: null, message: 'User deleted successfully' };
+  }
+
+  /**
+   * PATCH /users/:id/avatar
+   * Upload or replace user avatar.
+   * Only the account owner can update their own avatar.
+   */
+  @Patch(':id/avatar')
+  @UseInterceptors(FileInterceptor('avatar', imageUploadOptions()))
+  async uploadAvatar(
+    @Param('id', ParseIntPipe) id: number,
+    @CurrentUser() user: CurrentUserPayload,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    const updated = await this.userService.uploadAvatar(id, file);
+    return { data: updated, message: 'Avatar uploaded successfully' };
   }
 }

@@ -1,121 +1,258 @@
-# Udemy Clone API Reference
+# MobileHybridSolutionWHB API Reference
 
-Gunakan daftar ini sebagai contekan / panduan setiap kali kamu ingin melakukan tes di Postman atau Frontend. Pastikan tambahkan **Header: `Authorization: Bearer <token_kamu>`** di Postman (atau menggunakan fitur Collection Variables) untuk *route* yang butuh Autentikasi.
+Dokumentasi lengkap untuk semua endpoint di aplikasi ini. Gunakan panduan ini untuk melakukan tes di Postman atau integrasi dengan Frontend.
 
-_Semua url diawali dengan `http://localhost:3000/api`_
+**Penting:** 
+- Base URL: `http://localhost:3000/api` (atau disesuaikan dengan konfigurasi port servermu)
+- Untuk endpoint yang membutuhkan **Auth**, tambahkan Header: `Authorization: Bearer <token_jwt_kamu>`
+- Role yang tersedia: `USER` (Default saat daftar), `TRAINER`, `ADMIN`.
 
 ---
 
 ## 1. 🔑 Auth & Users
+
+### Auth
 1. **Register**
-   - **POST** `http://localhost:3000/api/auth/register`
+   - **POST** `/auth/register`
+   - **Akses:** Public
    - **JSON Body:**
      ```json
      {
-       "name": "Giovan",
-       "email": "giovan@example.com",
+       "name": "John Doe",
+       "email": "john@example.com",
        "password": "password123"
      }
      ```
 
 2. **Login**
-   - **POST** `http://localhost:3000/api/auth/login`
+   - **POST** `/auth/login`
+   - **Akses:** Public
    - **JSON Body:**
      ```json
      {
-       "email": "admin@example.com",
-       "password": "admin123"
+       "email": "john@example.com",
+       "password": "password123"
      }
      ```
 
-3. **Update User Profile (Auth)**
-   - **PATCH** `http://localhost:3000/api/users/:id`
-   - **JSON Body:** *(semua opsional)*
+### Users
+*Semua endpoint `/users` membutuhkan Auth (Login).*
+3. **Get All Users**
+   - **GET** `/users`
+   - **Akses:** ADMIN
+   - **Query Params:** `?page=1&limit=10` (Opsional)
+
+4. **Get User By ID**
+   - **GET** `/users/:id`
+   - **Akses:** Semua User Login
+
+5. **Update User Profile**
+   - **PATCH** `/users/:id`
+   - **Akses:** Semua User Login
+   - **JSON Body:** *(Semua field opsional)*
      ```json
      {
-       "name": "Giovan Updated",
+       "name": "John Updated",
+       "email": "john_updated@example.com",
        "avatar": "https://link-to-gambar.com/avatar.jpg"
      }
      ```
 
+6. **Delete User**
+   - **DELETE** `/users/:id`
+   - **Akses:** ADMIN
+
+7. **Upload/Update Avatar**
+   - **PATCH** `/users/:id/avatar`
+   - **Akses:** Semua User Login
+   - **Request:** `multipart/form-data`
+   - **Body:**
+     - `avatar`: File gambar (jpg/jpeg/png/webp)
+
 ---
 
 ## 2. 📂 Kategori (Categories)
-1. **Get All Categories**
-   - **GET** `http://localhost:3000/api/categories`
 
-2. **Create Category (Khusus ADMIN)**
-   - **POST** `http://localhost:3000/api/categories`
+1. **Get All Categories**
+   - **GET** `/categories`
+   - **Akses:** Public
+
+2. **Get Category By ID**
+   - **GET** `/categories/:id`
+   - **Akses:** Public
+
+3. **Create Category**
+   - **POST** `/categories`
+   - **Akses:** ADMIN
    - **JSON Body:**
      ```json
      {
-       "name": "Artificial Intelligence",
-       "slug": "artificial-intelligence",
-       "description": "Belajar AI dan Machine Learning"
+       "name": "Pemrograman"
      }
      ```
+
+4. **Update Category**
+   - **PATCH** `/categories/:id`
+   - **Akses:** ADMIN
+   - **JSON Body:**
+     ```json
+     {
+       "name": "Pemrograman Web"
+     }
+     ```
+
+5. **Delete Category**
+   - **DELETE** `/categories/:id`
+   - **Akses:** ADMIN
 
 ---
 
 ## 3. 🎓 Kursus (Courses)
-1. **Get All Courses (Public)**
-   - **GET** `http://localhost:3000/api/courses`
-   - *(Bisa ditambahkan query: `?categoryId=1&search=react&isFree=false`)*
 
-2. **Create Course (Khusus TRAINER & ADMIN)**
-   - **POST** `http://localhost:3000/api/courses`
-   - **JSON Body:** 
+1. **Get All Courses**
+   - **GET** `/courses`
+   - **Akses:** Public
+   - **Query Params (Opsional):** `?page=1&limit=10&categoryId=1&search=react&isFree=true&minPrice=0&maxPrice=100000&status=PUBLISHED`
+
+2. **Get Course By ID**
+   - **GET** `/courses/:id`
+   - **Akses:** Public
+
+3. **Create Course**
+   - **POST** `/courses`
+   - **Akses:** TRAINER, ADMIN
+   - **JSON Body:**
      ```json
      {
        "title": "Mastering React JS",
        "description": "Belajar React JS dari nol",
        "price": 150000,
        "isFree": false,
-       "categoryId": 1
+       "thumbnail": "https://link-gambar.com/thumb.jpg",
+       "previewYoutubeUrl": "https://youtube.com/watch?v=...",
+       "categoryId": 1,
+       "status": "DRAFT" 
      }
      ```
-     *(Opsional: `thumbnail`, `previewYoutubeUrl`)*
+     *(Hanya `title` dan `categoryId` yang wajib, status bisa "DRAFT" atau "PUBLISHED", lainnya opsional)*
+
+4. **Update Course**
+   - **PATCH** `/courses/:id`
+   - **Akses:** TRAINER (Pemilik course), ADMIN
+   - **JSON Body:** Sama seperti Create Course, tapi semua field opsional.
+
+5. **Delete Course**
+   - **DELETE** `/courses/:id`
+   - **Akses:** TRAINER (Pemilik course), ADMIN
+
+6. **Get Course Students**
+   - **GET** `/courses/:courseId/students`
+   - **Akses:** TRAINER (Pemilik course), ADMIN
+
+7. **Upload/Update Thumbnail Course**
+   - **PATCH** `/courses/:id/thumbnail`
+   - **Akses:** TRAINER (Pemilik course), ADMIN
+   - **Request:** `multipart/form-data`
+   - **Body:**
+     - `thumbnail`: File gambar (jpg/jpeg/png/webp)
 
 ---
 
 ## 4. 📑 Sections & Lessons
-1. **Create Section (Khusus TRAINER)**
-   - **POST** `http://localhost:3000/api/courses/:courseId/sections`
-     (Ganti `:courseId` dengan id course)
+
+### Sections
+1. **Get Course Sections**
+   - **GET** `/courses/:courseId/sections`
+   - **Akses:** Public
+
+2. **Create Section**
+   - **POST** `/courses/:courseId/sections`
+   - **Akses:** TRAINER (Pemilik course), ADMIN
    - **JSON Body:**
      ```json
      {
-       "title": "Bagian 1: Pengenalan"
+       "title": "Bagian 1: Pengenalan",
+       "order": 1
+     }
+     ```
+     *(`order` opsional)*
+
+3. **Update Section**
+   - **PATCH** `/sections/:id`
+   - **Akses:** TRAINER (Pemilik course), ADMIN
+   - **JSON Body:** *(Semua opsional)*
+     ```json
+     {
+       "title": "Bagian 1: Pengenalan Updated",
+       "order": 2
      }
      ```
 
-2. **Create Lesson (Khusus TRAINER)**
-   - **POST** `http://localhost:3000/api/sections/:sectionId/lessons`
-     (Ganti `:sectionId` dengan id section)
+4. **Delete Section**
+   - **DELETE** `/sections/:id`
+   - **Akses:** TRAINER (Pemilik course), ADMIN
+
+### Lessons
+5. **Create Lesson**
+   - **POST** `/sections/:sectionId/lessons`
+   - **Akses:** TRAINER (Pemilik course), ADMIN
    - **JSON Body:**
      ```json
      {
        "title": "Apa itu React?",
-       "youtubeUrl": "https://www.youtube.com/watch?v=...",
+       "youtubeUrl": "https://youtube.com/watch?v=...",
        "duration": 600,
-       "isPreview": true
+       "isPreview": true,
+       "order": 1
      }
      ```
+     *(Hanya `title` yang wajib, lainnya opsional)*
+
+6. **Update Lesson**
+   - **PATCH** `/lessons/:id`
+   - **Akses:** TRAINER (Pemilik course), ADMIN
+   - **JSON Body:** Sama seperti Create Lesson, tapi semua field opsional.
+
+7. **Delete Lesson**
+   - **DELETE** `/lessons/:id`
+   - **Akses:** TRAINER (Pemilik course), ADMIN
 
 ---
 
-## 5. 🛒 Pembayaran / Enroll (Orders & Wishlist)
-1. **Beli Kursus (Orders)**
-   - **POST** `http://localhost:3000/api/orders`
-   - **JSON Body:** (Bisa mengirim banyak `courseId` sekaligus)
+## 5. 🛒 Pembayaran, Enroll & Wishlist
+
+### Orders
+1. **Get My Orders**
+   - **GET** `/orders`
+   - **Akses:** Semua User Login
+
+2. **Create Order (Beli Kursus)**
+   - **POST** `/orders`
+   - **Akses:** Semua User Login
+   - **JSON Body:**
      ```json
      {
        "courseIds": [1, 2]
      }
      ```
 
-2. **Tambah ke Wishlist**
-   - **POST** `http://localhost:3000/api/wishlist`
+### Enrollment
+3. **Get My Courses (Kursus yang dibeli/diikuti)**
+   - **GET** `/my-courses`
+   - **Akses:** Semua User Login
+
+4. **Enroll In Course (Daftar kursus)**
+   - **POST** `/courses/:courseId/enroll`
+   - **Akses:** Semua User Login
+
+### Wishlist
+5. **Get Wishlist**
+   - **GET** `/wishlist`
+   - **Akses:** Semua User Login
+
+6. **Add To Wishlist**
+   - **POST** `/wishlist`
+   - **Akses:** Semua User Login
    - **JSON Body:**
      ```json
      {
@@ -123,24 +260,35 @@ _Semua url diawali dengan `http://localhost:3000/api`_
      }
      ```
 
+7. **Remove From Wishlist**
+   - **DELETE** `/wishlist/:courseId`
+   - **Akses:** Semua User Login
+
 ---
 
-## 6. 📚 Ruang Belajar (My Courses & Progress)
-1. **Lihat Kursusku (My Courses)**
-   - **GET** `http://localhost:3000/api/my-courses`
+## 6. 📚 Progress Belajar (Lesson Completion)
 
-2. **Penyelesaian Lesson (Mark As Completed)**
-   - **POST** `http://localhost:3000/api/lessons/:lessonId/complete`
+1. **Toggle Lesson Completion (Tandai selesai/belum selesai)**
+   - **POST** `/lessons/:lessonId/complete`
+   - **Akses:** Semua User Login
    - *(Tidak butuh JSON Body)*
 
-3. **Lihat Statistik Belajarku**
-   - **GET** `http://localhost:3000/api/analytics/learning`
+2. **Get Learning Analytics (Statistik Belajarku)**
+   - **GET** `/analytics/learning`
+   - **Akses:** Semua User Login
 
 ---
 
 ## 7. ⭐ Rating & Diskusi (Q&A)
-1. **Tambah Rating/Review di Course**
-   - **POST** `http://localhost:3000/api/courses/:courseId/rating`
+
+### Rating
+1. **Get Course Ratings**
+   - **GET** `/courses/:courseId/ratings`
+   - **Akses:** Public
+
+2. **Create Rating**
+   - **POST** `/courses/:courseId/rating`
+   - **Akses:** Semua User Login (Disarankan yang sudah enroll)
    - **JSON Body:**
      ```json
      {
@@ -148,9 +296,31 @@ _Semua url diawali dengan `http://localhost:3000/api`_
        "review": "Sangat membantu!"
      }
      ```
+     *(`rating` wajib 1-5, `review` opsional)*
 
-2. **Bikin Diskusi di Lesson (Tanya Jawab)**
-   - **POST** `http://localhost:3000/api/lessons/:lessonId/discussions`
+3. **Update Rating**
+   - **PATCH** `/ratings/:id`
+   - **Akses:** Semua User Login (Pemilik rating)
+   - **JSON Body:**
+     ```json
+     {
+       "rating": 4,
+       "review": "Update: Bagus banget"
+     }
+     ```
+
+4. **Delete Rating**
+   - **DELETE** `/ratings/:id`
+   - **Akses:** Semua User Login (Pemilik rating)
+
+### Diskusi
+5. **Get Discussions By Lesson**
+   - **GET** `/lessons/:lessonId/discussions`
+   - **Akses:** Public
+
+6. **Create Discussion**
+   - **POST** `/lessons/:lessonId/discussions`
+   - **Akses:** Semua User Login
    - **JSON Body:**
      ```json
      {
@@ -158,41 +328,59 @@ _Semua url diawali dengan `http://localhost:3000/api`_
      }
      ```
 
-3. **Balas Diskusi**
-   - **POST** `http://localhost:3000/api/discussions/:id/replies`
-     (Ganti `:id` dengan id discussion)
+7. **Create Reply (Balas diskusi)**
+   - **POST** `/discussions/:id/replies`
+   - **Akses:** Semua User Login
    - **JSON Body:**
      ```json
      {
-       "comment": "Coba gunakan npm install dengan flag --legacy-peer-deps"
+       "comment": "Gunakan npm install --legacy-peer-deps"
      }
      ```
 
 ---
 
-## 8. 👨‍🏫 Panel Instruktur (Trainer)
-1. **User Request Jadi Instruktur**
-   - **POST** `http://localhost:3000/api/trainer/request`
-   - **JSON Body:**
-     ```json
-     {
-       "cvUrl": "https://link-drive-cv-mu.com/cv.pdf",
-       "bio": "Software Engineer di Tech Company...",
-       "experience": "Pengalaman 5 tahun mengajar React JS..."
-     }
-     ```
+## 8. 👨‍🏫 Panel Instruktur (Trainer) & Pengajuan
 
-2. **Admin Verify Instruktur**
-   - **PATCH** `http://localhost:3000/api/admin/trainer/:id/verify`
-     (Ganti `:id` dengan id dari TrainerRequest)
+### Pengajuan Trainer (Trainer Request)
+1. **Submit Trainer Request**
+   - **POST** `/trainer/request`
+   - **Akses:** Semua User Login (USER biasa)
+   - **Request:** `multipart/form-data`
+   - **Body:**
+     - `bio`: (Text, minimal 10 karakter) "Software Engineer di Tech Company..."
+     - `experience`: (Text, minimal 10 karakter) "Pengalaman 5 tahun mengajar React JS..."
+     - `cv`: File Dokumen (PDF)
+
+2. **Get All Trainer Requests**
+   - **GET** `/admin/trainer-requests`
+   - **Akses:** ADMIN
+   - **Query Params:** `?status=PENDING` (Opsional)
+
+3. **Verify Trainer Request**
+   - **PATCH** `/admin/trainer/:id/verify`
+   - **Akses:** ADMIN
    - **JSON Body:**
      ```json
      {
        "status": "APPROVED" 
      }
      ```
-     *(Isi status bisa `APPROVED` atau `REJECTED`. Kalau Approved, user otomatis jadi TRAINER).*
+     *(Pilihan status: `APPROVED` atau `REJECTED`)*
 
-3. **Lihat Dashboard Penjualan (Khusus Trainer)**
-   - **GET** `http://localhost:3000/api/trainer/dashboard`
-   - **GET** `http://localhost:3000/api/trainer/sales`
+### Dashboard Instruktur
+4. **Get Trainer Dashboard**
+   - **GET** `/trainer/dashboard`
+   - **Akses:** TRAINER, ADMIN
+
+5. **Get Trainer Sales**
+   - **GET** `/trainer/sales`
+   - **Akses:** TRAINER, ADMIN
+
+---
+
+## 9. 🩺 Health Check
+
+1. **System Health Check**
+   - **GET** `/health`
+   - **Akses:** Public

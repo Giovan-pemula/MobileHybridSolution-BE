@@ -7,7 +7,7 @@ import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
 import { CurrentUser, CurrentUserPayload } from '../common/decorators/current-user.decorator';
 import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe';
-import { createLessonSchema, updateLessonSchema } from '../validations/lesson.validation';
+import { createLessonSchema, updateLessonSchema } from './lesson.validation';
 import { z } from 'zod';
 
 @Controller()
