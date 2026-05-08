@@ -1,6 +1,6 @@
 import {
   Controller, Post, Get, Patch, Param, Body, Query, ParseIntPipe,
-  UseGuards, UseInterceptors, UploadedFile,
+  UseGuards, UseInterceptors, UploadedFile, BadRequestException,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { TrainerRequestService } from './trainer-request.service';
@@ -22,9 +22,13 @@ export class TrainerRequestController {
   @UseInterceptors(FileInterceptor('cv', documentUploadOptions()))
   async submitTrainerRequest(
     @CurrentUser() user: CurrentUserPayload,
+    
     @Body(new ZodValidationPipe(trainerRequestSchema)) body: z.infer<typeof trainerRequestSchema>,
     @UploadedFile() cvFile: Express.Multer.File,
   ) {
+    if (!cvFile) {
+      throw new BadRequestException('CV file (PDF) is required');
+    }
     const request = await this.trainerRequestService.submitRequest(user.id, body, cvFile);
     return { data: request, message: 'Trainer request submitted' };
   }
