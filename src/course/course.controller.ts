@@ -1,8 +1,9 @@
 import {
   Controller, Get, Post, Patch, Delete, Param, Body, Query,
-  ParseIntPipe, UseGuards, UseInterceptors, UploadedFile,
+  ParseIntPipe, UseGuards, UseInterceptors, UploadedFile, Req,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { Request } from 'express';
 import { CourseService } from './course.service';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../common/guards/roles.guard';
@@ -23,8 +24,29 @@ export class CourseController {
     return { data: result, message: 'Courses fetched successfully' };
   }
 
+  @Get('manage')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('TRAINER', 'ADMIN')
+  async getCoursesForAdmin(
+    @Query() query: Record<string, any>,
+    @CurrentUser() user: CurrentUserPayload,
+  ) {
+    // Trainer only sees their own courses; Admin sees all
+    if (user.role === 'TRAINER') query = { ...query, trainerId: String(user.id) };
+    const result = await this.courseService.getAllCoursesForAdmin(query);
+    return { data: result, message: 'Courses fetched successfully' };
+  }
+
   @Get(':id')
-  async getCourse(@Param('id', ParseIntPipe) id: number) {
+  async getCourse(
+    @Param('id', ParseIntPipe) id: number,
+    @Req() req: Request,
+  ) {
+    const user = (req as any).user as CurrentUserPayload | undefined;
+    if (user?.id) {
+      const course = await this.courseService.getCourseByIdForEnrolled(id, user.id);
+      return { data: course, message: 'Course fetched successfully' };
+    }
     const course = await this.courseService.getCourseById(id);
     return { data: course, message: 'Course fetched successfully' };
   }
@@ -49,18 +71,8 @@ export class CourseController {
     @Body(new ZodValidationPipe(updateCourseSchema)) body: z.infer<typeof updateCourseSchema>,
   ) {
     const course = await this.courseService.updateCourse(id, user.id, user.role, body);
-    return { data: course, message: 'Course updated successfully' };
-  }
-
-  @Delete(':id')
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('TRAINER', 'ADMIN')
-  async deleteCourse(
-    @Param('id', ParseIntPipe) id: number,
-    @CurrentUser() user: CurrentUserPayload,
-  ) {
-    await this.courseService.deleteCourse(id, user.id, user.role);
-    return { data: null, message: 'Course deleted successfully' };
+    const statusMsg = body.status === 'ARCHIVED' ? 'archived' : 'updated';
+    return { data: course, message: `Course "${course.title}" ${statusMsg} successfully` };
   }
 
   @Get(':courseId/students')
@@ -75,11 +87,6 @@ export class CourseController {
     return { data: result, message: 'Students fetched successfully' };
   }
 
-  /**
-   * PATCH /courses/:id/thumbnail
-   * Upload or replace the course thumbnail image.
-   * Only TRAINER (owner) or ADMIN can update.
-   */
   @Patch(':id/thumbnail')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('TRAINER', 'ADMIN')

@@ -8,7 +8,7 @@ export const createCourseSchema = z.object({
   thumbnail: z.string().optional(),
   previewYoutubeUrl: z.string().optional(),
   categoryId: z.number().int().positive('Category is required'),
-  status: z.enum(['DRAFT', 'PUBLISHED']).optional(),
+  status: z.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']).optional(),
 });
 
 export const updateCourseSchema = z.object({
@@ -19,7 +19,7 @@ export const updateCourseSchema = z.object({
   thumbnail: z.string().optional(),
   previewYoutubeUrl: z.string().optional(),
   categoryId: z.number().int().positive().optional(),
-  status: z.enum(['DRAFT', 'PUBLISHED']).optional(),
+  status: z.enum(['DRAFT', 'PUBLISHED', 'ARCHIVED']).optional(),
 });
 
 export const courseFilterSchema = z.object({

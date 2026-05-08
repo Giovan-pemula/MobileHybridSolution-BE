@@ -27,6 +27,6 @@ export class LessonService {
     const lesson = await this.lessonRepository.findById(id);
     if (!lesson) throw new NotFoundException('Lesson not found');
     if (userRole !== 'ADMIN' && lesson.section.course.trainerId !== userId) throw new ForbiddenException('Access denied');
-    await this.lessonRepository.delete(id);
+    return this.lessonRepository.delete(id);
   }
 }

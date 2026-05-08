@@ -31,6 +31,6 @@ export class SectionService {
     const section = await this.sectionRepository.findById(id);
     if (!section) throw new NotFoundException('Section not found');
     if (userRole !== 'ADMIN' && section.course.trainerId !== userId) throw new ForbiddenException('Access denied');
-    await this.sectionRepository.delete(id);
+    return this.sectionRepository.delete(id);
   }
 }

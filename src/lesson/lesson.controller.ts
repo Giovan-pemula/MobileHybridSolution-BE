@@ -41,7 +41,7 @@ export class LessonController {
     @Param('id', ParseIntPipe) id: number,
     @CurrentUser() user: CurrentUserPayload,
   ) {
-    await this.lessonService.deleteLesson(id, user.id, user.role);
-    return { data: null, message: 'Lesson deleted successfully' };
+    const deleted = await this.lessonService.deleteLesson(id, user.id, user.role);
+    return { data: deleted, message: `Lesson "${deleted.title}" deleted successfully` };
   }
 }
