@@ -1,6 +1,7 @@
+import { Request } from 'express';
 import { CourseService } from './course.service';
 import { CurrentUserPayload } from '../common/decorators/current-user.decorator';
-import { createCourseSchema, updateCourseSchema } from '../validations/course.validation';
+import { createCourseSchema, updateCourseSchema } from './course.validation';
 import { z } from 'zod';
 export declare class CourseController {
     private readonly courseService;
@@ -10,8 +11,8 @@ export declare class CourseController {
             data: {
                 averageRating: number;
                 category: {
-                    id: number;
                     name: string;
+                    id: number;
                     createdAt: Date;
                     slug: string;
                 };
@@ -20,9 +21,9 @@ export declare class CourseController {
                     ratings: number;
                 };
                 trainer: {
+                    name: string;
                     id: number;
                     email: string;
-                    name: string;
                     avatar: string | null;
                 };
                 id: number;
@@ -47,12 +48,54 @@ export declare class CourseController {
         };
         message: string;
     }>;
-    getCourse(id: number): Promise<{
+    getCoursesForAdmin(query: Record<string, any>, user: CurrentUserPayload): Promise<{
+        data: {
+            data: {
+                averageRating: number;
+                category: {
+                    name: string;
+                    id: number;
+                    createdAt: Date;
+                    slug: string;
+                };
+                _count: {
+                    enrollments: number;
+                    ratings: number;
+                };
+                trainer: {
+                    name: string;
+                    id: number;
+                    email: string;
+                    avatar: string | null;
+                };
+                id: number;
+                createdAt: Date;
+                updatedAt: Date;
+                title: string;
+                description: string | null;
+                price: number;
+                isFree: boolean;
+                thumbnail: string | null;
+                previewYoutubeUrl: string | null;
+                status: import("../../generated/prisma/enums").CourseStatus;
+                categoryId: number;
+                trainerId: number;
+            }[];
+            pagination: {
+                page: number;
+                limit: number;
+                total: number;
+                totalPages: number;
+            };
+        };
+        message: string;
+    }>;
+    getCourse(id: number, req: Request): Promise<{
         data: {
             averageRating: number;
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };
@@ -61,9 +104,9 @@ export declare class CourseController {
                 ratings: number;
             };
             trainer: {
+                name: string;
                 id: number;
                 email: string;
-                name: string;
                 avatar: string | null;
             };
             sections: ({
@@ -100,15 +143,15 @@ export declare class CourseController {
     createCourse(user: CurrentUserPayload, body: z.infer<typeof createCourseSchema>): Promise<{
         data: {
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };
             trainer: {
+                name: string;
                 id: number;
                 email: string;
-                name: string;
                 avatar: string | null;
             };
         } & {
@@ -130,15 +173,15 @@ export declare class CourseController {
     updateCourse(id: number, user: CurrentUserPayload, body: z.infer<typeof updateCourseSchema>): Promise<{
         data: {
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };
             trainer: {
+                name: string;
                 id: number;
                 email: string;
-                name: string;
                 avatar: string | null;
             };
         } & {
@@ -157,17 +200,13 @@ export declare class CourseController {
         };
         message: string;
     }>;
-    deleteCourse(id: number, user: CurrentUserPayload): Promise<{
-        data: null;
-        message: string;
-    }>;
     getCourseStudents(courseId: number, query: Record<string, any>, user: CurrentUserPayload): Promise<{
         data: {
             data: ({
                 user: {
+                    name: string;
                     id: number;
                     email: string;
-                    name: string;
                     avatar: string | null;
                 };
             } & {
@@ -184,6 +223,36 @@ export declare class CourseController {
                 total: number;
                 totalPages: number;
             };
+        };
+        message: string;
+    }>;
+    uploadThumbnail(id: number, user: CurrentUserPayload, file: Express.Multer.File): Promise<{
+        data: {
+            category: {
+                name: string;
+                id: number;
+                createdAt: Date;
+                slug: string;
+            };
+            trainer: {
+                name: string;
+                id: number;
+                email: string;
+                avatar: string | null;
+            };
+        } & {
+            id: number;
+            createdAt: Date;
+            updatedAt: Date;
+            title: string;
+            description: string | null;
+            price: number;
+            isFree: boolean;
+            thumbnail: string | null;
+            previewYoutubeUrl: string | null;
+            status: import("../../generated/prisma/enums").CourseStatus;
+            categoryId: number;
+            trainerId: number;
         };
         message: string;
     }>;

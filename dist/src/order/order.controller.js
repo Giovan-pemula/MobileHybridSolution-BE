@@ -18,7 +18,7 @@ const order_service_1 = require("./order.service");
 const jwt_auth_guard_1 = require("../common/guards/jwt-auth.guard");
 const current_user_decorator_1 = require("../common/decorators/current-user.decorator");
 const zod_validation_pipe_1 = require("../common/pipes/zod-validation.pipe");
-const order_validation_1 = require("../validations/order.validation");
+const order_validation_1 = require("./order.validation");
 const zod_1 = require("zod");
 let OrderController = class OrderController {
     orderService;

@@ -48,7 +48,7 @@ export class CategoryController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('ADMIN')
   async deleteCategory(@Param('id', ParseIntPipe) id: number) {
-    await this.categoryService.deleteCategory(id);
-    return { data: null, message: 'Category deleted successfully' };
+    const deleted = await this.categoryService.deleteCategory(id);
+    return { data: deleted, message: `Category "${deleted.name}" deleted successfully` };
   }
 }

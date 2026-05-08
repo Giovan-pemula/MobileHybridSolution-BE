@@ -30,7 +30,7 @@ export class WishlistController {
     @Param('courseId', ParseIntPipe) courseId: number,
     @CurrentUser() user: CurrentUserPayload,
   ) {
-    await this.wishlistService.removeFromWishlist(user.id, courseId);
-    return { data: null, message: 'Removed from wishlist' };
+    const deleted = await this.wishlistService.removeFromWishlist(user.id, courseId);
+    return { data: deleted, message: `Course #${courseId} removed from wishlist` };
   }
 }

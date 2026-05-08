@@ -26,6 +26,6 @@ export class RatingService {
     const rating = await this.ratingRepository.findById(id);
     if (!rating) throw new NotFoundException('Rating not found');
     if (rating.userId !== userId) throw new ForbiddenException('You can only delete your own rating');
-    await this.ratingRepository.delete(id);
+    return this.ratingRepository.delete(id);
   }
 }

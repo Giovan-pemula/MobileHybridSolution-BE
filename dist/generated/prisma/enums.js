@@ -17,7 +17,8 @@ exports.UserRole = {
 };
 exports.CourseStatus = {
     DRAFT: 'DRAFT',
-    PUBLISHED: 'PUBLISHED'
+    PUBLISHED: 'PUBLISHED',
+    ARCHIVED: 'ARCHIVED'
 };
 exports.TrainerRequestStatus = {
     PENDING: 'PENDING',

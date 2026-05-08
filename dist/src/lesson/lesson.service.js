@@ -42,7 +42,7 @@ let LessonService = class LessonService {
             throw new common_1.NotFoundException('Lesson not found');
         if (userRole !== 'ADMIN' && lesson.section.course.trainerId !== userId)
             throw new common_1.ForbiddenException('Access denied');
-        await this.lessonRepository.delete(id);
+        return this.lessonRepository.delete(id);
     }
 };
 exports.LessonService = LessonService;

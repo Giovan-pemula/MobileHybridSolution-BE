@@ -20,7 +20,7 @@ const roles_guard_1 = require("../common/guards/roles.guard");
 const roles_decorator_1 = require("../common/decorators/roles.decorator");
 const current_user_decorator_1 = require("../common/decorators/current-user.decorator");
 const zod_validation_pipe_1 = require("../common/pipes/zod-validation.pipe");
-const section_validation_1 = require("../validations/section.validation");
+const section_validation_1 = require("./section.validation");
 const zod_1 = require("zod");
 let SectionController = class SectionController {
     sectionService;
@@ -40,8 +40,8 @@ let SectionController = class SectionController {
         return { data: section, message: 'Section updated successfully' };
     }
     async deleteSection(id, user) {
-        await this.sectionService.deleteSection(id, user.id, user.role);
-        return { data: null, message: 'Section deleted successfully' };
+        const deleted = await this.sectionService.deleteSection(id, user.id, user.role);
+        return { data: deleted, message: `Section "${deleted.title}" deleted successfully` };
     }
 };
 exports.SectionController = SectionController;

@@ -51,7 +51,7 @@ export class SectionController {
     @Param('id', ParseIntPipe) id: number,
     @CurrentUser() user: CurrentUserPayload,
   ) {
-    await this.sectionService.deleteSection(id, user.id, user.role);
-    return { data: null, message: 'Section deleted successfully' };
+    const deleted = await this.sectionService.deleteSection(id, user.id, user.role);
+    return { data: deleted, message: `Section "${deleted.title}" deleted successfully` };
   }
 }

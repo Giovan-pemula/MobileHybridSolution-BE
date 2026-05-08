@@ -46,7 +46,7 @@ export class RatingController {
     @Param('id', ParseIntPipe) id: number,
     @CurrentUser() user: CurrentUserPayload,
   ) {
-    await this.ratingService.deleteRating(id, user.id);
-    return { data: null, message: 'Rating deleted successfully' };
+    const deleted = await this.ratingService.deleteRating(id, user.id);
+    return { data: deleted, message: `Rating for course #${deleted.courseId} deleted successfully` };
   }
 }

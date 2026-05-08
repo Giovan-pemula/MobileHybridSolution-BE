@@ -41,6 +41,6 @@ export class CategoryService {
   async deleteCategory(id: number) {
     const category = await this.categoryRepository.findById(id);
     if (!category) throw new NotFoundException('Category not found');
-    await this.categoryRepository.delete(id);
+    return this.categoryRepository.delete(id);
   }
 }

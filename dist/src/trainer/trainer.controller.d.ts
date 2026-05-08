@@ -10,8 +10,8 @@ export declare class TrainerController {
             totalRevenue: number;
             latestCourses: ({
                 category: {
-                    id: number;
                     name: string;
+                    id: number;
                     createdAt: Date;
                     slug: string;
                 };

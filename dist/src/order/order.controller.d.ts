@@ -1,6 +1,6 @@
 import { OrderService } from './order.service';
 import { CurrentUserPayload } from '../common/decorators/current-user.decorator';
-import { createOrderSchema } from '../validations/order.validation';
+import { createOrderSchema } from './order.validation';
 import { z } from 'zod';
 export declare class OrderController {
     private readonly orderService;
@@ -10,14 +10,14 @@ export declare class OrderController {
             items: ({
                 course: {
                     category: {
-                        id: number;
                         name: string;
+                        id: number;
                         createdAt: Date;
                         slug: string;
                     };
                     trainer: {
-                        id: number;
                         name: string;
+                        id: number;
                     };
                 } & {
                     id: number;
@@ -53,8 +53,8 @@ export declare class OrderController {
             items: ({
                 course: {
                     category: {
-                        id: number;
                         name: string;
+                        id: number;
                         createdAt: Date;
                         slug: string;
                     };

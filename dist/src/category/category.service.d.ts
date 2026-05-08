@@ -7,8 +7,8 @@ export declare class CategoryService {
             courses: number;
         };
     } & {
-        id: number;
         name: string;
+        id: number;
         createdAt: Date;
         slug: string;
     })[]>;
@@ -17,27 +17,32 @@ export declare class CategoryService {
             courses: number;
         };
     } & {
-        id: number;
         name: string;
+        id: number;
         createdAt: Date;
         slug: string;
     }>;
     createCategory(data: {
         name: string;
     }): Promise<{
-        id: number;
         name: string;
+        id: number;
         createdAt: Date;
         slug: string;
     }>;
     updateCategory(id: number, data: {
         name?: string;
     }): Promise<{
-        id: number;
         name: string;
+        id: number;
         createdAt: Date;
         slug: string;
     }>;
-    deleteCategory(id: number): Promise<void>;
+    deleteCategory(id: number): Promise<{
+        name: string;
+        id: number;
+        createdAt: Date;
+        slug: string;
+    }>;
 }
 //# sourceMappingURL=category.service.d.ts.map

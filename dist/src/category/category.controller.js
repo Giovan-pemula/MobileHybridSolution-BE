@@ -19,7 +19,7 @@ const jwt_auth_guard_1 = require("../common/guards/jwt-auth.guard");
 const roles_guard_1 = require("../common/guards/roles.guard");
 const roles_decorator_1 = require("../common/decorators/roles.decorator");
 const zod_validation_pipe_1 = require("../common/pipes/zod-validation.pipe");
-const category_validation_1 = require("../validations/category.validation");
+const category_validation_1 = require("./category.validation");
 const zod_1 = require("zod");
 let CategoryController = class CategoryController {
     categoryService;
@@ -43,8 +43,8 @@ let CategoryController = class CategoryController {
         return { data: category, message: 'Category updated successfully' };
     }
     async deleteCategory(id) {
-        await this.categoryService.deleteCategory(id);
-        return { data: null, message: 'Category deleted successfully' };
+        const deleted = await this.categoryService.deleteCategory(id);
+        return { data: deleted, message: `Category "${deleted.name}" deleted successfully` };
     }
 };
 exports.CategoryController = CategoryController;

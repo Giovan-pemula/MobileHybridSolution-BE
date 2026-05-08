@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
+import { Injectable, NotFoundException, ConflictException, ForbiddenException } from '@nestjs/common';
 import { UserRepository } from './user.repository';
 import { R2Service } from '../common/storage/r2.service';
 import { parsePagination, paginatedResponse } from '../utils/pagination';
@@ -22,6 +22,19 @@ export class UserService {
     return user;
   }
 
+  async getPublicProfile(id: number) {
+    const user = await this.userRepository.findById(id);
+    if (!user) throw new NotFoundException('User not found');
+    if (user.role === 'ADMIN') throw new ForbiddenException('Profile not available');
+    return user;
+  }
+
+  async updateProfile(id: number, data: { name?: string }) {
+    const user = await this.userRepository.findById(id);
+    if (!user) throw new NotFoundException('User not found');
+    return this.userRepository.update(id, data);
+  }
+
   async updateUser(id: number, data: { name?: string; email?: string; avatar?: string }) {
     const user = await this.userRepository.findById(id);
     if (!user) throw new NotFoundException('User not found');
@@ -36,7 +49,7 @@ export class UserService {
   async deleteUser(id: number) {
     const user = await this.userRepository.findById(id);
     if (!user) throw new NotFoundException('User not found');
-    await this.userRepository.delete(id);
+    return this.userRepository.delete(id);
   }
 
   async uploadAvatar(id: number, file: Express.Multer.File) {

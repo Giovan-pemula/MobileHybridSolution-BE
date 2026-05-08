@@ -5,8 +5,8 @@ export declare class WishlistService {
     getWishlist(userId: number): Promise<({
         course: {
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };
@@ -14,8 +14,8 @@ export declare class WishlistService {
                 enrollments: number;
             };
             trainer: {
-                id: number;
                 name: string;
+                id: number;
                 avatar: string | null;
             };
         } & {
@@ -40,14 +40,14 @@ export declare class WishlistService {
     addToWishlist(userId: number, courseId: number): Promise<{
         course: {
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };
             trainer: {
-                id: number;
                 name: string;
+                id: number;
                 avatar: string | null;
             };
         } & {
@@ -69,6 +69,10 @@ export declare class WishlistService {
         userId: number;
         courseId: number;
     }>;
-    removeFromWishlist(userId: number, courseId: number): Promise<void>;
+    removeFromWishlist(userId: number, courseId: number): Promise<{
+        id: number;
+        userId: number;
+        courseId: number;
+    }>;
 }
 //# sourceMappingURL=wishlist.service.d.ts.map

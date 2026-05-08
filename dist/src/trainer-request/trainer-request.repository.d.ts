@@ -13,9 +13,9 @@ export declare class TrainerRequestRepository {
     } | null>;
     findById(id: number): Promise<({
         user: {
+            name: string;
             id: number;
             email: string;
-            name: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
         };
@@ -30,9 +30,9 @@ export declare class TrainerRequestRepository {
     }) | null>;
     findAll(status?: string): Promise<({
         user: {
+            name: string;
             id: number;
             email: string;
-            name: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
         };
@@ -52,9 +52,9 @@ export declare class TrainerRequestRepository {
         experience: string;
     }): Promise<{
         user: {
+            name: string;
             id: number;
             email: string;
-            name: string;
         };
     } & {
         id: number;
@@ -67,9 +67,9 @@ export declare class TrainerRequestRepository {
     }>;
     updateStatus(id: number, status: string): Promise<{
         user: {
+            name: string;
             id: number;
             email: string;
-            name: string;
             role: import("../../generated/prisma/enums").UserRole;
         };
     } & {

@@ -20,8 +20,8 @@ export declare class RatingRepository {
     } | null>;
     findByCourse(courseId: number): Promise<({
         user: {
-            id: number;
             name: string;
+            id: number;
             avatar: string | null;
         };
     } & {
@@ -39,8 +39,8 @@ export declare class RatingRepository {
         review?: string;
     }): Promise<{
         user: {
-            id: number;
             name: string;
+            id: number;
             avatar: string | null;
         };
     } & {
@@ -56,8 +56,8 @@ export declare class RatingRepository {
         review?: string;
     }): Promise<{
         user: {
-            id: number;
             name: string;
+            id: number;
             avatar: string | null;
         };
     } & {

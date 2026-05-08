@@ -8,8 +8,8 @@ export declare class TrainerService {
         totalRevenue: number;
         latestCourses: ({
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };

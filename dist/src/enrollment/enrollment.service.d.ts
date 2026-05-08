@@ -14,8 +14,8 @@ export declare class EnrollmentService {
         course: {
             category: {
                 id: number;
-                name: string;
                 createdAt: Date;
+                name: string;
                 slug: string;
             };
             _count: {
@@ -41,16 +41,16 @@ export declare class EnrollmentService {
             trainerId: number;
         };
         id: number;
-        createdAt: Date;
         userId: number;
         courseId: number;
+        createdAt: Date;
     }[]>;
     enrollInCourse(userId: number, courseId: number): Promise<{
         course: {
             category: {
                 id: number;
-                name: string;
                 createdAt: Date;
+                name: string;
                 slug: string;
             };
             trainer: {
@@ -74,11 +74,11 @@ export declare class EnrollmentService {
         };
     } & {
         id: number;
-        createdAt: Date;
         userId: number;
         courseId: number;
         progress: number;
         completed: boolean;
+        createdAt: Date;
     }>;
 }
 //# sourceMappingURL=enrollment.service.d.ts.map

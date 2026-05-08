@@ -31,8 +31,8 @@ let WishlistController = class WishlistController {
         return { data: item, message: 'Added to wishlist' };
     }
     async removeFromWishlist(courseId, user) {
-        await this.wishlistService.removeFromWishlist(user.id, courseId);
-        return { data: null, message: 'Removed from wishlist' };
+        const deleted = await this.wishlistService.removeFromWishlist(user.id, courseId);
+        return { data: deleted, message: `Course #${courseId} removed from wishlist` };
     }
 };
 exports.WishlistController = WishlistController;

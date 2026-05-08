@@ -20,7 +20,7 @@ const roles_guard_1 = require("../common/guards/roles.guard");
 const roles_decorator_1 = require("../common/decorators/roles.decorator");
 const current_user_decorator_1 = require("../common/decorators/current-user.decorator");
 const zod_validation_pipe_1 = require("../common/pipes/zod-validation.pipe");
-const lesson_validation_1 = require("../validations/lesson.validation");
+const lesson_validation_1 = require("./lesson.validation");
 const zod_1 = require("zod");
 let LessonController = class LessonController {
     lessonService;
@@ -36,8 +36,8 @@ let LessonController = class LessonController {
         return { data: lesson, message: 'Lesson updated successfully' };
     }
     async deleteLesson(id, user) {
-        await this.lessonService.deleteLesson(id, user.id, user.role);
-        return { data: null, message: 'Lesson deleted successfully' };
+        const deleted = await this.lessonService.deleteLesson(id, user.id, user.role);
+        return { data: deleted, message: `Lesson "${deleted.title}" deleted successfully` };
     }
 };
 exports.LessonController = LessonController;

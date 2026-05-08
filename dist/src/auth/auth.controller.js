@@ -16,7 +16,7 @@ exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const zod_validation_pipe_1 = require("../common/pipes/zod-validation.pipe");
-const auth_validation_1 = require("../validations/auth.validation");
+const auth_validation_1 = require("./auth.validation");
 const zod_1 = require("zod");
 let AuthController = class AuthController {
     authService;

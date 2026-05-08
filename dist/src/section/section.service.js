@@ -45,7 +45,7 @@ let SectionService = class SectionService {
             throw new common_1.NotFoundException('Section not found');
         if (userRole !== 'ADMIN' && section.course.trainerId !== userId)
             throw new common_1.ForbiddenException('Access denied');
-        await this.sectionRepository.delete(id);
+        return this.sectionRepository.delete(id);
     }
 };
 exports.SectionService = SectionService;

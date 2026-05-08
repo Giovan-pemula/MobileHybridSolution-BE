@@ -5,8 +5,8 @@ export declare class WishlistRepository {
     findByUser(userId: number): Promise<({
         course: {
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };
@@ -14,8 +14,8 @@ export declare class WishlistRepository {
                 enrollments: number;
             };
             trainer: {
-                id: number;
                 name: string;
+                id: number;
                 avatar: string | null;
             };
         } & {
@@ -45,14 +45,14 @@ export declare class WishlistRepository {
     create(userId: number, courseId: number): Promise<{
         course: {
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };
             trainer: {
-                id: number;
                 name: string;
+                id: number;
                 avatar: string | null;
             };
         } & {
