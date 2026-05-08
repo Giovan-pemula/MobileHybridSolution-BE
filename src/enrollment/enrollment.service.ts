@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
+import { Injectable, NotFoundException, ConflictException, ForbiddenException } from '@nestjs/common';
 import { EnrollmentRepository } from './enrollment.repository';
 import { CourseRepository } from '../course/course.repository';
 import { PrismaService } from '../common/prisma/prisma.service';
@@ -29,6 +29,13 @@ export class EnrollmentService {
   async enrollInCourse(userId: number, courseId: number) {
     const course = await this.courseRepository.findById(courseId);
     if (!course) throw new NotFoundException('Course not found');
+
+    if (!course.isFree) {
+      throw new ForbiddenException(
+        'This course requires purchase. please purchase the course and enroll.',
+      );
+    }
+
     const existing = await this.enrollmentRepository.findByUserAndCourse(userId, courseId);
     if (existing) throw new ConflictException('Already enrolled in this course');
     return this.enrollmentRepository.create(userId, courseId);
