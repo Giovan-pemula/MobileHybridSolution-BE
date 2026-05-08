@@ -26,6 +26,7 @@ This is a robust backend API built with **NestJS**, **Prisma ORM**, and **Postgr
 ## 📦 Prerequisites
 
 Ensure you have the following installed on your local machine:
+
 - [Node.js](https://nodejs.org/) (v16 or higher)
 - [PostgreSQL](https://www.postgresql.org/) database running
 - [npm](https://www.npmjs.com/) or yarn
@@ -33,11 +34,13 @@ Ensure you have the following installed on your local machine:
 ## ⚙️ Installation
 
 1. Clone the repository and navigate to the project directory:
+
    ```bash
    cd MobileHybridSolutionWHB
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
@@ -54,11 +57,13 @@ Ensure you have the following installed on your local machine:
 Run the following commands to initialize the database with Prisma:
 
 1. Generate Prisma Client:
+
    ```bash
    npx prisma generate
    ```
 
 2. Run Migrations:
+
    ```bash
    npx prisma migrate dev
    ```
@@ -71,6 +76,7 @@ Run the following commands to initialize the database with Prisma:
 ## 🏃 Running the Application
 
 - **Development mode:**
+
   ```bash
   npm run dev
   ```
@@ -94,7 +100,6 @@ Run the following commands to initialize the database with Prisma:
 
 ## 📡 API Endpoints
 
-### 🔑 Legend
 - `[Public]` : Accessible without authentication.
 - `[Bearer]` : Requires a valid Bearer Token (Authenticated).
 - `[TRAINER]` : Requires Trainer or Admin role.
@@ -103,16 +108,19 @@ Run the following commands to initialize the database with Prisma:
 ---
 
 ### Authentication (`/auth`)
+
 - `POST /auth/login` `[Public]` - User login
 - `POST /auth/register` `[Public]` - User registration
 
 ### Users (`/users`)
+
 - `GET /users` `[ADMIN]` - Get all users
 - `GET /users/:id` `[Bearer]` - Get a specific user
 - `PATCH /users/:id` `[Bearer]` - Update user details
 - `DELETE /users/:id` `[ADMIN]` - Delete user
 
 ### Categories (`/categories`)
+
 - `GET /categories` `[Public]` - Get all categories
 - `GET /categories/:id` `[Public]` - Get a specific category
 - `POST /categories` `[ADMIN]` - Create a new category
@@ -120,6 +128,7 @@ Run the following commands to initialize the database with Prisma:
 - `DELETE /categories/:id` `[ADMIN]` - Delete category
 
 ### Courses (`/courses`)
+
 - `GET /courses` `[Public]` - Get all courses
 - `GET /courses/:id` `[Public]` - Get course details
 - `POST /courses` `[TRAINER]` - Create a new course
@@ -128,45 +137,54 @@ Run the following commands to initialize the database with Prisma:
 - `GET /courses/:courseId/students` `[TRAINER]` - Get all students enrolled in a course
 
 ### Sections (`/sections`)
+
 - `GET /courses/:courseId/sections` `[Public]` - Get sections of a course
 - `POST /courses/:courseId/sections` `[TRAINER]` - Create a new section in a course
 - `PATCH /sections/:id` `[TRAINER]` - Update section
 - `DELETE /sections/:id` `[TRAINER]` - Delete section
 
 ### Lessons (`/lessons`)
+
 - `POST /sections/:sectionId/lessons` `[TRAINER]` - Add a lesson to a section
 - `PATCH /lessons/:id` `[TRAINER]` - Update lesson details
 - `DELETE /lessons/:id` `[TRAINER]` - Delete lesson
 
 ### Enrollments (`/enrollment`)
+
 - `GET /my-courses` `[Bearer]` - Get currently logged-in user's enrolled courses
 - `POST /courses/:courseId/enroll` `[Bearer]` - Enroll in a course
 
 ### Lesson Completions
+
 - `POST /lessons/:lessonId/complete` `[Bearer]` - Mark a lesson as completed
 - `GET /analytics/learning` `[Bearer]` - Get learning progress analytics
 
 ### Discussions
+
 - `GET /lessons/:lessonId/discussions` `[Public]` - Get discussions for a lesson
 - `POST /lessons/:lessonId/discussions` `[Bearer]` - Create a new discussion thread
 - `POST /discussions/:id/replies` `[Bearer]` - Reply to a discussion thread
 
 ### Ratings (`/ratings`)
+
 - `GET /courses/:courseId/ratings` `[Public]` - Get all ratings for a course
 - `POST /courses/:courseId/rating` `[Bearer]` - Rate a course
 - `PATCH /ratings/:id` `[Bearer]` - Update a rating
 - `DELETE /ratings/:id` `[Bearer]` - Delete a rating
 
 ### Wishlists (`/wishlist`)
+
 - `GET /wishlist` `[Bearer]` - Get user's wishlist
 - `POST /wishlist` `[Bearer]` - Add a course to wishlist
 - `DELETE /wishlist/:courseId` `[Bearer]` - Remove a course from wishlist
 
 ### Orders (`/orders`)
+
 - `GET /orders` `[Bearer]` - Get user's orders
 - `POST /orders` `[Bearer]` - Create a new order
 
 ### Trainer & Trainer Requests
+
 - `POST /trainer/request` `[Bearer]` - Submit a trainer request
 - `GET /admin/trainer-requests` `[ADMIN]` - Get all trainer requests
 - `PATCH /admin/trainer/:id/verify` `[ADMIN]` - Verify a trainer request
@@ -174,6 +192,7 @@ Run the following commands to initialize the database with Prisma:
 - `GET /trainer/sales` `[TRAINER]` - Get trainer sales stats
 
 ### Health Check
+
 - `GET /health` `[Public]` - Check API health status
 
 ## 📄 License

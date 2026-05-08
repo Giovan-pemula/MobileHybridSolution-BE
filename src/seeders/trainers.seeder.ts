@@ -44,7 +44,6 @@ async function seedTrainers(prisma: PrismaClient) {
       },
     });
 
-    // Upsert trainer request (APPROVED)
     await prisma.trainerRequest.upsert({
       where: { userId: user.id },
       update: { status: 'APPROVED' },

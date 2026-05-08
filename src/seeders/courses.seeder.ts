@@ -1,8 +1,6 @@
 import { PrismaClient } from '../../generated/prisma/client';
 
-// Each course entry: which trainer (by index), which category (by slug), sections & lessons
 const coursesData = [
-  // ─── Trainer 0: Budi Santoso (Web / DevOps) ──────────────────────────────
   {
     trainerIndex: 0,
     categorySlug: 'web-development',
@@ -93,7 +91,6 @@ const coursesData = [
       },
     ],
   },
-  // ─── Trainer 1: Siti Rahayu (Data Science / ML) ──────────────────────────
   {
     trainerIndex: 1,
     categorySlug: 'data-science',
@@ -177,7 +174,6 @@ const coursesData = [
       },
     ],
   },
-  // ─── Trainer 2: Andi Wijaya (Mobile / Flutter) ───────────────────────────
   {
     trainerIndex: 2,
     categorySlug: 'mobile-development',
@@ -286,7 +282,6 @@ async function seedCourses(
       continue;
     }
 
-    // Upsert course (match by title + trainerId)
     const existing = await prisma.course.findFirst({
       where: { title: data.title, trainerId },
     });
@@ -320,7 +315,6 @@ async function seedCourses(
     console.log(`  ✓ Course: "${course.title}"`);
 
     for (const sectionData of data.sections) {
-      // Upsert section
       const existingSection = await prisma.section.findFirst({
         where: { title: sectionData.title, courseId: course.id },
       });
