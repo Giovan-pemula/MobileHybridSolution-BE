@@ -7,6 +7,7 @@ export type UserRole = (typeof UserRole)[keyof typeof UserRole];
 export declare const CourseStatus: {
     readonly DRAFT: "DRAFT";
     readonly PUBLISHED: "PUBLISHED";
+    readonly ARCHIVED: "ARCHIVED";
 };
 export type CourseStatus = (typeof CourseStatus)[keyof typeof CourseStatus];
 export declare const TrainerRequestStatus: {

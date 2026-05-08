@@ -18,7 +18,7 @@ const rating_service_1 = require("./rating.service");
 const jwt_auth_guard_1 = require("../common/guards/jwt-auth.guard");
 const current_user_decorator_1 = require("../common/decorators/current-user.decorator");
 const zod_validation_pipe_1 = require("../common/pipes/zod-validation.pipe");
-const rating_validation_1 = require("../validations/rating.validation");
+const rating_validation_1 = require("./rating.validation");
 const zod_1 = require("zod");
 let RatingController = class RatingController {
     ratingService;
@@ -38,8 +38,8 @@ let RatingController = class RatingController {
         return { data: rating, message: 'Rating updated successfully' };
     }
     async deleteRating(id, user) {
-        await this.ratingService.deleteRating(id, user.id);
-        return { data: null, message: 'Rating deleted successfully' };
+        const deleted = await this.ratingService.deleteRating(id, user.id);
+        return { data: deleted, message: `Rating for course #${deleted.courseId} deleted successfully` };
     }
 };
 exports.RatingController = RatingController;

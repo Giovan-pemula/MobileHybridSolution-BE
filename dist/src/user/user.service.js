@@ -12,11 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const user_repository_1 = require("./user.repository");
+const r2_service_1 = require("../common/storage/r2.service");
 const pagination_1 = require("../utils/pagination");
 let UserService = class UserService {
     userRepository;
-    constructor(userRepository) {
+    r2Service;
+    constructor(userRepository, r2Service) {
         this.userRepository = userRepository;
+        this.r2Service = r2Service;
     }
     async getAllUsers(query) {
         const pagination = (0, pagination_1.parsePagination)(query);
@@ -28,6 +31,20 @@ let UserService = class UserService {
         if (!user)
             throw new common_1.NotFoundException('User not found');
         return user;
+    }
+    async getPublicProfile(id) {
+        const user = await this.userRepository.findById(id);
+        if (!user)
+            throw new common_1.NotFoundException('User not found');
+        if (user.role === 'ADMIN')
+            throw new common_1.ForbiddenException('Profile not available');
+        return user;
+    }
+    async updateProfile(id, data) {
+        const user = await this.userRepository.findById(id);
+        if (!user)
+            throw new common_1.NotFoundException('User not found');
+        return this.userRepository.update(id, data);
     }
     async updateUser(id, data) {
         const user = await this.userRepository.findById(id);
@@ -44,12 +61,24 @@ let UserService = class UserService {
         const user = await this.userRepository.findById(id);
         if (!user)
             throw new common_1.NotFoundException('User not found');
-        await this.userRepository.delete(id);
+        return this.userRepository.delete(id);
+    }
+    async uploadAvatar(id, file) {
+        const user = await this.userRepository.findById(id);
+        if (!user)
+            throw new common_1.NotFoundException('User not found');
+        // Delete old avatar from R2 if it exists
+        if (user.avatar) {
+            await this.r2Service.deleteFile(user.avatar).catch(() => null);
+        }
+        const avatarUrl = await this.r2Service.uploadFile(file, 'avatars');
+        return this.userRepository.update(id, { avatar: avatarUrl });
     }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [user_repository_1.UserRepository])
+    __metadata("design:paramtypes", [user_repository_1.UserRepository,
+        r2_service_1.R2Service])
 ], UserService);
 //# sourceMappingURL=user.service.js.map

@@ -13,8 +13,8 @@ export declare class EnrollmentRepository {
     findByUser(userId: number): Promise<({
         course: {
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };
@@ -22,8 +22,8 @@ export declare class EnrollmentRepository {
                 sections: number;
             };
             trainer: {
-                id: number;
                 name: string;
+                id: number;
                 avatar: string | null;
             };
         } & {
@@ -51,14 +51,14 @@ export declare class EnrollmentRepository {
     create(userId: number, courseId: number): Promise<{
         course: {
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };
             trainer: {
-                id: number;
                 name: string;
+                id: number;
                 avatar: string | null;
             };
         } & {

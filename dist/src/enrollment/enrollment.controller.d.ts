@@ -12,8 +12,8 @@ export declare class EnrollmentController {
             course: {
                 category: {
                     id: number;
-                    name: string;
                     createdAt: Date;
+                    name: string;
                     slug: string;
                 };
                 _count: {
@@ -39,9 +39,9 @@ export declare class EnrollmentController {
                 trainerId: number;
             };
             id: number;
-            createdAt: Date;
             userId: number;
             courseId: number;
+            createdAt: Date;
         }[];
         message: string;
     }>;
@@ -50,8 +50,8 @@ export declare class EnrollmentController {
             course: {
                 category: {
                     id: number;
-                    name: string;
                     createdAt: Date;
+                    name: string;
                     slug: string;
                 };
                 trainer: {
@@ -75,11 +75,11 @@ export declare class EnrollmentController {
             };
         } & {
             id: number;
-            createdAt: Date;
             userId: number;
             courseId: number;
             progress: number;
             completed: boolean;
+            createdAt: Date;
         };
         message: string;
     }>;

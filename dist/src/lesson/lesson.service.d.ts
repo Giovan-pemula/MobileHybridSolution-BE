@@ -34,6 +34,14 @@ export declare class LessonService {
         isPreview: boolean;
         sectionId: number;
     }>;
-    deleteLesson(id: number, userId: number, userRole: string): Promise<void>;
+    deleteLesson(id: number, userId: number, userRole: string): Promise<{
+        order: number;
+        id: number;
+        title: string;
+        youtubeUrl: string | null;
+        duration: number | null;
+        isPreview: boolean;
+        sectionId: number;
+    }>;
 }
 //# sourceMappingURL=lesson.service.d.ts.map

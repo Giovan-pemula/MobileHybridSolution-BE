@@ -1,5 +1,5 @@
 import { CategoryService } from './category.service';
-import { createCategorySchema, updateCategorySchema } from '../validations/category.validation';
+import { createCategorySchema, updateCategorySchema } from './category.validation';
 import { z } from 'zod';
 export declare class CategoryController {
     private readonly categoryService;
@@ -10,8 +10,8 @@ export declare class CategoryController {
                 courses: number;
             };
         } & {
-            id: number;
             name: string;
+            id: number;
             createdAt: Date;
             slug: string;
         })[];
@@ -23,8 +23,8 @@ export declare class CategoryController {
                 courses: number;
             };
         } & {
-            id: number;
             name: string;
+            id: number;
             createdAt: Date;
             slug: string;
         };
@@ -32,8 +32,8 @@ export declare class CategoryController {
     }>;
     createCategory(body: z.infer<typeof createCategorySchema>): Promise<{
         data: {
-            id: number;
             name: string;
+            id: number;
             createdAt: Date;
             slug: string;
         };
@@ -41,15 +41,20 @@ export declare class CategoryController {
     }>;
     updateCategory(id: number, body: z.infer<typeof updateCategorySchema>): Promise<{
         data: {
-            id: number;
             name: string;
+            id: number;
             createdAt: Date;
             slug: string;
         };
         message: string;
     }>;
     deleteCategory(id: number): Promise<{
-        data: null;
+        data: {
+            name: string;
+            id: number;
+            createdAt: Date;
+            slug: string;
+        };
         message: string;
     }>;
 }

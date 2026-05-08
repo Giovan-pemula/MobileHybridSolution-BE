@@ -51,7 +51,7 @@ let CategoryService = class CategoryService {
         const category = await this.categoryRepository.findById(id);
         if (!category)
             throw new common_1.NotFoundException('Category not found');
-        await this.categoryRepository.delete(id);
+        return this.categoryRepository.delete(id);
     }
 };
 exports.CategoryService = CategoryService;

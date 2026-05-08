@@ -1,16 +1,16 @@
 import { TrainerRequestService } from './trainer-request.service';
 import { CurrentUserPayload } from '../common/decorators/current-user.decorator';
-import { trainerRequestSchema, verifyTrainerSchema } from '../validations/trainerRequest.validation';
+import { trainerRequestSchema, verifyTrainerSchema } from './trainerRequest.validation';
 import { z } from 'zod';
 export declare class TrainerRequestController {
     private readonly trainerRequestService;
     constructor(trainerRequestService: TrainerRequestService);
-    submitTrainerRequest(user: CurrentUserPayload, body: z.infer<typeof trainerRequestSchema>): Promise<{
+    submitTrainerRequest(user: CurrentUserPayload, body: z.infer<typeof trainerRequestSchema>, cvFile: Express.Multer.File): Promise<{
         data: {
             user: {
+                name: string;
                 id: number;
                 email: string;
-                name: string;
             };
         } & {
             id: number;
@@ -26,9 +26,9 @@ export declare class TrainerRequestController {
     getTrainerRequests(status?: string): Promise<{
         data: ({
             user: {
+                name: string;
                 id: number;
                 email: string;
-                name: string;
                 role: import("../../generated/prisma/enums").UserRole;
                 avatar: string | null;
             };
@@ -46,9 +46,9 @@ export declare class TrainerRequestController {
     verifyTrainer(id: number, body: z.infer<typeof verifyTrainerSchema>): Promise<{
         data: {
             user: {
+                name: string;
                 id: number;
                 email: string;
-                name: string;
                 role: import("../../generated/prisma/enums").UserRole;
             };
         } & {

@@ -3,9 +3,9 @@ export declare class AuthRepository {
     private readonly prisma;
     constructor(prisma: PrismaService);
     findByEmail(email: string): Promise<{
+        name: string;
         id: number;
         email: string;
-        name: string;
         password: string;
         role: import("../../generated/prisma/enums").UserRole;
         avatar: string | null;
@@ -17,9 +17,9 @@ export declare class AuthRepository {
         email: string;
         password: string;
     }): Promise<{
+        name: string;
         id: number;
         email: string;
-        name: string;
         role: import("../../generated/prisma/enums").UserRole;
         avatar: string | null;
         createdAt: Date;

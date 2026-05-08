@@ -4,8 +4,8 @@ export declare class RatingService {
     constructor(ratingRepository: RatingRepository);
     getCourseRatings(courseId: number): Promise<({
         user: {
-            id: number;
             name: string;
+            id: number;
             avatar: string | null;
         };
     } & {
@@ -21,8 +21,8 @@ export declare class RatingService {
         review?: string;
     }): Promise<{
         user: {
-            id: number;
             name: string;
+            id: number;
             avatar: string | null;
         };
     } & {
@@ -38,8 +38,8 @@ export declare class RatingService {
         review?: string;
     }): Promise<{
         user: {
-            id: number;
             name: string;
+            id: number;
             avatar: string | null;
         };
     } & {
@@ -50,6 +50,13 @@ export declare class RatingService {
         courseId: number;
         review: string | null;
     }>;
-    deleteRating(id: number, userId: number): Promise<void>;
+    deleteRating(id: number, userId: number): Promise<{
+        rating: number;
+        id: number;
+        createdAt: Date;
+        userId: number;
+        courseId: number;
+        review: string | null;
+    }>;
 }
 //# sourceMappingURL=rating.service.d.ts.map

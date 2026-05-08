@@ -8,8 +8,8 @@ export declare class TrainerRepository {
         totalRevenue: number;
         latestCourses: ({
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };

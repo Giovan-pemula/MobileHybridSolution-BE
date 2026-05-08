@@ -40,7 +40,7 @@ let RatingService = class RatingService {
             throw new common_1.NotFoundException('Rating not found');
         if (rating.userId !== userId)
             throw new common_1.ForbiddenException('You can only delete your own rating');
-        await this.ratingRepository.delete(id);
+        return this.ratingRepository.delete(id);
     }
 };
 exports.RatingService = RatingService;

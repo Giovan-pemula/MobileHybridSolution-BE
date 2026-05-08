@@ -1,5 +1,6 @@
 import { UserService } from './user.service';
-import { updateUserSchema } from '../validations/user.validation';
+import { CurrentUserPayload } from '../common/decorators/current-user.decorator';
+import { updateProfileSchema, updateUserSchema } from './user.validation';
 import { z } from 'zod';
 export declare class UserController {
     private readonly userService;
@@ -10,9 +11,9 @@ export declare class UserController {
     }): Promise<{
         data: {
             data: {
+                name: string;
                 id: number;
                 email: string;
-                name: string;
                 role: import("../../generated/prisma/enums").UserRole;
                 avatar: string | null;
                 createdAt: Date;
@@ -27,11 +28,47 @@ export declare class UserController {
         };
         message: string;
     }>;
-    getUser(id: number): Promise<{
+    getProfile(currentUser: CurrentUserPayload): Promise<{
         data: {
+            name: string;
             id: number;
             email: string;
+            role: import("../../generated/prisma/enums").UserRole;
+            avatar: string | null;
+            createdAt: Date;
+            updatedAt: Date;
+        };
+        message: string;
+    }>;
+    updateProfile(body: z.infer<typeof updateProfileSchema>, currentUser: CurrentUserPayload): Promise<{
+        data: {
             name: string;
+            id: number;
+            email: string;
+            role: import("../../generated/prisma/enums").UserRole;
+            avatar: string | null;
+            createdAt: Date;
+            updatedAt: Date;
+        };
+        message: string;
+    }>;
+    uploadProfileAvatar(currentUser: CurrentUserPayload, file: Express.Multer.File): Promise<{
+        data: {
+            name: string;
+            id: number;
+            email: string;
+            role: import("../../generated/prisma/enums").UserRole;
+            avatar: string | null;
+            createdAt: Date;
+            updatedAt: Date;
+        };
+        message: string;
+    }>;
+    getPublicProfile(id: number, currentUser: CurrentUserPayload): Promise<{
+        data: {
+            name: string;
+            id: number;
+            email: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
             createdAt: Date;
@@ -41,9 +78,21 @@ export declare class UserController {
     }>;
     updateUser(id: number, body: z.infer<typeof updateUserSchema>): Promise<{
         data: {
+            name: string;
             id: number;
             email: string;
+            role: import("../../generated/prisma/enums").UserRole;
+            avatar: string | null;
+            createdAt: Date;
+            updatedAt: Date;
+        };
+        message: string;
+    }>;
+    uploadAvatar(id: number, file: Express.Multer.File): Promise<{
+        data: {
             name: string;
+            id: number;
+            email: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
             createdAt: Date;
@@ -52,7 +101,16 @@ export declare class UserController {
         message: string;
     }>;
     deleteUser(id: number): Promise<{
-        data: null;
+        data: {
+            name: string;
+            id: number;
+            email: string;
+            password: string;
+            role: import("../../generated/prisma/enums").UserRole;
+            avatar: string | null;
+            createdAt: Date;
+            updatedAt: Date;
+        };
         message: string;
     }>;
 }

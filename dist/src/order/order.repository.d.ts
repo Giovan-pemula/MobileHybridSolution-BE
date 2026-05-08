@@ -6,14 +6,14 @@ export declare class OrderRepository {
         items: ({
             course: {
                 category: {
-                    id: number;
                     name: string;
+                    id: number;
                     createdAt: Date;
                     slug: string;
                 };
                 trainer: {
-                    id: number;
                     name: string;
+                    id: number;
                 };
             } & {
                 id: number;
@@ -49,8 +49,8 @@ export declare class OrderRepository {
         items: ({
             course: {
                 category: {
-                    id: number;
                     name: string;
+                    id: number;
                     createdAt: Date;
                     slug: string;
                 };

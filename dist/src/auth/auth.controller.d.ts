@@ -1,5 +1,5 @@
 import { AuthService } from './auth.service';
-import { loginSchema, registerSchema } from '../validations/auth.validation';
+import { loginSchema, registerSchema } from './auth.validation';
 import { z } from 'zod';
 export declare class AuthController {
     private readonly authService;

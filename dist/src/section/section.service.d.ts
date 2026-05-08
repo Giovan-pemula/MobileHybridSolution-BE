@@ -38,6 +38,11 @@ export declare class SectionService {
         title: string;
         courseId: number;
     }>;
-    deleteSection(id: number, userId: number, userRole: string): Promise<void>;
+    deleteSection(id: number, userId: number, userRole: string): Promise<{
+        order: number;
+        id: number;
+        title: string;
+        courseId: number;
+    }>;
 }
 //# sourceMappingURL=section.service.d.ts.map

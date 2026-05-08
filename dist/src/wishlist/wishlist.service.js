@@ -32,7 +32,7 @@ let WishlistService = class WishlistService {
         const existing = await this.wishlistRepository.findByUserAndCourse(userId, courseId);
         if (!existing)
             throw new common_1.NotFoundException('Course not in wishlist');
-        await this.wishlistRepository.delete(userId, courseId);
+        return this.wishlistRepository.delete(userId, courseId);
     }
 };
 exports.WishlistService = WishlistService;

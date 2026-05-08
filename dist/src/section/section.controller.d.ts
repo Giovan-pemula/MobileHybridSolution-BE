@@ -1,6 +1,6 @@
 import { SectionService } from './section.service';
 import { CurrentUserPayload } from '../common/decorators/current-user.decorator';
-import { createSectionSchema, updateSectionSchema } from '../validations/section.validation';
+import { createSectionSchema, updateSectionSchema } from './section.validation';
 import { z } from 'zod';
 export declare class SectionController {
     private readonly sectionService;
@@ -43,7 +43,12 @@ export declare class SectionController {
         message: string;
     }>;
     deleteSection(id: number, user: CurrentUserPayload): Promise<{
-        data: null;
+        data: {
+            order: number;
+            id: number;
+            title: string;
+            courseId: number;
+        };
         message: string;
     }>;
 }

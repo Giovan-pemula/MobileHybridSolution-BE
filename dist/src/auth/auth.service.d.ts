@@ -1,6 +1,6 @@
 import { AuthRepository } from './auth.repository';
 import { z } from 'zod';
-import { loginSchema, registerSchema } from '../validations/auth.validation';
+import { loginSchema, registerSchema } from './auth.validation';
 type LoginPayload = z.infer<typeof loginSchema>;
 type RegisterPayload = z.infer<typeof registerSchema>;
 export declare class AuthService {

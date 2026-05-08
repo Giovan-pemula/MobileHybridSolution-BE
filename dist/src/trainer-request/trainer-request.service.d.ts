@@ -1,18 +1,19 @@
 import { TrainerRequestRepository } from './trainer-request.repository';
 import { UserRepository } from '../user/user.repository';
+import { R2Service } from '../common/storage/r2.service';
 export declare class TrainerRequestService {
     private readonly trainerRequestRepository;
     private readonly userRepository;
-    constructor(trainerRequestRepository: TrainerRequestRepository, userRepository: UserRepository);
+    private readonly r2Service;
+    constructor(trainerRequestRepository: TrainerRequestRepository, userRepository: UserRepository, r2Service: R2Service);
     submitRequest(userId: number, data: {
-        cvUrl: string;
         bio: string;
         experience: string;
-    }): Promise<{
+    }, cvFile: Express.Multer.File): Promise<{
         user: {
+            name: string;
             id: number;
             email: string;
-            name: string;
         };
     } & {
         id: number;
@@ -25,9 +26,9 @@ export declare class TrainerRequestService {
     }>;
     getAllRequests(status?: string): Promise<({
         user: {
+            name: string;
             id: number;
             email: string;
-            name: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
         };
@@ -42,9 +43,9 @@ export declare class TrainerRequestService {
     })[]>;
     verifyTrainer(requestId: number, status: string): Promise<{
         user: {
+            name: string;
             id: number;
             email: string;
-            name: string;
             role: import("../../generated/prisma/enums").UserRole;
         };
     } & {
