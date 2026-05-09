@@ -78,7 +78,7 @@ Run the following commands to initialize the database with Prisma:
 
 3. Seed the Database (if seed script exists):
    ```bash
-   npm run seed
+   npx prisma db seed
    ```
 
 ## 🏃 Running the Application
