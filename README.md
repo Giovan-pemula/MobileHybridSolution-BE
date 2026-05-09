@@ -1,6 +1,6 @@
 # BRAINUP (E-Learning / LMS API)
 
-This is a robust backend API built with **NestJS**, **Prisma ORM**, and **PostgreSQL** for an E-Learning platform. The API supports courses management, student enrollments, trainer features, lesson tracking, discussions, and an ordering system.
+This is a robust backend API built with **NestJS**, **Prisma ORM**, and **PostgreSQL** for an E-Learning platform. The API supports courses management, student enrollments, trainer features, lesson tracking, discussions, and an ordering system for courses.
 
 ## 🚀 Features
 
@@ -16,6 +16,7 @@ This is a robust backend API built with **NestJS**, **Prisma ORM**, and **Postgr
 
 ## 🛠️ Tech Stack
 
+- **Runtime:** Node.js v20+
 - **Framework:** [NestJS](https://nestjs.com/)
 - **Database:** PostgreSQL
 - **ORM:** [Prisma](https://www.prisma.io/)
@@ -27,7 +28,7 @@ This is a robust backend API built with **NestJS**, **Prisma ORM**, and **Postgr
 
 Ensure you have the following installed on your local machine:
 
-- [Node.js](https://nodejs.org/) (v16 or higher)
+- [Node.js](https://nodejs.org/) (v20 or higher)
 - [PostgreSQL](https://www.postgresql.org/) database running
 - [npm](https://www.npmjs.com/) or yarn
 
@@ -36,7 +37,8 @@ Ensure you have the following installed on your local machine:
 1. Clone the repository and navigate to the project directory:
 
    ```bash
-   cd MobileHybridSolutionWHB
+   git clone https://github.com/Giovan-pemula/MobileHybridSolution-BE.git
+   cd MobileHybridSolution-BE
    ```
 
 2. Install dependencies:
@@ -45,27 +47,33 @@ Ensure you have the following installed on your local machine:
    npm install
    ```
 
-3. Configure Environment Variables:
-   Create a `.env` file in the root directory and configure your database and JWT secrets:
-   ```env
-   DATABASE_URL="postgresql://user:password@localhost:5432/yourdb?schema=public"
-   PORT=3000
-   ```
+## 🔧 Configuration
+Create a `.env` file in the root directory
+```bash
+cp .env.example .env
+```
+
+Configure the following variables
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `DATABASE_URL` | PostgreSQL connection string | `mysql://user:pass@localhost:3306/bncc_learning` |
+| `JWT_KEY` | Secret key for verifying JWT tokens | `super-secret-key-change-me` |
+| `PORT` | Application port | `3000` |
 
 ## 🗄️ Database Setup
 
 Run the following commands to initialize the database with Prisma:
 
-1. Generate Prisma Client:
-
-   ```bash
-   npx prisma generate
-   ```
-
-2. Run Migrations:
+1. Run Migrations to create tables:
 
    ```bash
    npx prisma migrate dev
+   ```
+
+2. Generate Prisma Clients:
+
+   ```bash
+   npx prisma generate
    ```
 
 3. Seed the Database (if seed script exists):
@@ -75,28 +83,70 @@ Run the following commands to initialize the database with Prisma:
 
 ## 🏃 Running the Application
 
-- **Development mode:**
+### Development mode
 
   ```bash
   npm run dev
   ```
 
-- **Production mode:**
+### Production mode
+
+Compile TypeScript and run:
+
   ```bash
   npm run build
   npm run start
   ```
 
+## 🗄️ Database Schema
+
+```
+Category ←→ Course ←→ Section ←→ Lesson
+Course ←→ Enrollment ←→ User
+       ←→ Rating ←→ User
+       ←→ Wishlist ←→ User
+       ←→ OrderItem ←→ Order ←→ User
+Lesson ←→ Discussion ←→ Reply ←→ User
+       ←→ LessonCompletion ←→ User
+User ←→ TrainerRequest
+```
+
+### Models
+
+- `User` — A platform user with specific role (USER, TRAINER, ADMIN)
+- `Category` — classification group for courses
+- `Course` — learning course containing sections and lessons
+- `Section` — structured grouping of lessons within a course
+- `Lesson` — An individual learning material using video within a section
+- `Enrollment` — Enrollment join table linking users to their courses with progress tracking
+- `Rating` — user's review and rating score for a specific course
+- `Wishlist` — record of a course saved by a user
+- `TrainerRequest` — verification request submitted by a user to become a trainer
+- `Discussion` — forum thread created by a user on a specific lesson
+- `Reply` — response to a discussion thread by a user
+- `LessonCompletion` — tracking record indicating a user's completion of a specific lesson
+- `Order` — purchase transaction created by a user
+- `OrderItem` — individual course included within an order transaction
+
 ## 📁 Project Structure
 
-- `src/auth/` - Authentication and JWT logic
-- `src/user/` - User profiles and management
-- `src/course/` - Course, section, and lesson management
-- `src/enrollment/` - Managing student enrollments and progress
-- `src/trainer-request/` - Logic for upgrading user accounts to trainers
-- `src/discussion/` - Lesson discussions and replies
-- `src/order/` - Course purchase and transaction management
-- `prisma/schema.prisma` - Prisma database schema definition
+```
+MobileHybridSolution-BE/
+├── prisma/
+│   ├── schema.prisma        # Database schema
+│   └── migrations/          # Migration history
+├── src/
+│   ├── <feature-modules>/   # Domain modules (auth, course, user, etc.)
+│   ├── common/              # Shared components (guards, decorators, filters)
+│   ├── config/              # Environment configuration
+│   ├── utils/               # Helper functions
+│   ├── validations/         # Validation schemas
+│   ├── app.module.ts        # Main application module
+│   └── main.ts              # Application entry point
+├── .env.example             # Environment variables example
+├── package.json             # Project dependencies and scripts
+└── tsconfig.json            # TypeScript configuration
+```
 
 ## 📡 API Endpoints
 
