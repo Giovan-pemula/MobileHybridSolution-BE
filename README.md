@@ -149,7 +149,7 @@ MobileHybridSolution-BE/
 ```
 
 ## 📡 API Endpoints
-
+- `[API DOCUM]` : https://docs.google.com/spreadsheets/d/1i25X6Bk2onD6W_MOBAOuljXnV-fGvJAWY2t5iHApOaE/edit?usp=sharing
 - `[Public]` : Accessible without authentication.
 - `[Bearer]` : Requires a valid Bearer Token (Authenticated).
 - `[TRAINER]` : Requires Trainer or Admin role.
