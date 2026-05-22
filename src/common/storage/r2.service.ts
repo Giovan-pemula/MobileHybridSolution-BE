@@ -6,7 +6,7 @@ import {
   DeleteObjectCommand,
   PutObjectCommandInput,
 } from '@aws-sdk/client-s3';
-import { v4 as uuidv4 } from 'uuid';
+import * as crypto from 'crypto'; // <-- Menggantikan import 'uuid'
 import * as path from 'path';
 
 @Injectable()
@@ -42,7 +42,8 @@ export class R2Service {
    */
   async uploadFile(file: Express.Multer.File, folder: string = 'uploads'): Promise<string> {
     const ext = path.extname(file.originalname).toLowerCase();
-    const key = `${folder}/${uuidv4()}${ext}`;
+    // Gunakan crypto.randomUUID() bawaan Node.js
+    const key = `${folder}/${crypto.randomUUID()}${ext}`; 
 
     const params: PutObjectCommandInput = {
       Bucket: this.bucketName,
