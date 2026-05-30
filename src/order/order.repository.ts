@@ -1,9 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../common/prisma/prisma.service';
+import { OrderStatus } from '../../generated/prisma/enums';
 
 @Injectable()
 export class OrderRepository {
   constructor(private readonly prisma: PrismaService) {}
+
+  async findById(id: number) {
+    return this.prisma.order.findUnique({
+      where: { id },
+      include: {
+        items: {
+          include: {
+            course: {
+              select: {
+                id: true,
+                title: true,
+                price: true,
+                thumbnail: true,
+              },
+            },
+          },
+        },
+      },
+    });
+  }
 
   async findByUser(userId: number) {
     return this.prisma.order.findMany({
@@ -30,12 +51,33 @@ export class OrderRepository {
       data: {
         userId,
         total,
-        status: 'COMPLETED',
+        status: total === 0 ? OrderStatus.COMPLETED : OrderStatus.PENDING,
         items: { create: items },
       },
       include: {
         items: {
-          include: { course: { include: { category: true } } },
+          include: {
+            course: {
+              select: {
+                id: true,
+                title: true,
+                price: true,
+                thumbnail: true,
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
+  async updateStatus(id: number, status: OrderStatus) {
+    return this.prisma.order.update({
+      where: { id },
+      data: { status },
+      include: {
+        items: {
+          include: { course: true },
         },
       },
     });
