@@ -33,10 +33,19 @@ let OrderController = class OrderController {
         const order = await this.orderService.createOrder(user.id, body.courseIds);
         return { data: order, message: 'Order created successfully' };
     }
+    async handleWebhook(payload) {
+        const result = await this.orderService.handleWebhook(payload);
+        return { data: result, message: 'Webhook processed successfully' };
+    }
+    async getPaymentStatus(user, orderId) {
+        const order = await this.orderService.syncPaymentStatus(user.id, orderId);
+        return { data: order, message: 'Payment status fetched successfully' };
+    }
 };
 exports.OrderController = OrderController;
 __decorate([
     (0, common_1.Get)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -44,15 +53,31 @@ __decorate([
 ], OrderController.prototype, "getOrders", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __param(1, (0, common_1.Body)(new zod_validation_pipe_1.ZodValidationPipe(order_validation_1.createOrderSchema))),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], OrderController.prototype, "createOrder", null);
+__decorate([
+    (0, common_1.Post)('webhook'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], OrderController.prototype, "handleWebhook", null);
+__decorate([
+    (0, common_1.Get)(':id/payment-status'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    __param(0, (0, current_user_decorator_1.CurrentUser)()),
+    __param(1, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Number]),
+    __metadata("design:returntype", Promise)
+], OrderController.prototype, "getPaymentStatus", null);
 exports.OrderController = OrderController = __decorate([
     (0, common_1.Controller)('orders'),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     __metadata("design:paramtypes", [order_service_1.OrderService])
 ], OrderController);
 //# sourceMappingURL=order.controller.js.map

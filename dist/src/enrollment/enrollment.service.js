@@ -41,9 +41,8 @@ let EnrollmentService = class EnrollmentService {
         const course = await this.courseRepository.findById(courseId);
         if (!course)
             throw new common_1.NotFoundException('Course not found');
-        // Paid courses must go through the order flow — direct enroll is not allowed
         if (!course.isFree) {
-            throw new common_1.ForbiddenException('This course requires purchase. Please use POST /orders to buy and enroll.');
+            throw new common_1.ForbiddenException('This course requires purchase. please purchase the course and enroll.');
         }
         const existing = await this.enrollmentRepository.findByUserAndCourse(userId, courseId);
         if (existing)
