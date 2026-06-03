@@ -45,14 +45,39 @@ export class OrderRepository {
     });
   }
 
-  async create(userId: number, items: { courseId: number; price: number }[]) {
-    const total = items.reduce((sum, item) => sum + item.price, 0);
+  async create(
+    userId: number,
+    total: number,
+    couponId: number | null,
+    discountAmt: number,
+    serviceFee: number,
+    items: {
+      courseId: number;
+      price: number;
+      revenue: {
+        basePrice: number;
+        discountAmt: number;
+        netRevenue: number;
+        trainerShare: number;
+        platformShare: number;
+      };
+    }[]
+  ) {
     return this.prisma.order.create({
       data: {
         userId,
         total,
+        couponId,
+        discountAmt,
+        serviceFee,
         status: total === 0 ? OrderStatus.COMPLETED : OrderStatus.PENDING,
-        items: { create: items },
+        items: {
+          create: items.map(item => ({
+            courseId: item.courseId,
+            price: item.price,
+            revenue: { create: item.revenue },
+          })),
+        },
       },
       include: {
         items: {
@@ -65,6 +90,7 @@ export class OrderRepository {
                 thumbnail: true,
               },
             },
+            revenue: true,
           },
         },
       },

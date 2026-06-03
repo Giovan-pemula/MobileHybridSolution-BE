@@ -23,7 +23,7 @@ export class OrderController {
     @CurrentUser() user: CurrentUserPayload,
     @Body(new ZodValidationPipe(createOrderSchema)) body: z.infer<typeof createOrderSchema>,
   ) {
-    const order = await this.orderService.createOrder(user.id, body.courseIds);
+    const order = await this.orderService.createOrder(user.id, body.courseIds, body.couponId);
     return { data: order, message: 'Order created successfully' };
   }
 

@@ -16,6 +16,7 @@ import { DiscussionModule } from './discussion/discussion.module';
 import { OrderModule } from './order/order.module';
 import { LessonCompletionModule } from './lesson-completion/lesson-completion.module';
 import { TrainerModule } from './trainer/trainer.module';
+import { GamificationModule } from './gamification/gamification.module';
 import { HealthController } from './health.controller';
 
 @Module({
@@ -37,6 +38,7 @@ import { HealthController } from './health.controller';
     OrderModule,
     LessonCompletionModule,
     TrainerModule,
+    GamificationModule,
   ],
   controllers: [HealthController],
 })
