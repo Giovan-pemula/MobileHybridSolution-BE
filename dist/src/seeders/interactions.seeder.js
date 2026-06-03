@@ -1,15 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// user index → list of course indexes to enroll in (from courses seeder order)
-// courses: [0]=NestJS, [1]=Docker, [2]=Python, [3]=ML, [4]=Flutter, [5]=RN
 const enrollmentMap = {
-    0: [0, 2, 4], // Ahmad: NestJS, Python DS (free), Flutter
-    1: [2, 3, 5], // Dewi: Python DS (free), ML, React Native (free)
-    2: [0, 1, 4], // Reza: NestJS, Docker, Flutter
-    3: [2, 5], // Nurul: Python DS, React Native (keduanya free)
-    4: [3, 4], // Bagas: ML, Flutter
+    0: [0, 2, 4],
+    1: [2, 3, 5],
+    2: [0, 1, 4],
+    3: [2, 5],
+    4: [3, 4],
 };
-// Sample ratings per user per enrolled course (not all)
 const ratingsData = [
     { userIndex: 0, courseIndex: 0, rating: 5, review: 'Materi NestJS-nya sangat lengkap dan mudah dipahami! Highly recommended.' },
     { userIndex: 0, courseIndex: 2, rating: 4, review: 'Penjelasan Pandas-nya bagus, tapi lebih banyak contoh real-world would be great.' },
@@ -21,7 +18,6 @@ const ratingsData = [
     { userIndex: 4, courseIndex: 3, rating: 3, review: 'Bagus tapi beberapa topik advanced kurang dalam pembahasannya.' },
     { userIndex: 4, courseIndex: 4, rating: 5, review: 'Terbaik! Dari zero to hero Flutter dalam satu kursus.' },
 ];
-// Sample discussions
 const discussionsData = [
     { userIndex: 0, lessonKey: 'NestJS?', comment: 'Apakah NestJS bisa digunakan untuk real-time app dengan WebSocket?' },
     { userIndex: 2, lessonKey: 'NestJS?', comment: 'Bagaimana cara handle error secara global di NestJS?' },
@@ -29,7 +25,6 @@ const discussionsData = [
 ];
 async function seedInteractions(prisma, userIds, courseIds) {
     console.log('Seeding enrollments, ratings & discussions...');
-    // ─── Enrollments ──────────────────────────────────────────────────────────
     let enrollCount = 0;
     for (const [userIdx, courseIdxList] of Object.entries(enrollmentMap)) {
         const userId = userIds[Number(userIdx)];
@@ -48,7 +43,6 @@ async function seedInteractions(prisma, userIds, courseIds) {
         }
     }
     console.log(`  ✓ ${enrollCount} enrollments seeded`);
-    // ─── Ratings ──────────────────────────────────────────────────────────────
     let ratingCount = 0;
     for (const r of ratingsData) {
         const userId = userIds[r.userIndex];
@@ -63,19 +57,16 @@ async function seedInteractions(prisma, userIds, courseIds) {
         ratingCount++;
     }
     console.log(`  ✓ ${ratingCount} ratings seeded`);
-    // ─── Discussions ──────────────────────────────────────────────────────────
     let discussionCount = 0;
     for (const d of discussionsData) {
         const userId = userIds[d.userIndex];
         if (!userId)
             continue;
-        // Find a lesson whose title contains the key
         const lesson = await prisma.lesson.findFirst({
             where: { title: { contains: d.lessonKey } },
         });
         if (!lesson)
             continue;
-        // Only create if not already there (avoid duplicates on re-seed)
         const existing = await prisma.discussion.findFirst({
             where: { lessonId: lesson.id, userId, comment: d.comment },
         });

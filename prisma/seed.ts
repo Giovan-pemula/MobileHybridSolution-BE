@@ -8,6 +8,7 @@ import seedTrainers from '../src/seeders/trainers.seeder';
 import seedUsers from '../src/seeders/users.seeder';
 import seedCourses from '../src/seeders/courses.seeder';
 import seedInteractions from '../src/seeders/interactions.seeder';
+import seedGamification from '../src/seeders/gamification.seeder';
 
 const pool = new Pool({ connectionString: process.env['DATABASE_URL'] });
 const adapter = new PrismaPg(pool as any);
@@ -28,6 +29,9 @@ async function main() {
 
   // 4. Regular users — returns array of user IDs
   const userIds = await seedUsers(prisma);
+
+  // 4.5 Gamification (XP, Streaks, Coupons)
+  await seedGamification(prisma, userIds);
 
   // 5. Courses + sections + lessons (depends on trainers & categories)
   await seedCourses(prisma, trainerIds);
@@ -55,3 +59,4 @@ main()
     await prisma.$disconnect();
     await pool.end();
   });
+

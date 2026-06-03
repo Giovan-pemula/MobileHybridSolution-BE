@@ -10,80 +10,117 @@ export declare class OrderController {
             items: ({
                 course: {
                     category: {
-                        name: string;
                         id: number;
                         createdAt: Date;
+                        name: string;
                         slug: string;
                     };
                     trainer: {
-                        name: string;
                         id: number;
+                        name: string;
                     };
                 } & {
                     id: number;
+                    status: import("../../generated/prisma/enums").CourseStatus;
                     createdAt: Date;
-                    updatedAt: Date;
                     title: string;
                     description: string | null;
                     price: number;
                     isFree: boolean;
                     thumbnail: string | null;
                     previewYoutubeUrl: string | null;
-                    status: import("../../generated/prisma/enums").CourseStatus;
                     categoryId: number;
                     trainerId: number;
+                    updatedAt: Date;
                 };
             } & {
                 id: number;
                 price: number;
-                courseId: number;
                 orderId: number;
+                courseId: number;
             })[];
         } & {
             id: number;
-            createdAt: Date;
+            userId: number;
             total: number;
             status: import("../../generated/prisma/enums").OrderStatus;
-            userId: number;
+            createdAt: Date;
         })[];
         message: string;
     }>;
     createOrder(user: CurrentUserPayload, body: z.infer<typeof createOrderSchema>): Promise<{
         data: {
+            snapToken: null;
+            snapRedirectUrl: null;
             items: ({
                 course: {
-                    category: {
-                        name: string;
-                        id: number;
-                        createdAt: Date;
-                        slug: string;
-                    };
-                } & {
                     id: number;
-                    createdAt: Date;
-                    updatedAt: Date;
                     title: string;
-                    description: string | null;
                     price: number;
-                    isFree: boolean;
                     thumbnail: string | null;
-                    previewYoutubeUrl: string | null;
-                    status: import("../../generated/prisma/enums").CourseStatus;
-                    categoryId: number;
-                    trainerId: number;
                 };
             } & {
                 id: number;
                 price: number;
-                courseId: number;
                 orderId: number;
+                courseId: number;
+            })[];
+            id: number;
+            userId: number;
+            total: number;
+            status: import("../../generated/prisma/enums").OrderStatus;
+            createdAt: Date;
+        } | {
+            snapToken: string;
+            snapRedirectUrl: string;
+            items: ({
+                course: {
+                    id: number;
+                    title: string;
+                    price: number;
+                    thumbnail: string | null;
+                };
+            } & {
+                id: number;
+                price: number;
+                orderId: number;
+                courseId: number;
+            })[];
+            id: number;
+            userId: number;
+            total: number;
+            status: import("../../generated/prisma/enums").OrderStatus;
+            createdAt: Date;
+        };
+        message: string;
+    }>;
+    handleWebhook(payload: any): Promise<{
+        data: {
+            message: string;
+        };
+        message: string;
+    }>;
+    getPaymentStatus(user: CurrentUserPayload, orderId: number): Promise<{
+        data: {
+            items: ({
+                course: {
+                    id: number;
+                    title: string;
+                    price: number;
+                    thumbnail: string | null;
+                };
+            } & {
+                id: number;
+                price: number;
+                orderId: number;
+                courseId: number;
             })[];
         } & {
             id: number;
-            createdAt: Date;
+            userId: number;
             total: number;
             status: import("../../generated/prisma/enums").OrderStatus;
-            userId: number;
+            createdAt: Date;
         };
         message: string;
     }>;

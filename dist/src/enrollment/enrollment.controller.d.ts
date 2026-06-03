@@ -11,17 +11,17 @@ export declare class EnrollmentController {
             completedLessons: number;
             course: {
                 category: {
+                    name: string;
                     id: number;
                     createdAt: Date;
-                    name: string;
                     slug: string;
                 };
                 _count: {
                     sections: number;
                 };
                 trainer: {
-                    id: number;
                     name: string;
+                    id: number;
                     avatar: string | null;
                 };
             } & {
@@ -39,9 +39,9 @@ export declare class EnrollmentController {
                 trainerId: number;
             };
             id: number;
+            createdAt: Date;
             userId: number;
             courseId: number;
-            createdAt: Date;
         }[];
         message: string;
     }>;
@@ -49,14 +49,14 @@ export declare class EnrollmentController {
         data: {
             course: {
                 category: {
+                    name: string;
                     id: number;
                     createdAt: Date;
-                    name: string;
                     slug: string;
                 };
                 trainer: {
-                    id: number;
                     name: string;
+                    id: number;
                     avatar: string | null;
                 };
             } & {
@@ -75,11 +75,11 @@ export declare class EnrollmentController {
             };
         } & {
             id: number;
+            createdAt: Date;
             userId: number;
             courseId: number;
             progress: number;
             completed: boolean;
-            createdAt: Date;
         };
         message: string;
     }>;

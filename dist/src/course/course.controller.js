@@ -29,12 +29,10 @@ let CourseController = class CourseController {
     constructor(courseService) {
         this.courseService = courseService;
     }
-    // ─── Public Catalog (PUBLISHED only, ARCHIVED never shown) ────────────────
     async getCourses(query) {
         const result = await this.courseService.getAllCourses(query);
         return { data: result, message: 'Courses fetched successfully' };
     }
-    // ─── Trainer / Admin — see all statuses (DRAFT, PUBLISHED, ARCHIVED) ──────
     async getCoursesForAdmin(query, user) {
         // Trainer only sees their own courses; Admin sees all
         if (user.role === 'TRAINER')
@@ -42,9 +40,6 @@ let CourseController = class CourseController {
         const result = await this.courseService.getAllCoursesForAdmin(query);
         return { data: result, message: 'Courses fetched successfully' };
     }
-    // ─── Course Detail ─────────────────────────────────────────────────────────
-    // Logged-in enrolled users can still view ARCHIVED courses they purchased.
-    // Guests or non-enrolled users get 404 for ARCHIVED courses.
     async getCourse(id, req) {
         const user = req.user;
         if (user?.id) {
@@ -54,12 +49,10 @@ let CourseController = class CourseController {
         const course = await this.courseService.getCourseById(id);
         return { data: course, message: 'Course fetched successfully' };
     }
-    // ─── Mutations ─────────────────────────────────────────────────────────────
     async createCourse(user, body) {
         const course = await this.courseService.createCourse(user.id, body);
         return { data: course, message: 'Course created successfully' };
     }
-    // To archive a course: PATCH /courses/:id with { "status": "ARCHIVED" }
     async updateCourse(id, user, body) {
         const course = await this.courseService.updateCourse(id, user.id, user.role, body);
         const statusMsg = body.status === 'ARCHIVED' ? 'archived' : 'updated';

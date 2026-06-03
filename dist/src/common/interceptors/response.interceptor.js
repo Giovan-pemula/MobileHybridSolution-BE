@@ -9,15 +9,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ResponseInterceptor = void 0;
 const common_1 = require("@nestjs/common");
 const operators_1 = require("rxjs/operators");
-/**
- * Global response interceptor.
- * Wraps all successful controller return values into:
- * { success: true, message: string, data: T }
- *
- * Controllers can return:
- * - { data, message } → uses the provided message
- * - any other value  → wraps it with message: 'success'
- */
 let ResponseInterceptor = class ResponseInterceptor {
     intercept(_context, next) {
         return next.handle().pipe((0, operators_1.map)((value) => {

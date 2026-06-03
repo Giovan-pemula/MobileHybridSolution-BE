@@ -12,10 +12,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderRepository = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../common/prisma/prisma.service");
+const enums_1 = require("../../generated/prisma/enums");
 let OrderRepository = class OrderRepository {
     prisma;
     constructor(prisma) {
         this.prisma = prisma;
+    }
+    async findById(id) {
+        return this.prisma.order.findUnique({
+            where: { id },
+            include: {
+                items: {
+                    include: {
+                        course: {
+                            select: {
+                                id: true,
+                                title: true,
+                                price: true,
+                                thumbnail: true,
+                            },
+                        },
+                    },
+                },
+            },
+        });
     }
     async findByUser(userId) {
         return this.prisma.order.findMany({
@@ -41,12 +61,32 @@ let OrderRepository = class OrderRepository {
             data: {
                 userId,
                 total,
-                status: 'COMPLETED',
+                status: total === 0 ? enums_1.OrderStatus.COMPLETED : enums_1.OrderStatus.PENDING,
                 items: { create: items },
             },
             include: {
                 items: {
-                    include: { course: { include: { category: true } } },
+                    include: {
+                        course: {
+                            select: {
+                                id: true,
+                                title: true,
+                                price: true,
+                                thumbnail: true,
+                            },
+                        },
+                    },
+                },
+            },
+        });
+    }
+    async updateStatus(id, status) {
+        return this.prisma.order.update({
+            where: { id },
+            data: { status },
+            include: {
+                items: {
+                    include: { course: true },
                 },
             },
         });
