@@ -54,6 +54,11 @@ model User {
   orders            Order[]
   trainerRequest    TrainerRequest?
   lessonCompletions LessonCompletion[]
+  
+  userXp            UserXp?
+  xpHistory         XpHistory[]
+  loginStreak       UserLoginStreak?
+  coupons           Coupon[]
 }
 
 // ─── Category ────────────────────────────────────────────
@@ -224,14 +229,19 @@ model LessonCompletion {
 // ─── Order ───────────────────────────────────────────────
 
 model Order {
-  id        Int         @id @default(autoincrement())
-  userId    Int
-  total     Float       @default(0)
-  status    OrderStatus @default(PENDING)
-  createdAt DateTime    @default(now())
+  id          Int         @id @default(autoincrement())
+  userId      Int
+  total       Float       @default(0)
+  status      OrderStatus @default(PENDING)
+  createdAt   DateTime    @default(now())
 
-  user  User        @relation(fields: [userId], references: [id])
-  items OrderItem[]
+  couponId    Int?
+  serviceFee  Float       @default(10000)
+  discountAmt Float       @default(0)
+
+  user   User        @relation(fields: [userId], references: [id])
+  coupon Coupon?     @relation(fields: [couponId], references: [id])
+  items  OrderItem[]
 }
 
 // ─── OrderItem ───────────────────────────────────────────
@@ -242,6 +252,60 @@ model OrderItem {
   courseId Int
   price    Float
 
-  order  Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  course Course @relation(fields: [courseId], references: [id])
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  course  Course  @relation(fields: [courseId], references: [id])
+  revenue OrderItemRevenue?
+}
+
+// ─── Gamification & Economics ────────────────────────────
+
+model UserXp {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  xp        Int      @default(0)
+  
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model XpHistory {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  amount    Int
+  activity  String
+  createdAt DateTime @default(now())
+  
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model UserLoginStreak {
+  id             Int      @id @default(autoincrement())
+  userId         Int      @unique
+  currentStreak  Int      @default(0)
+  lastLoginDate  DateTime
+  
+  user           User     @relation(fields: [userId], references: [id])
+}
+
+model Coupon {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  discountPct Int
+  isUsed      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  usedAt      DateTime?
+  
+  user        User     @relation(fields: [userId], references: [id])
+  orders      Order[]
+}
+
+model OrderItemRevenue {
+  id            Int       @id @default(autoincrement())
+  orderItemId   Int       @unique
+  basePrice     Float
+  discountAmt   Float
+  netRevenue    Float
+  trainerShare  Float
+  platformShare Float
+  
+  orderItem     OrderItem @relation(fields: [orderItemId], references: [id], onDelete: Cascade)
 }
