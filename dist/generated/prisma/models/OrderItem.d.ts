@@ -174,6 +174,7 @@ export type OrderItemWhereInput = {
     price?: Prisma.FloatFilter<"OrderItem"> | number;
     order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>;
     course?: Prisma.XOR<Prisma.CourseScalarRelationFilter, Prisma.CourseWhereInput>;
+    revenue?: Prisma.XOR<Prisma.OrderItemRevenueNullableScalarRelationFilter, Prisma.OrderItemRevenueWhereInput> | null;
 };
 export type OrderItemOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
@@ -182,6 +183,7 @@ export type OrderItemOrderByWithRelationInput = {
     price?: Prisma.SortOrder;
     order?: Prisma.OrderOrderByWithRelationInput;
     course?: Prisma.CourseOrderByWithRelationInput;
+    revenue?: Prisma.OrderItemRevenueOrderByWithRelationInput;
 };
 export type OrderItemWhereUniqueInput = Prisma.AtLeast<{
     id?: number;
@@ -193,6 +195,7 @@ export type OrderItemWhereUniqueInput = Prisma.AtLeast<{
     price?: Prisma.FloatFilter<"OrderItem"> | number;
     order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>;
     course?: Prisma.XOR<Prisma.CourseScalarRelationFilter, Prisma.CourseWhereInput>;
+    revenue?: Prisma.XOR<Prisma.OrderItemRevenueNullableScalarRelationFilter, Prisma.OrderItemRevenueWhereInput> | null;
 }, "id">;
 export type OrderItemOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
@@ -218,23 +221,27 @@ export type OrderItemCreateInput = {
     price: number;
     order: Prisma.OrderCreateNestedOneWithoutItemsInput;
     course: Prisma.CourseCreateNestedOneWithoutOrderItemsInput;
+    revenue?: Prisma.OrderItemRevenueCreateNestedOneWithoutOrderItemInput;
 };
 export type OrderItemUncheckedCreateInput = {
     id?: number;
     orderId: number;
     courseId: number;
     price: number;
+    revenue?: Prisma.OrderItemRevenueUncheckedCreateNestedOneWithoutOrderItemInput;
 };
 export type OrderItemUpdateInput = {
     price?: Prisma.FloatFieldUpdateOperationsInput | number;
     order?: Prisma.OrderUpdateOneRequiredWithoutItemsNestedInput;
     course?: Prisma.CourseUpdateOneRequiredWithoutOrderItemsNestedInput;
+    revenue?: Prisma.OrderItemRevenueUpdateOneWithoutOrderItemNestedInput;
 };
 export type OrderItemUncheckedUpdateInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     orderId?: Prisma.IntFieldUpdateOperationsInput | number;
     courseId?: Prisma.IntFieldUpdateOperationsInput | number;
     price?: Prisma.FloatFieldUpdateOperationsInput | number;
+    revenue?: Prisma.OrderItemRevenueUncheckedUpdateOneWithoutOrderItemNestedInput;
 };
 export type OrderItemCreateManyInput = {
     id?: number;
@@ -288,6 +295,10 @@ export type OrderItemSumOrderByAggregateInput = {
     orderId?: Prisma.SortOrder;
     courseId?: Prisma.SortOrder;
     price?: Prisma.SortOrder;
+};
+export type OrderItemScalarRelationFilter = {
+    is?: Prisma.OrderItemWhereInput;
+    isNot?: Prisma.OrderItemWhereInput;
 };
 export type OrderItemCreateNestedManyWithoutCourseInput = {
     create?: Prisma.XOR<Prisma.OrderItemCreateWithoutCourseInput, Prisma.OrderItemUncheckedCreateWithoutCourseInput> | Prisma.OrderItemCreateWithoutCourseInput[] | Prisma.OrderItemUncheckedCreateWithoutCourseInput[];
@@ -365,14 +376,28 @@ export type OrderItemUncheckedUpdateManyWithoutOrderNestedInput = {
     updateMany?: Prisma.OrderItemUpdateManyWithWhereWithoutOrderInput | Prisma.OrderItemUpdateManyWithWhereWithoutOrderInput[];
     deleteMany?: Prisma.OrderItemScalarWhereInput | Prisma.OrderItemScalarWhereInput[];
 };
+export type OrderItemCreateNestedOneWithoutRevenueInput = {
+    create?: Prisma.XOR<Prisma.OrderItemCreateWithoutRevenueInput, Prisma.OrderItemUncheckedCreateWithoutRevenueInput>;
+    connectOrCreate?: Prisma.OrderItemCreateOrConnectWithoutRevenueInput;
+    connect?: Prisma.OrderItemWhereUniqueInput;
+};
+export type OrderItemUpdateOneRequiredWithoutRevenueNestedInput = {
+    create?: Prisma.XOR<Prisma.OrderItemCreateWithoutRevenueInput, Prisma.OrderItemUncheckedCreateWithoutRevenueInput>;
+    connectOrCreate?: Prisma.OrderItemCreateOrConnectWithoutRevenueInput;
+    upsert?: Prisma.OrderItemUpsertWithoutRevenueInput;
+    connect?: Prisma.OrderItemWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.OrderItemUpdateToOneWithWhereWithoutRevenueInput, Prisma.OrderItemUpdateWithoutRevenueInput>, Prisma.OrderItemUncheckedUpdateWithoutRevenueInput>;
+};
 export type OrderItemCreateWithoutCourseInput = {
     price: number;
     order: Prisma.OrderCreateNestedOneWithoutItemsInput;
+    revenue?: Prisma.OrderItemRevenueCreateNestedOneWithoutOrderItemInput;
 };
 export type OrderItemUncheckedCreateWithoutCourseInput = {
     id?: number;
     orderId: number;
     price: number;
+    revenue?: Prisma.OrderItemRevenueUncheckedCreateNestedOneWithoutOrderItemInput;
 };
 export type OrderItemCreateOrConnectWithoutCourseInput = {
     where: Prisma.OrderItemWhereUniqueInput;
@@ -407,11 +432,13 @@ export type OrderItemScalarWhereInput = {
 export type OrderItemCreateWithoutOrderInput = {
     price: number;
     course: Prisma.CourseCreateNestedOneWithoutOrderItemsInput;
+    revenue?: Prisma.OrderItemRevenueCreateNestedOneWithoutOrderItemInput;
 };
 export type OrderItemUncheckedCreateWithoutOrderInput = {
     id?: number;
     courseId: number;
     price: number;
+    revenue?: Prisma.OrderItemRevenueUncheckedCreateNestedOneWithoutOrderItemInput;
 };
 export type OrderItemCreateOrConnectWithoutOrderInput = {
     where: Prisma.OrderItemWhereUniqueInput;
@@ -434,6 +461,41 @@ export type OrderItemUpdateManyWithWhereWithoutOrderInput = {
     where: Prisma.OrderItemScalarWhereInput;
     data: Prisma.XOR<Prisma.OrderItemUpdateManyMutationInput, Prisma.OrderItemUncheckedUpdateManyWithoutOrderInput>;
 };
+export type OrderItemCreateWithoutRevenueInput = {
+    price: number;
+    order: Prisma.OrderCreateNestedOneWithoutItemsInput;
+    course: Prisma.CourseCreateNestedOneWithoutOrderItemsInput;
+};
+export type OrderItemUncheckedCreateWithoutRevenueInput = {
+    id?: number;
+    orderId: number;
+    courseId: number;
+    price: number;
+};
+export type OrderItemCreateOrConnectWithoutRevenueInput = {
+    where: Prisma.OrderItemWhereUniqueInput;
+    create: Prisma.XOR<Prisma.OrderItemCreateWithoutRevenueInput, Prisma.OrderItemUncheckedCreateWithoutRevenueInput>;
+};
+export type OrderItemUpsertWithoutRevenueInput = {
+    update: Prisma.XOR<Prisma.OrderItemUpdateWithoutRevenueInput, Prisma.OrderItemUncheckedUpdateWithoutRevenueInput>;
+    create: Prisma.XOR<Prisma.OrderItemCreateWithoutRevenueInput, Prisma.OrderItemUncheckedCreateWithoutRevenueInput>;
+    where?: Prisma.OrderItemWhereInput;
+};
+export type OrderItemUpdateToOneWithWhereWithoutRevenueInput = {
+    where?: Prisma.OrderItemWhereInput;
+    data: Prisma.XOR<Prisma.OrderItemUpdateWithoutRevenueInput, Prisma.OrderItemUncheckedUpdateWithoutRevenueInput>;
+};
+export type OrderItemUpdateWithoutRevenueInput = {
+    price?: Prisma.FloatFieldUpdateOperationsInput | number;
+    order?: Prisma.OrderUpdateOneRequiredWithoutItemsNestedInput;
+    course?: Prisma.CourseUpdateOneRequiredWithoutOrderItemsNestedInput;
+};
+export type OrderItemUncheckedUpdateWithoutRevenueInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    orderId?: Prisma.IntFieldUpdateOperationsInput | number;
+    courseId?: Prisma.IntFieldUpdateOperationsInput | number;
+    price?: Prisma.FloatFieldUpdateOperationsInput | number;
+};
 export type OrderItemCreateManyCourseInput = {
     id?: number;
     orderId: number;
@@ -442,11 +504,13 @@ export type OrderItemCreateManyCourseInput = {
 export type OrderItemUpdateWithoutCourseInput = {
     price?: Prisma.FloatFieldUpdateOperationsInput | number;
     order?: Prisma.OrderUpdateOneRequiredWithoutItemsNestedInput;
+    revenue?: Prisma.OrderItemRevenueUpdateOneWithoutOrderItemNestedInput;
 };
 export type OrderItemUncheckedUpdateWithoutCourseInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     orderId?: Prisma.IntFieldUpdateOperationsInput | number;
     price?: Prisma.FloatFieldUpdateOperationsInput | number;
+    revenue?: Prisma.OrderItemRevenueUncheckedUpdateOneWithoutOrderItemNestedInput;
 };
 export type OrderItemUncheckedUpdateManyWithoutCourseInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -461,11 +525,13 @@ export type OrderItemCreateManyOrderInput = {
 export type OrderItemUpdateWithoutOrderInput = {
     price?: Prisma.FloatFieldUpdateOperationsInput | number;
     course?: Prisma.CourseUpdateOneRequiredWithoutOrderItemsNestedInput;
+    revenue?: Prisma.OrderItemRevenueUpdateOneWithoutOrderItemNestedInput;
 };
 export type OrderItemUncheckedUpdateWithoutOrderInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     courseId?: Prisma.IntFieldUpdateOperationsInput | number;
     price?: Prisma.FloatFieldUpdateOperationsInput | number;
+    revenue?: Prisma.OrderItemRevenueUncheckedUpdateOneWithoutOrderItemNestedInput;
 };
 export type OrderItemUncheckedUpdateManyWithoutOrderInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -479,6 +545,7 @@ export type OrderItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
     price?: boolean;
     order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>;
     course?: boolean | Prisma.CourseDefaultArgs<ExtArgs>;
+    revenue?: boolean | Prisma.OrderItem$revenueArgs<ExtArgs>;
 }, ExtArgs["result"]["orderItem"]>;
 export type OrderItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
@@ -506,6 +573,7 @@ export type OrderItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type OrderItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>;
     course?: boolean | Prisma.CourseDefaultArgs<ExtArgs>;
+    revenue?: boolean | Prisma.OrderItem$revenueArgs<ExtArgs>;
 };
 export type OrderItemIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>;
@@ -520,6 +588,7 @@ export type $OrderItemPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     objects: {
         order: Prisma.$OrderPayload<ExtArgs>;
         course: Prisma.$CoursePayload<ExtArgs>;
+        revenue: Prisma.$OrderItemRevenuePayload<ExtArgs> | null;
     };
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: number;
@@ -857,6 +926,7 @@ export interface Prisma__OrderItemClient<T, Null = never, ExtArgs extends runtim
     readonly [Symbol.toStringTag]: "PrismaPromise";
     order<T extends Prisma.OrderDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrderDefaultArgs<ExtArgs>>): Prisma.Prisma__OrderClient<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
     course<T extends Prisma.CourseDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CourseDefaultArgs<ExtArgs>>): Prisma.Prisma__CourseClient<runtime.Types.Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
+    revenue<T extends Prisma.OrderItem$revenueArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrderItem$revenueArgs<ExtArgs>>): Prisma.Prisma__OrderItemRevenueClient<runtime.Types.Result.GetResult<Prisma.$OrderItemRevenuePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1268,6 +1338,24 @@ export type OrderItemDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
      * Limit how many OrderItems to delete.
      */
     limit?: number;
+};
+/**
+ * OrderItem.revenue
+ */
+export type OrderItem$revenueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderItemRevenue
+     */
+    select?: Prisma.OrderItemRevenueSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the OrderItemRevenue
+     */
+    omit?: Prisma.OrderItemRevenueOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.OrderItemRevenueInclude<ExtArgs> | null;
+    where?: Prisma.OrderItemRevenueWhereInput;
 };
 /**
  * OrderItem without action

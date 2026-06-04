@@ -1,7 +1,11 @@
 import { LessonCompletionRepository } from './lesson-completion.repository';
+import { GamificationService } from '../gamification/gamification.service';
+import { PrismaService } from '../common/prisma/prisma.service';
 export declare class LessonCompletionService {
     private readonly lessonCompletionRepository;
-    constructor(lessonCompletionRepository: LessonCompletionRepository);
+    private readonly gamificationService;
+    private readonly prisma;
+    constructor(lessonCompletionRepository: LessonCompletionRepository, gamificationService: GamificationService, prisma: PrismaService);
     toggleLessonCompletion(userId: number, lessonId: number): Promise<{
         id: number;
         userId: number;

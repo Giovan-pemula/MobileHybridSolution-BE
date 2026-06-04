@@ -269,6 +269,61 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
     get orderItem(): Prisma.OrderItemDelegate<ExtArgs, {
         omit: OmitOpts;
     }>;
+    /**
+     * `prisma.userXp`: Exposes CRUD operations for the **UserXp** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more UserXps
+      * const userXps = await prisma.userXp.findMany()
+      * ```
+      */
+    get userXp(): Prisma.UserXpDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.xpHistory`: Exposes CRUD operations for the **XpHistory** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more XpHistories
+      * const xpHistories = await prisma.xpHistory.findMany()
+      * ```
+      */
+    get xpHistory(): Prisma.XpHistoryDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.userLoginStreak`: Exposes CRUD operations for the **UserLoginStreak** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more UserLoginStreaks
+      * const userLoginStreaks = await prisma.userLoginStreak.findMany()
+      * ```
+      */
+    get userLoginStreak(): Prisma.UserLoginStreakDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.coupon`: Exposes CRUD operations for the **Coupon** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Coupons
+      * const coupons = await prisma.coupon.findMany()
+      * ```
+      */
+    get coupon(): Prisma.CouponDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.orderItemRevenue`: Exposes CRUD operations for the **OrderItemRevenue** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more OrderItemRevenues
+      * const orderItemRevenues = await prisma.orderItemRevenue.findMany()
+      * ```
+      */
+    get orderItemRevenue(): Prisma.OrderItemRevenueDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
 }
 export declare function getPrismaClientClass(): PrismaClientConstructor;
 //# sourceMappingURL=class.d.ts.map

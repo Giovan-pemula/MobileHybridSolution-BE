@@ -4,14 +4,14 @@ export declare class DiscussionRepository {
     constructor(prisma: PrismaService);
     findByLessonId(lessonId: number): Promise<({
         user: {
-            name: string;
             id: number;
+            name: string;
             avatar: string | null;
         };
         replies: ({
             user: {
-                name: string;
                 id: number;
+                name: string;
                 avatar: string | null;
             };
         } & {
@@ -30,14 +30,14 @@ export declare class DiscussionRepository {
     })[]>;
     findById(id: number): Promise<({
         user: {
-            name: string;
             id: number;
+            name: string;
             avatar: string | null;
         };
         replies: ({
             user: {
-                name: string;
                 id: number;
+                name: string;
                 avatar: string | null;
             };
         } & {
@@ -60,8 +60,8 @@ export declare class DiscussionRepository {
         comment: string;
     }): Promise<{
         user: {
-            name: string;
             id: number;
+            name: string;
             avatar: string | null;
         };
     } & {
@@ -77,8 +77,8 @@ export declare class DiscussionRepository {
         comment: string;
     }): Promise<{
         user: {
-            name: string;
             id: number;
+            name: string;
             avatar: string | null;
         };
     } & {

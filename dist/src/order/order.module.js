@@ -12,12 +12,13 @@ const order_controller_1 = require("./order.controller");
 const order_service_1 = require("./order.service");
 const order_repository_1 = require("./order.repository");
 const enrollment_module_1 = require("../enrollment/enrollment.module");
+const gamification_module_1 = require("../gamification/gamification.module");
 let OrderModule = class OrderModule {
 };
 exports.OrderModule = OrderModule;
 exports.OrderModule = OrderModule = __decorate([
     (0, common_1.Module)({
-        imports: [enrollment_module_1.EnrollmentModule],
+        imports: [enrollment_module_1.EnrollmentModule, gamification_module_1.GamificationModule],
         controllers: [order_controller_1.OrderController],
         providers: [order_service_1.OrderService, order_repository_1.OrderRepository],
     })

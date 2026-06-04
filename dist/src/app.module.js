@@ -25,6 +25,7 @@ const discussion_module_1 = require("./discussion/discussion.module");
 const order_module_1 = require("./order/order.module");
 const lesson_completion_module_1 = require("./lesson-completion/lesson-completion.module");
 const trainer_module_1 = require("./trainer/trainer.module");
+const gamification_module_1 = require("./gamification/gamification.module");
 const health_controller_1 = require("./health.controller");
 let AppModule = class AppModule {
 };
@@ -49,6 +50,7 @@ exports.AppModule = AppModule = __decorate([
             order_module_1.OrderModule,
             lesson_completion_module_1.LessonCompletionModule,
             trainer_module_1.TrainerModule,
+            gamification_module_1.GamificationModule,
         ],
         controllers: [health_controller_1.HealthController],
     })

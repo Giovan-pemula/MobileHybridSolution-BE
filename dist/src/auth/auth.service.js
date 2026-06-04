@@ -45,12 +45,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const bcrypt = __importStar(require("bcryptjs"));
+const uuid_1 = require("uuid");
 const auth_repository_1 = require("./auth.repository");
 const jwt_1 = require("../utils/jwt");
 let AuthService = class AuthService {
     authRepository;
     constructor(authRepository) {
         this.authRepository = authRepository;
+    }
+    async generateTokens(user) {
+        const accessToken = (0, jwt_1.signToken)({ id: user.id, email: user.email, role: user.role });
+        const refreshToken = (0, jwt_1.signRefreshToken)({ id: user.id });
+        // Hash refresh token before saving to db
+        const hashedRefreshToken = await bcrypt.hash(refreshToken, 10);
+        await this.authRepository.updateRefreshToken(user.id, hashedRefreshToken);
+        return { accessToken, refreshToken };
     }
     async login(payload) {
         const user = await this.authRepository.findByEmail(payload.email);
@@ -59,9 +68,9 @@ let AuthService = class AuthService {
         const isValidPassword = await bcrypt.compare(payload.password, user.password);
         if (!isValidPassword)
             throw new common_1.UnauthorizedException('Wrong email or password');
-        const token = (0, jwt_1.signToken)({ id: user.id, email: user.email, role: user.role });
+        const tokens = await this.generateTokens(user);
         return {
-            token,
+            ...tokens,
             user: { id: user.id, name: user.name, email: user.email, role: user.role },
         };
     }
@@ -75,11 +84,57 @@ let AuthService = class AuthService {
             email: payload.email,
             password: hashedPassword,
         });
-        const token = (0, jwt_1.signToken)({ id: user.id, email: user.email, role: user.role });
+        const tokens = await this.generateTokens(user);
         return {
-            token,
+            ...tokens,
             user: { id: user.id, name: user.name, email: user.email, role: user.role },
         };
+    }
+    async googleLogin(reqUser) {
+        if (!reqUser) {
+            throw new common_1.UnauthorizedException('No user from google');
+        }
+        let user = await this.authRepository.findByEmail(reqUser.email);
+        if (!user) {
+            // Create new user if not exists
+            const randomPassword = (0, uuid_1.v4)();
+            const hashedPassword = await bcrypt.hash(randomPassword, 10);
+            user = (await this.authRepository.create({
+                name: `${reqUser.firstName} ${reqUser.lastName}`.trim() || 'Google User',
+                email: reqUser.email,
+                password: hashedPassword,
+            })); // Cast because create returns specific fields but it's enough for generateTokens
+        }
+        const tokens = await this.generateTokens(user);
+        return {
+            ...tokens,
+            user: { id: user.id, name: user.name, email: user.email, role: user.role },
+        };
+    }
+    async refreshTokens(refreshToken) {
+        try {
+            const payload = (0, jwt_1.verifyRefreshToken)(refreshToken);
+            const user = await this.authRepository.findById(payload.id);
+            if (!user || !user.refreshToken) {
+                throw new common_1.UnauthorizedException('Invalid refresh token');
+            }
+            const isRefreshTokenValid = await bcrypt.compare(refreshToken, user.refreshToken);
+            if (!isRefreshTokenValid) {
+                throw new common_1.UnauthorizedException('Invalid refresh token');
+            }
+            const tokens = await this.generateTokens(user);
+            return {
+                ...tokens,
+                user: { id: user.id, name: user.name, email: user.email, role: user.role },
+            };
+        }
+        catch (e) {
+            throw new common_1.UnauthorizedException('Invalid or expired refresh token');
+        }
+    }
+    async logout(userId) {
+        await this.authRepository.updateRefreshToken(userId, null);
+        return { message: 'Logged out successfully' };
     }
 };
 exports.AuthService = AuthService;

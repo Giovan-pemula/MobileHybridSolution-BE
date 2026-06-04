@@ -5,16 +5,16 @@ export declare class EnrollmentRepository {
     findByUserAndCourse(userId: number, courseId: number): Promise<{
         id: number;
         createdAt: Date;
-        userId: number;
         courseId: number;
+        userId: number;
         progress: number;
         completed: boolean;
     } | null>;
     findByUser(userId: number): Promise<({
         course: {
             category: {
-                name: string;
                 id: number;
+                name: string;
                 createdAt: Date;
                 slug: string;
             };
@@ -22,8 +22,8 @@ export declare class EnrollmentRepository {
                 sections: number;
             };
             trainer: {
-                name: string;
                 id: number;
+                name: string;
                 avatar: string | null;
             };
         } & {
@@ -43,22 +43,22 @@ export declare class EnrollmentRepository {
     } & {
         id: number;
         createdAt: Date;
-        userId: number;
         courseId: number;
+        userId: number;
         progress: number;
         completed: boolean;
     })[]>;
     create(userId: number, courseId: number): Promise<{
         course: {
             category: {
-                name: string;
                 id: number;
+                name: string;
                 createdAt: Date;
                 slug: string;
             };
             trainer: {
-                name: string;
                 id: number;
+                name: string;
                 avatar: string | null;
             };
         } & {
@@ -78,16 +78,16 @@ export declare class EnrollmentRepository {
     } & {
         id: number;
         createdAt: Date;
-        userId: number;
         courseId: number;
+        userId: number;
         progress: number;
         completed: boolean;
     }>;
     updateProgress(userId: number, courseId: number, progress: number, completed: boolean): Promise<{
         id: number;
         createdAt: Date;
-        userId: number;
         courseId: number;
+        userId: number;
         progress: number;
         completed: boolean;
     }>;

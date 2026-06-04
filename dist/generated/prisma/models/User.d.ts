@@ -202,6 +202,10 @@ export type UserWhereInput = {
     orders?: Prisma.OrderListRelationFilter;
     trainerRequest?: Prisma.XOR<Prisma.TrainerRequestNullableScalarRelationFilter, Prisma.TrainerRequestWhereInput> | null;
     lessonCompletions?: Prisma.LessonCompletionListRelationFilter;
+    userXp?: Prisma.XOR<Prisma.UserXpNullableScalarRelationFilter, Prisma.UserXpWhereInput> | null;
+    xpHistory?: Prisma.XpHistoryListRelationFilter;
+    loginStreak?: Prisma.XOR<Prisma.UserLoginStreakNullableScalarRelationFilter, Prisma.UserLoginStreakWhereInput> | null;
+    coupons?: Prisma.CouponListRelationFilter;
 };
 export type UserOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
@@ -221,6 +225,10 @@ export type UserOrderByWithRelationInput = {
     orders?: Prisma.OrderOrderByRelationAggregateInput;
     trainerRequest?: Prisma.TrainerRequestOrderByWithRelationInput;
     lessonCompletions?: Prisma.LessonCompletionOrderByRelationAggregateInput;
+    userXp?: Prisma.UserXpOrderByWithRelationInput;
+    xpHistory?: Prisma.XpHistoryOrderByRelationAggregateInput;
+    loginStreak?: Prisma.UserLoginStreakOrderByWithRelationInput;
+    coupons?: Prisma.CouponOrderByRelationAggregateInput;
 };
 export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: number;
@@ -243,6 +251,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
     orders?: Prisma.OrderListRelationFilter;
     trainerRequest?: Prisma.XOR<Prisma.TrainerRequestNullableScalarRelationFilter, Prisma.TrainerRequestWhereInput> | null;
     lessonCompletions?: Prisma.LessonCompletionListRelationFilter;
+    userXp?: Prisma.XOR<Prisma.UserXpNullableScalarRelationFilter, Prisma.UserXpWhereInput> | null;
+    xpHistory?: Prisma.XpHistoryListRelationFilter;
+    loginStreak?: Prisma.XOR<Prisma.UserLoginStreakNullableScalarRelationFilter, Prisma.UserLoginStreakWhereInput> | null;
+    coupons?: Prisma.CouponListRelationFilter;
 }, "id" | "email">;
 export type UserOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
@@ -289,6 +301,10 @@ export type UserCreateInput = {
     orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateInput = {
     id?: number;
@@ -308,6 +324,10 @@ export type UserUncheckedCreateInput = {
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpUncheckedCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryUncheckedCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserUpdateInput = {
     name?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -326,6 +346,10 @@ export type UserUpdateInput = {
     orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -345,6 +369,10 @@ export type UserUncheckedUpdateInput = {
     orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUncheckedUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUncheckedUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUncheckedUpdateManyWithoutUserNestedInput;
 };
 export type UserCreateManyInput = {
     id?: number;
@@ -542,6 +570,54 @@ export type UserUpdateOneRequiredWithoutOrdersNestedInput = {
     connect?: Prisma.UserWhereUniqueInput;
     update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOrdersInput, Prisma.UserUpdateWithoutOrdersInput>, Prisma.UserUncheckedUpdateWithoutOrdersInput>;
 };
+export type UserCreateNestedOneWithoutUserXpInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutUserXpInput, Prisma.UserUncheckedCreateWithoutUserXpInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserXpInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutUserXpNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutUserXpInput, Prisma.UserUncheckedCreateWithoutUserXpInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserXpInput;
+    upsert?: Prisma.UserUpsertWithoutUserXpInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUserXpInput, Prisma.UserUpdateWithoutUserXpInput>, Prisma.UserUncheckedUpdateWithoutUserXpInput>;
+};
+export type UserCreateNestedOneWithoutXpHistoryInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutXpHistoryInput, Prisma.UserUncheckedCreateWithoutXpHistoryInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutXpHistoryInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutXpHistoryNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutXpHistoryInput, Prisma.UserUncheckedCreateWithoutXpHistoryInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutXpHistoryInput;
+    upsert?: Prisma.UserUpsertWithoutXpHistoryInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutXpHistoryInput, Prisma.UserUpdateWithoutXpHistoryInput>, Prisma.UserUncheckedUpdateWithoutXpHistoryInput>;
+};
+export type UserCreateNestedOneWithoutLoginStreakInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutLoginStreakInput, Prisma.UserUncheckedCreateWithoutLoginStreakInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutLoginStreakInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutLoginStreakNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutLoginStreakInput, Prisma.UserUncheckedCreateWithoutLoginStreakInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutLoginStreakInput;
+    upsert?: Prisma.UserUpsertWithoutLoginStreakInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutLoginStreakInput, Prisma.UserUpdateWithoutLoginStreakInput>, Prisma.UserUncheckedUpdateWithoutLoginStreakInput>;
+};
+export type UserCreateNestedOneWithoutCouponsInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutCouponsInput, Prisma.UserUncheckedCreateWithoutCouponsInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutCouponsInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutCouponsNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutCouponsInput, Prisma.UserUncheckedCreateWithoutCouponsInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutCouponsInput;
+    upsert?: Prisma.UserUpsertWithoutCouponsInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCouponsInput, Prisma.UserUpdateWithoutCouponsInput>, Prisma.UserUncheckedUpdateWithoutCouponsInput>;
+};
 export type UserCreateWithoutCoursesInput = {
     name: string;
     email: string;
@@ -558,6 +634,10 @@ export type UserCreateWithoutCoursesInput = {
     orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateWithoutCoursesInput = {
     id?: number;
@@ -576,6 +656,10 @@ export type UserUncheckedCreateWithoutCoursesInput = {
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpUncheckedCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryUncheckedCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserCreateOrConnectWithoutCoursesInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -606,6 +690,10 @@ export type UserUpdateWithoutCoursesInput = {
     orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateWithoutCoursesInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -624,6 +712,10 @@ export type UserUncheckedUpdateWithoutCoursesInput = {
     orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUncheckedUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUncheckedUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUncheckedUpdateManyWithoutUserNestedInput;
 };
 export type UserCreateWithoutEnrollmentsInput = {
     name: string;
@@ -641,6 +733,10 @@ export type UserCreateWithoutEnrollmentsInput = {
     orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateWithoutEnrollmentsInput = {
     id?: number;
@@ -659,6 +755,10 @@ export type UserUncheckedCreateWithoutEnrollmentsInput = {
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpUncheckedCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryUncheckedCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserCreateOrConnectWithoutEnrollmentsInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -689,6 +789,10 @@ export type UserUpdateWithoutEnrollmentsInput = {
     orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateWithoutEnrollmentsInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -707,6 +811,10 @@ export type UserUncheckedUpdateWithoutEnrollmentsInput = {
     orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUncheckedUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUncheckedUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUncheckedUpdateManyWithoutUserNestedInput;
 };
 export type UserCreateWithoutRatingsInput = {
     name: string;
@@ -724,6 +832,10 @@ export type UserCreateWithoutRatingsInput = {
     orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateWithoutRatingsInput = {
     id?: number;
@@ -742,6 +854,10 @@ export type UserUncheckedCreateWithoutRatingsInput = {
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpUncheckedCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryUncheckedCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserCreateOrConnectWithoutRatingsInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -772,6 +888,10 @@ export type UserUpdateWithoutRatingsInput = {
     orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateWithoutRatingsInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -790,6 +910,10 @@ export type UserUncheckedUpdateWithoutRatingsInput = {
     orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUncheckedUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUncheckedUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUncheckedUpdateManyWithoutUserNestedInput;
 };
 export type UserCreateWithoutWishlistsInput = {
     name: string;
@@ -807,6 +931,10 @@ export type UserCreateWithoutWishlistsInput = {
     orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateWithoutWishlistsInput = {
     id?: number;
@@ -825,6 +953,10 @@ export type UserUncheckedCreateWithoutWishlistsInput = {
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpUncheckedCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryUncheckedCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserCreateOrConnectWithoutWishlistsInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -855,6 +987,10 @@ export type UserUpdateWithoutWishlistsInput = {
     orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateWithoutWishlistsInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -873,6 +1009,10 @@ export type UserUncheckedUpdateWithoutWishlistsInput = {
     orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUncheckedUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUncheckedUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUncheckedUpdateManyWithoutUserNestedInput;
 };
 export type UserCreateWithoutTrainerRequestInput = {
     name: string;
@@ -890,6 +1030,10 @@ export type UserCreateWithoutTrainerRequestInput = {
     replies?: Prisma.ReplyCreateNestedManyWithoutUserInput;
     orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateWithoutTrainerRequestInput = {
     id?: number;
@@ -908,6 +1052,10 @@ export type UserUncheckedCreateWithoutTrainerRequestInput = {
     replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutUserInput;
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpUncheckedCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryUncheckedCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserCreateOrConnectWithoutTrainerRequestInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -938,6 +1086,10 @@ export type UserUpdateWithoutTrainerRequestInput = {
     replies?: Prisma.ReplyUpdateManyWithoutUserNestedInput;
     orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateWithoutTrainerRequestInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -956,6 +1108,10 @@ export type UserUncheckedUpdateWithoutTrainerRequestInput = {
     replies?: Prisma.ReplyUncheckedUpdateManyWithoutUserNestedInput;
     orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUncheckedUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUncheckedUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUncheckedUpdateManyWithoutUserNestedInput;
 };
 export type UserCreateWithoutDiscussionsInput = {
     name: string;
@@ -973,6 +1129,10 @@ export type UserCreateWithoutDiscussionsInput = {
     orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateWithoutDiscussionsInput = {
     id?: number;
@@ -991,6 +1151,10 @@ export type UserUncheckedCreateWithoutDiscussionsInput = {
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpUncheckedCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryUncheckedCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserCreateOrConnectWithoutDiscussionsInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -1021,6 +1185,10 @@ export type UserUpdateWithoutDiscussionsInput = {
     orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateWithoutDiscussionsInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -1039,6 +1207,10 @@ export type UserUncheckedUpdateWithoutDiscussionsInput = {
     orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUncheckedUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUncheckedUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUncheckedUpdateManyWithoutUserNestedInput;
 };
 export type UserCreateWithoutRepliesInput = {
     name: string;
@@ -1056,6 +1228,10 @@ export type UserCreateWithoutRepliesInput = {
     orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateWithoutRepliesInput = {
     id?: number;
@@ -1074,6 +1250,10 @@ export type UserUncheckedCreateWithoutRepliesInput = {
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpUncheckedCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryUncheckedCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserCreateOrConnectWithoutRepliesInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -1104,6 +1284,10 @@ export type UserUpdateWithoutRepliesInput = {
     orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateWithoutRepliesInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -1122,6 +1306,10 @@ export type UserUncheckedUpdateWithoutRepliesInput = {
     orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUncheckedUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUncheckedUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUncheckedUpdateManyWithoutUserNestedInput;
 };
 export type UserCreateWithoutLessonCompletionsInput = {
     name: string;
@@ -1139,6 +1327,10 @@ export type UserCreateWithoutLessonCompletionsInput = {
     replies?: Prisma.ReplyCreateNestedManyWithoutUserInput;
     orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
+    userXp?: Prisma.UserXpCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateWithoutLessonCompletionsInput = {
     id?: number;
@@ -1157,6 +1349,10 @@ export type UserUncheckedCreateWithoutLessonCompletionsInput = {
     replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutUserInput;
     orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
+    userXp?: Prisma.UserXpUncheckedCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryUncheckedCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserCreateOrConnectWithoutLessonCompletionsInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -1187,6 +1383,10 @@ export type UserUpdateWithoutLessonCompletionsInput = {
     replies?: Prisma.ReplyUpdateManyWithoutUserNestedInput;
     orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateWithoutLessonCompletionsInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -1205,6 +1405,10 @@ export type UserUncheckedUpdateWithoutLessonCompletionsInput = {
     replies?: Prisma.ReplyUncheckedUpdateManyWithoutUserNestedInput;
     orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUncheckedUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUncheckedUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUncheckedUpdateManyWithoutUserNestedInput;
 };
 export type UserCreateWithoutOrdersInput = {
     name: string;
@@ -1222,6 +1426,10 @@ export type UserCreateWithoutOrdersInput = {
     replies?: Prisma.ReplyCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateWithoutOrdersInput = {
     id?: number;
@@ -1240,6 +1448,10 @@ export type UserUncheckedCreateWithoutOrdersInput = {
     replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutUserInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpUncheckedCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryUncheckedCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserCreateOrConnectWithoutOrdersInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -1270,6 +1482,10 @@ export type UserUpdateWithoutOrdersInput = {
     replies?: Prisma.ReplyUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateWithoutOrdersInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -1288,6 +1504,406 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
     replies?: Prisma.ReplyUncheckedUpdateManyWithoutUserNestedInput;
     trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
     lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUncheckedUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUncheckedUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUncheckedUpdateManyWithoutUserNestedInput;
+};
+export type UserCreateWithoutUserXpInput = {
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponCreateNestedManyWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutUserXpInput = {
+    id?: number;
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionUncheckedCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryUncheckedCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutUserXpInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutUserXpInput, Prisma.UserUncheckedCreateWithoutUserXpInput>;
+};
+export type UserUpsertWithoutUserXpInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutUserXpInput, Prisma.UserUncheckedUpdateWithoutUserXpInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutUserXpInput, Prisma.UserUncheckedCreateWithoutUserXpInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutUserXpInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutUserXpInput, Prisma.UserUncheckedUpdateWithoutUserXpInput>;
+};
+export type UserUpdateWithoutUserXpInput = {
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUpdateManyWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutUserXpInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUncheckedUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUncheckedUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUncheckedUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUncheckedUpdateManyWithoutUserNestedInput;
+};
+export type UserCreateWithoutXpHistoryInput = {
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpCreateNestedOneWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponCreateNestedManyWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutXpHistoryInput = {
+    id?: number;
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionUncheckedCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpUncheckedCreateNestedOneWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedCreateNestedOneWithoutUserInput;
+    coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutXpHistoryInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutXpHistoryInput, Prisma.UserUncheckedCreateWithoutXpHistoryInput>;
+};
+export type UserUpsertWithoutXpHistoryInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutXpHistoryInput, Prisma.UserUncheckedUpdateWithoutXpHistoryInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutXpHistoryInput, Prisma.UserUncheckedCreateWithoutXpHistoryInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutXpHistoryInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutXpHistoryInput, Prisma.UserUncheckedUpdateWithoutXpHistoryInput>;
+};
+export type UserUpdateWithoutXpHistoryInput = {
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUpdateOneWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUpdateManyWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutXpHistoryInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUncheckedUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUncheckedUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUncheckedUpdateOneWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedUpdateOneWithoutUserNestedInput;
+    coupons?: Prisma.CouponUncheckedUpdateManyWithoutUserNestedInput;
+};
+export type UserCreateWithoutLoginStreakInput = {
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryCreateNestedManyWithoutUserInput;
+    coupons?: Prisma.CouponCreateNestedManyWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutLoginStreakInput = {
+    id?: number;
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionUncheckedCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpUncheckedCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryUncheckedCreateNestedManyWithoutUserInput;
+    coupons?: Prisma.CouponUncheckedCreateNestedManyWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutLoginStreakInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutLoginStreakInput, Prisma.UserUncheckedCreateWithoutLoginStreakInput>;
+};
+export type UserUpsertWithoutLoginStreakInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutLoginStreakInput, Prisma.UserUncheckedUpdateWithoutLoginStreakInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutLoginStreakInput, Prisma.UserUncheckedCreateWithoutLoginStreakInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutLoginStreakInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutLoginStreakInput, Prisma.UserUncheckedUpdateWithoutLoginStreakInput>;
+};
+export type UserUpdateWithoutLoginStreakInput = {
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUpdateManyWithoutUserNestedInput;
+    coupons?: Prisma.CouponUpdateManyWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutLoginStreakInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUncheckedUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUncheckedUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUncheckedUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUncheckedUpdateManyWithoutUserNestedInput;
+    coupons?: Prisma.CouponUncheckedUpdateManyWithoutUserNestedInput;
+};
+export type UserCreateWithoutCouponsInput = {
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakCreateNestedOneWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutCouponsInput = {
+    id?: number;
+    name: string;
+    email: string;
+    password: string;
+    role?: $Enums.UserRole;
+    avatar?: string | null;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
+    enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
+    ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
+    wishlists?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput;
+    discussions?: Prisma.DiscussionUncheckedCreateNestedManyWithoutUserInput;
+    replies?: Prisma.ReplyUncheckedCreateNestedManyWithoutUserInput;
+    orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedCreateNestedOneWithoutUserInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedCreateNestedManyWithoutUserInput;
+    userXp?: Prisma.UserXpUncheckedCreateNestedOneWithoutUserInput;
+    xpHistory?: Prisma.XpHistoryUncheckedCreateNestedManyWithoutUserInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedCreateNestedOneWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutCouponsInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutCouponsInput, Prisma.UserUncheckedCreateWithoutCouponsInput>;
+};
+export type UserUpsertWithoutCouponsInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutCouponsInput, Prisma.UserUncheckedUpdateWithoutCouponsInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutCouponsInput, Prisma.UserUncheckedCreateWithoutCouponsInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutCouponsInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutCouponsInput, Prisma.UserUncheckedUpdateWithoutCouponsInput>;
+};
+export type UserUpdateWithoutCouponsInput = {
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUpdateOneWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutCouponsInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    name?: Prisma.StringFieldUpdateOperationsInput | string;
+    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole;
+    avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
+    enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
+    ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
+    wishlists?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput;
+    discussions?: Prisma.DiscussionUncheckedUpdateManyWithoutUserNestedInput;
+    replies?: Prisma.ReplyUncheckedUpdateManyWithoutUserNestedInput;
+    orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput;
+    trainerRequest?: Prisma.TrainerRequestUncheckedUpdateOneWithoutUserNestedInput;
+    lessonCompletions?: Prisma.LessonCompletionUncheckedUpdateManyWithoutUserNestedInput;
+    userXp?: Prisma.UserXpUncheckedUpdateOneWithoutUserNestedInput;
+    xpHistory?: Prisma.XpHistoryUncheckedUpdateManyWithoutUserNestedInput;
+    loginStreak?: Prisma.UserLoginStreakUncheckedUpdateOneWithoutUserNestedInput;
 };
 /**
  * Count Type UserCountOutputType
@@ -1301,6 +1917,8 @@ export type UserCountOutputType = {
     replies: number;
     orders: number;
     lessonCompletions: number;
+    xpHistory: number;
+    coupons: number;
 };
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     courses?: boolean | UserCountOutputTypeCountCoursesArgs;
@@ -1311,6 +1929,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
     replies?: boolean | UserCountOutputTypeCountRepliesArgs;
     orders?: boolean | UserCountOutputTypeCountOrdersArgs;
     lessonCompletions?: boolean | UserCountOutputTypeCountLessonCompletionsArgs;
+    xpHistory?: boolean | UserCountOutputTypeCountXpHistoryArgs;
+    coupons?: boolean | UserCountOutputTypeCountCouponsArgs;
 };
 /**
  * UserCountOutputType without action
@@ -1369,6 +1989,18 @@ export type UserCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Ext
 export type UserCountOutputTypeCountLessonCompletionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     where?: Prisma.LessonCompletionWhereInput;
 };
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountXpHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.XpHistoryWhereInput;
+};
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCouponsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.CouponWhereInput;
+};
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     name?: boolean;
@@ -1387,6 +2019,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
     orders?: boolean | Prisma.User$ordersArgs<ExtArgs>;
     trainerRequest?: boolean | Prisma.User$trainerRequestArgs<ExtArgs>;
     lessonCompletions?: boolean | Prisma.User$lessonCompletionsArgs<ExtArgs>;
+    userXp?: boolean | Prisma.User$userXpArgs<ExtArgs>;
+    xpHistory?: boolean | Prisma.User$xpHistoryArgs<ExtArgs>;
+    loginStreak?: boolean | Prisma.User$loginStreakArgs<ExtArgs>;
+    coupons?: boolean | Prisma.User$couponsArgs<ExtArgs>;
     _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["user"]>;
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1430,6 +2066,10 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     orders?: boolean | Prisma.User$ordersArgs<ExtArgs>;
     trainerRequest?: boolean | Prisma.User$trainerRequestArgs<ExtArgs>;
     lessonCompletions?: boolean | Prisma.User$lessonCompletionsArgs<ExtArgs>;
+    userXp?: boolean | Prisma.User$userXpArgs<ExtArgs>;
+    xpHistory?: boolean | Prisma.User$xpHistoryArgs<ExtArgs>;
+    loginStreak?: boolean | Prisma.User$loginStreakArgs<ExtArgs>;
+    coupons?: boolean | Prisma.User$couponsArgs<ExtArgs>;
     _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
@@ -1446,6 +2086,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
         orders: Prisma.$OrderPayload<ExtArgs>[];
         trainerRequest: Prisma.$TrainerRequestPayload<ExtArgs> | null;
         lessonCompletions: Prisma.$LessonCompletionPayload<ExtArgs>[];
+        userXp: Prisma.$UserXpPayload<ExtArgs> | null;
+        xpHistory: Prisma.$XpHistoryPayload<ExtArgs>[];
+        loginStreak: Prisma.$UserLoginStreakPayload<ExtArgs> | null;
+        coupons: Prisma.$CouponPayload<ExtArgs>[];
     };
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: number;
@@ -1794,6 +2438,10 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
     orders<T extends Prisma.User$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     trainerRequest<T extends Prisma.User$trainerRequestArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$trainerRequestArgs<ExtArgs>>): Prisma.Prisma__TrainerRequestClient<runtime.Types.Result.GetResult<Prisma.$TrainerRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
     lessonCompletions<T extends Prisma.User$lessonCompletionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$lessonCompletionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LessonCompletionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    userXp<T extends Prisma.User$userXpArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userXpArgs<ExtArgs>>): Prisma.Prisma__UserXpClient<runtime.Types.Result.GetResult<Prisma.$UserXpPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    xpHistory<T extends Prisma.User$xpHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$xpHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$XpHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    loginStreak<T extends Prisma.User$loginStreakArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$loginStreakArgs<ExtArgs>>): Prisma.Prisma__UserLoginStreakClient<runtime.Types.Result.GetResult<Prisma.$UserLoginStreakPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    coupons<T extends Prisma.User$couponsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$couponsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CouponPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2403,6 +3051,88 @@ export type User$lessonCompletionsArgs<ExtArgs extends runtime.Types.Extensions.
     take?: number;
     skip?: number;
     distinct?: Prisma.LessonCompletionScalarFieldEnum | Prisma.LessonCompletionScalarFieldEnum[];
+};
+/**
+ * User.userXp
+ */
+export type User$userXpArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserXp
+     */
+    select?: Prisma.UserXpSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserXp
+     */
+    omit?: Prisma.UserXpOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.UserXpInclude<ExtArgs> | null;
+    where?: Prisma.UserXpWhereInput;
+};
+/**
+ * User.xpHistory
+ */
+export type User$xpHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the XpHistory
+     */
+    select?: Prisma.XpHistorySelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the XpHistory
+     */
+    omit?: Prisma.XpHistoryOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.XpHistoryInclude<ExtArgs> | null;
+    where?: Prisma.XpHistoryWhereInput;
+    orderBy?: Prisma.XpHistoryOrderByWithRelationInput | Prisma.XpHistoryOrderByWithRelationInput[];
+    cursor?: Prisma.XpHistoryWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.XpHistoryScalarFieldEnum | Prisma.XpHistoryScalarFieldEnum[];
+};
+/**
+ * User.loginStreak
+ */
+export type User$loginStreakArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserLoginStreak
+     */
+    select?: Prisma.UserLoginStreakSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the UserLoginStreak
+     */
+    omit?: Prisma.UserLoginStreakOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.UserLoginStreakInclude<ExtArgs> | null;
+    where?: Prisma.UserLoginStreakWhereInput;
+};
+/**
+ * User.coupons
+ */
+export type User$couponsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Coupon
+     */
+    select?: Prisma.CouponSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Coupon
+     */
+    omit?: Prisma.CouponOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.CouponInclude<ExtArgs> | null;
+    where?: Prisma.CouponWhereInput;
+    orderBy?: Prisma.CouponOrderByWithRelationInput | Prisma.CouponOrderByWithRelationInput[];
+    cursor?: Prisma.CouponWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.CouponScalarFieldEnum | Prisma.CouponScalarFieldEnum[];
 };
 /**
  * User without action

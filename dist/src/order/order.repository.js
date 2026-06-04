@@ -55,14 +55,22 @@ let OrderRepository = class OrderRepository {
             orderBy: { createdAt: 'desc' },
         });
     }
-    async create(userId, items) {
-        const total = items.reduce((sum, item) => sum + item.price, 0);
+    async create(userId, total, couponId, discountAmt, serviceFee, items) {
         return this.prisma.order.create({
             data: {
                 userId,
                 total,
+                couponId,
+                discountAmt,
+                serviceFee,
                 status: total === 0 ? enums_1.OrderStatus.COMPLETED : enums_1.OrderStatus.PENDING,
-                items: { create: items },
+                items: {
+                    create: items.map(item => ({
+                        courseId: item.courseId,
+                        price: item.price,
+                        revenue: { create: item.revenue },
+                    })),
+                },
             },
             include: {
                 items: {
@@ -75,6 +83,7 @@ let OrderRepository = class OrderRepository {
                                 thumbnail: true,
                             },
                         },
+                        revenue: true,
                     },
                 },
             },

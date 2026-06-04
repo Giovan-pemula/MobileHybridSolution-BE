@@ -14,23 +14,26 @@ export declare class OrderRepository {
         } & {
             id: number;
             price: number;
-            orderId: number;
             courseId: number;
+            orderId: number;
         })[];
     } & {
         id: number;
+        createdAt: Date;
+        status: OrderStatus;
         userId: number;
         total: number;
-        status: OrderStatus;
-        createdAt: Date;
+        couponId: number | null;
+        serviceFee: number;
+        discountAmt: number;
     }) | null>;
     findByUser(userId: number): Promise<({
         items: ({
             course: {
                 category: {
                     id: number;
-                    createdAt: Date;
                     name: string;
+                    createdAt: Date;
                     slug: string;
                 };
                 trainer: {
@@ -39,34 +42,44 @@ export declare class OrderRepository {
                 };
             } & {
                 id: number;
-                status: import("../../generated/prisma/enums").CourseStatus;
                 createdAt: Date;
+                updatedAt: Date;
                 title: string;
                 description: string | null;
                 price: number;
                 isFree: boolean;
                 thumbnail: string | null;
                 previewYoutubeUrl: string | null;
+                status: import("../../generated/prisma/enums").CourseStatus;
                 categoryId: number;
                 trainerId: number;
-                updatedAt: Date;
             };
         } & {
             id: number;
             price: number;
-            orderId: number;
             courseId: number;
+            orderId: number;
         })[];
     } & {
         id: number;
+        createdAt: Date;
+        status: OrderStatus;
         userId: number;
         total: number;
-        status: OrderStatus;
-        createdAt: Date;
+        couponId: number | null;
+        serviceFee: number;
+        discountAmt: number;
     })[]>;
-    create(userId: number, items: {
+    create(userId: number, total: number, couponId: number | null, discountAmt: number, serviceFee: number, items: {
         courseId: number;
         price: number;
+        revenue: {
+            basePrice: number;
+            discountAmt: number;
+            netRevenue: number;
+            trainerShare: number;
+            platformShare: number;
+        };
     }[]): Promise<{
         items: ({
             course: {
@@ -75,47 +88,62 @@ export declare class OrderRepository {
                 price: number;
                 thumbnail: string | null;
             };
+            revenue: {
+                id: number;
+                discountAmt: number;
+                orderItemId: number;
+                basePrice: number;
+                netRevenue: number;
+                trainerShare: number;
+                platformShare: number;
+            } | null;
         } & {
             id: number;
             price: number;
-            orderId: number;
             courseId: number;
+            orderId: number;
         })[];
     } & {
         id: number;
+        createdAt: Date;
+        status: OrderStatus;
         userId: number;
         total: number;
-        status: OrderStatus;
-        createdAt: Date;
+        couponId: number | null;
+        serviceFee: number;
+        discountAmt: number;
     }>;
     updateStatus(id: number, status: OrderStatus): Promise<{
         items: ({
             course: {
                 id: number;
-                status: import("../../generated/prisma/enums").CourseStatus;
                 createdAt: Date;
+                updatedAt: Date;
                 title: string;
                 description: string | null;
                 price: number;
                 isFree: boolean;
                 thumbnail: string | null;
                 previewYoutubeUrl: string | null;
+                status: import("../../generated/prisma/enums").CourseStatus;
                 categoryId: number;
                 trainerId: number;
-                updatedAt: Date;
             };
         } & {
             id: number;
             price: number;
-            orderId: number;
             courseId: number;
+            orderId: number;
         })[];
     } & {
         id: number;
+        createdAt: Date;
+        status: OrderStatus;
         userId: number;
         total: number;
-        status: OrderStatus;
-        createdAt: Date;
+        couponId: number | null;
+        serviceFee: number;
+        discountAmt: number;
     }>;
 }
 //# sourceMappingURL=order.repository.d.ts.map

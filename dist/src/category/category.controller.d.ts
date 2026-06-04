@@ -10,8 +10,8 @@ export declare class CategoryController {
                 courses: number;
             };
         } & {
-            name: string;
             id: number;
+            name: string;
             createdAt: Date;
             slug: string;
         })[];
@@ -23,8 +23,8 @@ export declare class CategoryController {
                 courses: number;
             };
         } & {
-            name: string;
             id: number;
+            name: string;
             createdAt: Date;
             slug: string;
         };
@@ -32,8 +32,8 @@ export declare class CategoryController {
     }>;
     createCategory(body: z.infer<typeof createCategorySchema>): Promise<{
         data: {
-            name: string;
             id: number;
+            name: string;
             createdAt: Date;
             slug: string;
         };
@@ -41,8 +41,8 @@ export declare class CategoryController {
     }>;
     updateCategory(id: number, body: z.infer<typeof updateCategorySchema>): Promise<{
         data: {
-            name: string;
             id: number;
+            name: string;
             createdAt: Date;
             slug: string;
         };
@@ -50,8 +50,8 @@ export declare class CategoryController {
     }>;
     deleteCategory(id: number): Promise<{
         data: {
-            name: string;
             id: number;
+            name: string;
             createdAt: Date;
             slug: string;
         };
