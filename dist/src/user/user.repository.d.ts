@@ -4,8 +4,8 @@ export declare class UserRepository {
     constructor(prisma: PrismaService);
     findAll(skip: number, limit: number): Promise<{
         users: {
-            name: string;
             id: number;
+            name: string;
             email: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
@@ -15,8 +15,8 @@ export declare class UserRepository {
         total: number;
     }>;
     findById(id: number): Promise<{
-        name: string;
         id: number;
+        name: string;
         email: string;
         role: import("../../generated/prisma/enums").UserRole;
         avatar: string | null;
@@ -24,8 +24,8 @@ export declare class UserRepository {
         updatedAt: Date;
     } | null>;
     findByEmail(email: string): Promise<{
-        name: string;
         id: number;
+        name: string;
         email: string;
         password: string;
         role: import("../../generated/prisma/enums").UserRole;
@@ -39,8 +39,8 @@ export declare class UserRepository {
         avatar?: string;
         role?: string;
     }): Promise<{
-        name: string;
         id: number;
+        name: string;
         email: string;
         role: import("../../generated/prisma/enums").UserRole;
         avatar: string | null;
@@ -48,8 +48,8 @@ export declare class UserRepository {
         updatedAt: Date;
     }>;
     delete(id: number): Promise<{
-        name: string;
         id: number;
+        name: string;
         email: string;
         password: string;
         role: import("../../generated/prisma/enums").UserRole;

@@ -12,5 +12,10 @@ export type * from './models/Reply';
 export type * from './models/LessonCompletion';
 export type * from './models/Order';
 export type * from './models/OrderItem';
+export type * from './models/UserXp';
+export type * from './models/XpHistory';
+export type * from './models/UserLoginStreak';
+export type * from './models/Coupon';
+export type * from './models/OrderItemRevenue';
 export type * from './commonInputTypes';
 //# sourceMappingURL=models.d.ts.map

@@ -11,9 +11,9 @@ export declare class LessonService {
         isPreview?: boolean;
         order?: number;
     }): Promise<{
-        order: number;
         id: number;
         title: string;
+        order: number;
         youtubeUrl: string | null;
         duration: number | null;
         isPreview: boolean;
@@ -26,18 +26,18 @@ export declare class LessonService {
         isPreview?: boolean;
         order?: number;
     }): Promise<{
-        order: number;
         id: number;
         title: string;
+        order: number;
         youtubeUrl: string | null;
         duration: number | null;
         isPreview: boolean;
         sectionId: number;
     }>;
     deleteLesson(id: number, userId: number, userRole: string): Promise<{
-        order: number;
         id: number;
         title: string;
+        order: number;
         youtubeUrl: string | null;
         duration: number | null;
         isPreview: boolean;

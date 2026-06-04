@@ -48,7 +48,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.OrderItemScalarFieldEnum = exports.OrderScalarFieldEnum = exports.LessonCompletionScalarFieldEnum = exports.ReplyScalarFieldEnum = exports.DiscussionScalarFieldEnum = exports.TrainerRequestScalarFieldEnum = exports.WishlistScalarFieldEnum = exports.RatingScalarFieldEnum = exports.EnrollmentScalarFieldEnum = exports.LessonScalarFieldEnum = exports.SectionScalarFieldEnum = exports.CourseScalarFieldEnum = exports.CategoryScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.OrderItemRevenueScalarFieldEnum = exports.CouponScalarFieldEnum = exports.UserLoginStreakScalarFieldEnum = exports.XpHistoryScalarFieldEnum = exports.UserXpScalarFieldEnum = exports.OrderItemScalarFieldEnum = exports.OrderScalarFieldEnum = exports.LessonCompletionScalarFieldEnum = exports.ReplyScalarFieldEnum = exports.DiscussionScalarFieldEnum = exports.TrainerRequestScalarFieldEnum = exports.WishlistScalarFieldEnum = exports.RatingScalarFieldEnum = exports.EnrollmentScalarFieldEnum = exports.LessonScalarFieldEnum = exports.SectionScalarFieldEnum = exports.CourseScalarFieldEnum = exports.CategoryScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/client"));
 /**
  * Prisma Errors
@@ -116,7 +116,12 @@ exports.ModelName = {
     Reply: 'Reply',
     LessonCompletion: 'LessonCompletion',
     Order: 'Order',
-    OrderItem: 'OrderItem'
+    OrderItem: 'OrderItem',
+    UserXp: 'UserXp',
+    XpHistory: 'XpHistory',
+    UserLoginStreak: 'UserLoginStreak',
+    Coupon: 'Coupon',
+    OrderItemRevenue: 'OrderItemRevenue'
 };
 /**
  * Enums
@@ -228,13 +233,51 @@ exports.OrderScalarFieldEnum = {
     userId: 'userId',
     total: 'total',
     status: 'status',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    couponId: 'couponId',
+    serviceFee: 'serviceFee',
+    discountAmt: 'discountAmt'
 };
 exports.OrderItemScalarFieldEnum = {
     id: 'id',
     orderId: 'orderId',
     courseId: 'courseId',
     price: 'price'
+};
+exports.UserXpScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    xp: 'xp'
+};
+exports.XpHistoryScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    amount: 'amount',
+    activity: 'activity',
+    createdAt: 'createdAt'
+};
+exports.UserLoginStreakScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    currentStreak: 'currentStreak',
+    lastLoginDate: 'lastLoginDate'
+};
+exports.CouponScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    discountPct: 'discountPct',
+    isUsed: 'isUsed',
+    createdAt: 'createdAt',
+    usedAt: 'usedAt'
+};
+exports.OrderItemRevenueScalarFieldEnum = {
+    id: 'id',
+    orderItemId: 'orderItemId',
+    basePrice: 'basePrice',
+    discountAmt: 'discountAmt',
+    netRevenue: 'netRevenue',
+    trainerShare: 'trainerShare',
+    platformShare: 'platformShare'
 };
 exports.SortOrder = {
     asc: 'asc',

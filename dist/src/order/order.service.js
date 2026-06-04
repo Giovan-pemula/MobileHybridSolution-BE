@@ -51,19 +51,22 @@ const env_1 = require("../config/env");
 const crypto = __importStar(require("crypto"));
 const midtrans_1 = require("../config/midtrans");
 const enums_1 = require("../../generated/prisma/enums");
+const gamification_service_1 = require("../gamification/gamification.service");
 let OrderService = class OrderService {
     orderRepository;
     enrollmentRepository;
     prisma;
-    constructor(orderRepository, enrollmentRepository, prisma) {
+    gamificationService;
+    constructor(orderRepository, enrollmentRepository, prisma, gamificationService) {
         this.orderRepository = orderRepository;
         this.enrollmentRepository = enrollmentRepository;
         this.prisma = prisma;
+        this.gamificationService = gamificationService;
     }
     async getOrders(userId) {
         return this.orderRepository.findByUser(userId);
     }
-    async createOrder(userId, courseIds) {
+    async createOrder(userId, courseIds, couponId) {
         const courses = await this.prisma.course.findMany({
             where: { id: { in: courseIds }, status: 'PUBLISHED' },
         });
@@ -74,12 +77,49 @@ let OrderService = class OrderService {
             if (existing)
                 throw new common_1.ConflictException('Already enrolled in one of the courses');
         }
-        const items = courses.map((course) => ({
-            courseId: course.id,
-            price: course.isFree ? 0 : course.price,
-        }));
-        const order = await this.orderRepository.create(userId, items);
-        if (order.total === 0) {
+        let couponDiscountPct = 0;
+        if (couponId) {
+            const coupon = await this.prisma.coupon.findFirst({
+                where: { id: couponId, userId, isUsed: false },
+            });
+            if (!coupon)
+                throw new common_1.NotFoundException('Coupon not found or already used');
+            couponDiscountPct = coupon.discountPct;
+            // Mark coupon as used immediately
+            await this.prisma.coupon.update({
+                where: { id: couponId },
+                data: { isUsed: true, usedAt: new Date() },
+            });
+        }
+        const cartTotal = courses.reduce((sum, course) => sum + (course.isFree ? 0 : course.price), 0);
+        const totalCouponDiscount = cartTotal * (couponDiscountPct / 100);
+        const serviceFee = 10000;
+        // Total price to pay = cartTotal - discount + serviceFee
+        const finalTotal = Math.max(0, cartTotal - totalCouponDiscount) + serviceFee;
+        const items = courses.map((course) => {
+            const basePrice = course.isFree ? 0 : course.price;
+            // Proportional discount allocation
+            let allocatedDiscount = 0;
+            if (cartTotal > 0) {
+                allocatedDiscount = (basePrice / cartTotal) * totalCouponDiscount;
+            }
+            const netRevenue = basePrice - allocatedDiscount;
+            const trainerShare = netRevenue * 0.8;
+            const platformShare = netRevenue * 0.2;
+            return {
+                courseId: course.id,
+                price: basePrice,
+                revenue: {
+                    basePrice,
+                    discountAmt: allocatedDiscount,
+                    netRevenue,
+                    trainerShare,
+                    platformShare,
+                },
+            };
+        });
+        const order = await this.orderRepository.create(userId, finalTotal, couponId || null, totalCouponDiscount, serviceFee, items);
+        if (order.total === 0 || cartTotal === 0) {
             for (const course of courses) {
                 await this.enrollmentRepository.create(userId, course.id);
             }
@@ -89,18 +129,34 @@ let OrderService = class OrderService {
         if (!user)
             throw new common_1.NotFoundException('User not found');
         const midtransOrderId = `ORDER-${order.id}-${Date.now()}`;
+        // Setup midtrans item details
+        const itemDetails = courses.map((course) => ({
+            id: `COURSE-${course.id}`,
+            price: course.price,
+            quantity: 1,
+            name: course.title.substring(0, 50),
+        }));
+        if (totalCouponDiscount > 0) {
+            itemDetails.push({
+                id: `COUPON-${couponId}`,
+                price: -Math.round(totalCouponDiscount),
+                quantity: 1,
+                name: `Coupon Discount ${couponDiscountPct}%`,
+            });
+        }
+        itemDetails.push({
+            id: `FEE-SERVICE`,
+            price: serviceFee,
+            quantity: 1,
+            name: 'Platform Service Fee',
+        });
         const payload = {
             transaction_details: {
                 order_id: midtransOrderId,
-                gross_amount: order.total,
+                gross_amount: Math.round(finalTotal),
             },
             credit_card: { secure: true },
-            item_details: courses.map((course) => ({
-                id: course.id.toString(),
-                price: course.price,
-                quantity: 1,
-                name: course.title.substring(0, 50),
-            })),
+            item_details: itemDetails,
             customer_details: {
                 first_name: user.name,
                 email: user.email,
@@ -161,6 +217,7 @@ let OrderService = class OrderService {
                         await this.enrollmentRepository.create(order.userId, item.courseId);
                     }
                 }
+                await this.gamificationService.addXp(order.userId, 50 * order.items.length, 'COURSE_CHECKOUT');
             }
         }
         return { message: 'Webhook processed' };
@@ -179,6 +236,7 @@ exports.OrderService = OrderService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [order_repository_1.OrderRepository,
         enrollment_repository_1.EnrollmentRepository,
-        prisma_service_1.PrismaService])
+        prisma_service_1.PrismaService,
+        gamification_service_1.GamificationService])
 ], OrderService);
 //# sourceMappingURL=order.service.js.map

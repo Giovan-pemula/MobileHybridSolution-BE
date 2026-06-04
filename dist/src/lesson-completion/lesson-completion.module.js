@@ -11,11 +11,13 @@ const common_1 = require("@nestjs/common");
 const lesson_completion_controller_1 = require("./lesson-completion.controller");
 const lesson_completion_service_1 = require("./lesson-completion.service");
 const lesson_completion_repository_1 = require("./lesson-completion.repository");
+const gamification_module_1 = require("../gamification/gamification.module");
 let LessonCompletionModule = class LessonCompletionModule {
 };
 exports.LessonCompletionModule = LessonCompletionModule;
 exports.LessonCompletionModule = LessonCompletionModule = __decorate([
     (0, common_1.Module)({
+        imports: [gamification_module_1.GamificationModule],
         controllers: [lesson_completion_controller_1.LessonCompletionController],
         providers: [lesson_completion_service_1.LessonCompletionService, lesson_completion_repository_1.LessonCompletionRepository],
     })

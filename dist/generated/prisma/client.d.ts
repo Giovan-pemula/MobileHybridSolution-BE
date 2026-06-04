@@ -91,4 +91,29 @@ export type Order = Prisma.OrderModel;
  *
  */
 export type OrderItem = Prisma.OrderItemModel;
+/**
+ * Model UserXp
+ *
+ */
+export type UserXp = Prisma.UserXpModel;
+/**
+ * Model XpHistory
+ *
+ */
+export type XpHistory = Prisma.XpHistoryModel;
+/**
+ * Model UserLoginStreak
+ *
+ */
+export type UserLoginStreak = Prisma.UserLoginStreakModel;
+/**
+ * Model Coupon
+ *
+ */
+export type Coupon = Prisma.CouponModel;
+/**
+ * Model OrderItemRevenue
+ *
+ */
+export type OrderItemRevenue = Prisma.OrderItemRevenueModel;
 //# sourceMappingURL=client.d.ts.map

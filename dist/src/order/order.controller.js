@@ -30,7 +30,7 @@ let OrderController = class OrderController {
         return { data: orders, message: 'Orders fetched successfully' };
     }
     async createOrder(user, body) {
-        const order = await this.orderService.createOrder(user.id, body.courseIds);
+        const order = await this.orderService.createOrder(user.id, body.courseIds, body.couponId);
         return { data: order, message: 'Order created successfully' };
     }
     async handleWebhook(payload) {

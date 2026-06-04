@@ -11,8 +11,8 @@ export declare class OrderController {
                 course: {
                     category: {
                         id: number;
-                        createdAt: Date;
                         name: string;
+                        createdAt: Date;
                         slug: string;
                     };
                     trainer: {
@@ -21,30 +21,33 @@ export declare class OrderController {
                     };
                 } & {
                     id: number;
-                    status: import("../../generated/prisma/enums").CourseStatus;
                     createdAt: Date;
+                    updatedAt: Date;
                     title: string;
                     description: string | null;
                     price: number;
                     isFree: boolean;
                     thumbnail: string | null;
                     previewYoutubeUrl: string | null;
+                    status: import("../../generated/prisma/enums").CourseStatus;
                     categoryId: number;
                     trainerId: number;
-                    updatedAt: Date;
                 };
             } & {
                 id: number;
                 price: number;
-                orderId: number;
                 courseId: number;
+                orderId: number;
             })[];
         } & {
             id: number;
+            createdAt: Date;
+            status: import("../../generated/prisma/enums").OrderStatus;
             userId: number;
             total: number;
-            status: import("../../generated/prisma/enums").OrderStatus;
-            createdAt: Date;
+            couponId: number | null;
+            serviceFee: number;
+            discountAmt: number;
         })[];
         message: string;
     }>;
@@ -59,17 +62,29 @@ export declare class OrderController {
                     price: number;
                     thumbnail: string | null;
                 };
+                revenue: {
+                    id: number;
+                    discountAmt: number;
+                    orderItemId: number;
+                    basePrice: number;
+                    netRevenue: number;
+                    trainerShare: number;
+                    platformShare: number;
+                } | null;
             } & {
                 id: number;
                 price: number;
-                orderId: number;
                 courseId: number;
+                orderId: number;
             })[];
             id: number;
+            createdAt: Date;
+            status: import("../../generated/prisma/enums").OrderStatus;
             userId: number;
             total: number;
-            status: import("../../generated/prisma/enums").OrderStatus;
-            createdAt: Date;
+            couponId: number | null;
+            serviceFee: number;
+            discountAmt: number;
         } | {
             snapToken: string;
             snapRedirectUrl: string;
@@ -80,17 +95,29 @@ export declare class OrderController {
                     price: number;
                     thumbnail: string | null;
                 };
+                revenue: {
+                    id: number;
+                    discountAmt: number;
+                    orderItemId: number;
+                    basePrice: number;
+                    netRevenue: number;
+                    trainerShare: number;
+                    platformShare: number;
+                } | null;
             } & {
                 id: number;
                 price: number;
-                orderId: number;
                 courseId: number;
+                orderId: number;
             })[];
             id: number;
+            createdAt: Date;
+            status: import("../../generated/prisma/enums").OrderStatus;
             userId: number;
             total: number;
-            status: import("../../generated/prisma/enums").OrderStatus;
-            createdAt: Date;
+            couponId: number | null;
+            serviceFee: number;
+            discountAmt: number;
         };
         message: string;
     }>;
@@ -112,15 +139,18 @@ export declare class OrderController {
             } & {
                 id: number;
                 price: number;
-                orderId: number;
                 courseId: number;
+                orderId: number;
             })[];
         } & {
             id: number;
+            createdAt: Date;
+            status: import("../../generated/prisma/enums").OrderStatus;
             userId: number;
             total: number;
-            status: import("../../generated/prisma/enums").OrderStatus;
-            createdAt: Date;
+            couponId: number | null;
+            serviceFee: number;
+            discountAmt: number;
         };
         message: string;
     }>;

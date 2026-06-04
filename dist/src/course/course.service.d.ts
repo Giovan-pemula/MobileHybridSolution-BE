@@ -10,8 +10,8 @@ export declare class CourseService {
         data: {
             averageRating: number;
             category: {
-                name: string;
                 id: number;
+                name: string;
                 createdAt: Date;
                 slug: string;
             };
@@ -20,8 +20,8 @@ export declare class CourseService {
                 ratings: number;
             };
             trainer: {
-                name: string;
                 id: number;
+                name: string;
                 email: string;
                 avatar: string | null;
             };
@@ -49,8 +49,8 @@ export declare class CourseService {
         data: {
             averageRating: number;
             category: {
-                name: string;
                 id: number;
+                name: string;
                 createdAt: Date;
                 slug: string;
             };
@@ -59,8 +59,8 @@ export declare class CourseService {
                 ratings: number;
             };
             trainer: {
-                name: string;
                 id: number;
+                name: string;
                 email: string;
                 avatar: string | null;
             };
@@ -87,8 +87,8 @@ export declare class CourseService {
     getCourseById(id: number): Promise<{
         averageRating: number;
         category: {
-            name: string;
             id: number;
+            name: string;
             createdAt: Date;
             slug: string;
         };
@@ -97,26 +97,26 @@ export declare class CourseService {
             ratings: number;
         };
         trainer: {
-            name: string;
             id: number;
+            name: string;
             email: string;
             avatar: string | null;
         };
         sections: ({
             lessons: {
-                order: number;
                 id: number;
                 title: string;
+                order: number;
                 youtubeUrl: string | null;
                 duration: number | null;
                 isPreview: boolean;
                 sectionId: number;
             }[];
         } & {
-            order: number;
             id: number;
             title: string;
             courseId: number;
+            order: number;
         })[];
         id: number;
         createdAt: Date;
@@ -134,8 +134,8 @@ export declare class CourseService {
     getCourseByIdForEnrolled(courseId: number, userId: number): Promise<{
         averageRating: number;
         category: {
-            name: string;
             id: number;
+            name: string;
             createdAt: Date;
             slug: string;
         };
@@ -144,26 +144,26 @@ export declare class CourseService {
             ratings: number;
         };
         trainer: {
-            name: string;
             id: number;
+            name: string;
             email: string;
             avatar: string | null;
         };
         sections: ({
             lessons: {
-                order: number;
                 id: number;
                 title: string;
+                order: number;
                 youtubeUrl: string | null;
                 duration: number | null;
                 isPreview: boolean;
                 sectionId: number;
             }[];
         } & {
-            order: number;
             id: number;
             title: string;
             courseId: number;
+            order: number;
         })[];
         id: number;
         createdAt: Date;
@@ -180,14 +180,14 @@ export declare class CourseService {
     }>;
     createCourse(trainerId: number, data: any): Promise<{
         category: {
-            name: string;
             id: number;
+            name: string;
             createdAt: Date;
             slug: string;
         };
         trainer: {
-            name: string;
             id: number;
+            name: string;
             email: string;
             avatar: string | null;
         };
@@ -207,14 +207,14 @@ export declare class CourseService {
     }>;
     updateCourse(id: number, userId: number, userRole: string, data: any): Promise<{
         category: {
-            name: string;
             id: number;
+            name: string;
             createdAt: Date;
             slug: string;
         };
         trainer: {
-            name: string;
             id: number;
+            name: string;
             email: string;
             avatar: string | null;
         };
@@ -249,16 +249,16 @@ export declare class CourseService {
     getCourseStudents(courseId: number, query: Record<string, any>, userId: number, userRole: string): Promise<{
         data: ({
             user: {
-                name: string;
                 id: number;
+                name: string;
                 email: string;
                 avatar: string | null;
             };
         } & {
             id: number;
             createdAt: Date;
-            userId: number;
             courseId: number;
+            userId: number;
             progress: number;
             completed: boolean;
         })[];
@@ -271,14 +271,14 @@ export declare class CourseService {
     }>;
     uploadThumbnail(courseId: number, userId: number, userRole: string, file: Express.Multer.File): Promise<{
         category: {
-            name: string;
             id: number;
+            name: string;
             createdAt: Date;
             slug: string;
         };
         trainer: {
-            name: string;
             id: number;
+            name: string;
             email: string;
             avatar: string | null;
         };

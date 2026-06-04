@@ -7,8 +7,8 @@ export declare class WishlistController {
         data: ({
             course: {
                 category: {
-                    name: string;
                     id: number;
+                    name: string;
                     createdAt: Date;
                     slug: string;
                 };
@@ -16,8 +16,8 @@ export declare class WishlistController {
                     enrollments: number;
                 };
                 trainer: {
-                    name: string;
                     id: number;
+                    name: string;
                     avatar: string | null;
                 };
             } & {
@@ -36,8 +36,8 @@ export declare class WishlistController {
             };
         } & {
             id: number;
-            userId: number;
             courseId: number;
+            userId: number;
         })[];
         message: string;
     }>;
@@ -47,14 +47,14 @@ export declare class WishlistController {
         data: {
             course: {
                 category: {
-                    name: string;
                     id: number;
+                    name: string;
                     createdAt: Date;
                     slug: string;
                 };
                 trainer: {
-                    name: string;
                     id: number;
+                    name: string;
                     avatar: string | null;
                 };
             } & {
@@ -73,16 +73,16 @@ export declare class WishlistController {
             };
         } & {
             id: number;
-            userId: number;
             courseId: number;
+            userId: number;
         };
         message: string;
     }>;
     removeFromWishlist(courseId: number, user: CurrentUserPayload): Promise<{
         data: {
             id: number;
-            userId: number;
             courseId: number;
+            userId: number;
         };
         message: string;
     }>;

@@ -6,23 +6,49 @@ type RegisterPayload = z.infer<typeof registerSchema>;
 export declare class AuthService {
     private readonly authRepository;
     constructor(authRepository: AuthRepository);
+    private generateTokens;
     login(payload: LoginPayload): Promise<{
-        token: string;
         user: {
             id: number;
             name: string;
             email: string;
             role: import("../../generated/prisma/enums").UserRole;
         };
+        accessToken: string;
+        refreshToken: string;
     }>;
     register(payload: RegisterPayload): Promise<{
-        token: string;
         user: {
             id: number;
             name: string;
             email: string;
             role: import("../../generated/prisma/enums").UserRole;
         };
+        accessToken: string;
+        refreshToken: string;
+    }>;
+    googleLogin(reqUser: any): Promise<{
+        user: {
+            id: number;
+            name: string;
+            email: string;
+            role: import("../../generated/prisma/enums").UserRole;
+        };
+        accessToken: string;
+        refreshToken: string;
+    }>;
+    refreshTokens(refreshToken: string): Promise<{
+        user: {
+            id: number;
+            name: string;
+            email: string;
+            role: import("../../generated/prisma/enums").UserRole;
+        };
+        accessToken: string;
+        refreshToken: string;
+    }>;
+    logout(userId: number): Promise<{
+        message: string;
     }>;
 }
 export {};
