@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
-import { v4 as uuidv4 } from 'uuid';
+import { randomUUID } from 'crypto';
 import { AuthRepository } from './auth.repository';
 import { signToken, signRefreshToken, verifyRefreshToken } from '../utils/jwt';
 import { z } from 'zod';
@@ -68,7 +68,7 @@ export class AuthService {
 
     if (!user) {
       // Create new user if not exists
-      const randomPassword = uuidv4();
+      const randomPassword = randomUUID();
       const hashedPassword = await bcrypt.hash(randomPassword, 10);
       user = (await this.authRepository.create({
         name: `${reqUser.firstName} ${reqUser.lastName}`.trim() || 'Google User',
