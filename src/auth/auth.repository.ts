@@ -9,6 +9,10 @@ export class AuthRepository {
     return this.prisma.user.findUnique({ where: { email } });
   }
 
+  async findById(id: number) {
+    return this.prisma.user.findUnique({ where: { id } });
+  }
+
   async create(data: { name: string; email: string; password: string }) {
     return this.prisma.user.create({
       data: { ...data, role: 'USER' as any },
@@ -21,6 +25,13 @@ export class AuthRepository {
         createdAt: true,
         updatedAt: true,
       },
+    });
+  }
+
+  async updateRefreshToken(id: number, refreshToken: string | null) {
+    return this.prisma.user.update({
+      where: { id },
+      data: { refreshToken },
     });
   }
 }
