@@ -59,6 +59,7 @@ model User {
   xpHistory         XpHistory[]
   loginStreak       UserLoginStreak?
   coupons           Coupon[]
+  refreshToken      String?
 }
 
 // ─── Category ────────────────────────────────────────────
