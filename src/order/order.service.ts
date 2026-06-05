@@ -21,6 +21,10 @@ export class OrderService {
     return this.orderRepository.findByUser(userId);
   }
 
+  async getAllOrdersForAdmin() {
+    return this.orderRepository.findAllWithRevenue();
+  }
+
   async createOrder(userId: number, courseIds: number[], couponId?: number) {
     const courses = await this.prisma.course.findMany({
       where: { id: { in: courseIds }, status: 'PUBLISHED' },
@@ -90,11 +94,18 @@ export class OrderService {
       items
     );
 
+    const summary = {
+      subtotal: cartTotal,
+      discountAmt: totalCouponDiscount,
+      serviceFee,
+      total: finalTotal,
+    };
+
     if (order.total === 0 || cartTotal === 0) {
       for (const course of courses) {
         await this.enrollmentRepository.create(userId, course.id);
       }
-      return { ...order, snapToken: null, snapRedirectUrl: null };
+      return { ...order, summary, snapToken: null, snapRedirectUrl: null };
     }
 
     const user = await this.prisma.user.findUnique({ where: { id: userId } });
@@ -144,6 +155,7 @@ export class OrderService {
 
       return {
         ...order,
+        summary,
         snapToken: transaction.token,
         snapRedirectUrl: transaction.redirect_url,
       };

@@ -1,6 +1,8 @@
 import { Controller, Get, Post, Body, UseGuards, Param, ParseIntPipe } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
+import { RolesGuard } from '../common/guards/roles.guard';
+import { Roles } from '../common/decorators/roles.decorator';
 import { CurrentUser, CurrentUserPayload } from '../common/decorators/current-user.decorator';
 import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe';
 import { createOrderSchema } from './order.validation';
@@ -15,6 +17,14 @@ export class OrderController {
   async getOrders(@CurrentUser() user: CurrentUserPayload) {
     const orders = await this.orderService.getOrders(user.id);
     return { data: orders, message: 'Orders fetched successfully' };
+  }
+
+  @Get('admin/revenue')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN')
+  async getAllOrdersWithRevenue() {
+    const orders = await this.orderService.getAllOrdersForAdmin();
+    return { data: orders, message: 'Admin orders with revenue fetched successfully' };
   }
 
   @Post()

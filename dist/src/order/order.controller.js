@@ -16,6 +16,8 @@ exports.OrderController = void 0;
 const common_1 = require("@nestjs/common");
 const order_service_1 = require("./order.service");
 const jwt_auth_guard_1 = require("../common/guards/jwt-auth.guard");
+const roles_guard_1 = require("../common/guards/roles.guard");
+const roles_decorator_1 = require("../common/decorators/roles.decorator");
 const current_user_decorator_1 = require("../common/decorators/current-user.decorator");
 const zod_validation_pipe_1 = require("../common/pipes/zod-validation.pipe");
 const order_validation_1 = require("./order.validation");
@@ -28,6 +30,10 @@ let OrderController = class OrderController {
     async getOrders(user) {
         const orders = await this.orderService.getOrders(user.id);
         return { data: orders, message: 'Orders fetched successfully' };
+    }
+    async getAllOrdersWithRevenue() {
+        const orders = await this.orderService.getAllOrdersForAdmin();
+        return { data: orders, message: 'Admin orders with revenue fetched successfully' };
     }
     async createOrder(user, body) {
         const order = await this.orderService.createOrder(user.id, body.courseIds, body.couponId);
@@ -51,6 +57,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], OrderController.prototype, "getOrders", null);
+__decorate([
+    (0, common_1.Get)('admin/revenue'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)('ADMIN'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], OrderController.prototype, "getAllOrdersWithRevenue", null);
 __decorate([
     (0, common_1.Post)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),

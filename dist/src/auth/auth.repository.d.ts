@@ -11,6 +11,7 @@ export declare class AuthRepository {
         avatar: string | null;
         createdAt: Date;
         updatedAt: Date;
+        refreshToken: string | null;
     } | null>;
     findById(id: number): Promise<{
         id: number;
@@ -21,6 +22,7 @@ export declare class AuthRepository {
         avatar: string | null;
         createdAt: Date;
         updatedAt: Date;
+        refreshToken: string | null;
     } | null>;
     create(data: {
         name: string;
@@ -44,6 +46,7 @@ export declare class AuthRepository {
         avatar: string | null;
         createdAt: Date;
         updatedAt: Date;
+        refreshToken: string | null;
     }>;
 }
 //# sourceMappingURL=auth.repository.d.ts.map

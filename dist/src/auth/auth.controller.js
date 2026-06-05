@@ -19,6 +19,9 @@ const auth_service_1 = require("./auth.service");
 const zod_validation_pipe_1 = require("../common/pipes/zod-validation.pipe");
 const auth_validation_1 = require("./auth.validation");
 const zod_1 = require("zod");
+const jwt_auth_guard_1 = require("../common/guards/jwt-auth.guard");
+const jwt_refresh_guard_1 = require("../common/guards/jwt-refresh.guard");
+const current_user_decorator_1 = require("../common/decorators/current-user.decorator");
 let AuthController = class AuthController {
     authService;
     constructor(authService) {
@@ -32,32 +35,17 @@ let AuthController = class AuthController {
         const result = await this.authService.register(body);
         return { data: result, message: 'Registration successful' };
     }
-    async googleAuth() {
-        // This endpoint redirects the user to the Google consent screen.
-    }
+    async googleAuth() { }
     async googleAuthRedirect(req) {
         const result = await this.authService.googleLogin(req.user);
-        // Usually, in a real application, you might want to redirect the user back to the frontend with the tokens in the URL or set a cookie.
-        // For a mobile API, returning JSON is also common if the mobile app intercepts the callback.
-        // Let's return JSON for now as per a standard API.
         return { data: result, message: 'Google login successful' };
     }
-    async refresh(refreshToken) {
-        if (!refreshToken) {
-            return { message: 'Refresh token is required', statusCode: 400 };
-        }
-        const result = await this.authService.refreshTokens(refreshToken);
+    async refresh(req) {
+        const result = await this.authService.refreshTokens(req.token);
         return { data: result, message: 'Token refreshed successfully' };
     }
-    // NOTE: In a real app, this should be protected by AuthGuard('jwt') to ensure only logged in users can logout
-    // Assuming a generic JWT guard or we extract user ID directly from token if passed
-    async logout(userId) {
-        // We are passing userId in body for simplicity, usually it's extracted from req.user using JwtGuard
-        if (!userId) {
-            return { message: 'User ID is required', statusCode: 400 };
-        }
-        const result = await this.authService.logout(userId);
-        return result;
+    async logout(user) {
+        return await this.authService.logout(user.id);
     }
 };
 exports.AuthController = AuthController;
@@ -93,18 +81,20 @@ __decorate([
 ], AuthController.prototype, "googleAuthRedirect", null);
 __decorate([
     (0, common_1.Post)('refresh'),
+    (0, common_1.UseGuards)(jwt_refresh_guard_1.JwtRefreshGuard),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    __param(0, (0, common_1.Body)('refreshToken')),
+    __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "refresh", null);
 __decorate([
     (0, common_1.Post)('logout'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    __param(0, (0, common_1.Body)('userId')),
+    __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "logout", null);
 exports.AuthController = AuthController = __decorate([

@@ -70,6 +70,45 @@ export declare class OrderRepository {
         serviceFee: number;
         discountAmt: number;
     })[]>;
+    findAllWithRevenue(): Promise<({
+        user: {
+            id: number;
+            name: string;
+            email: string;
+        };
+        items: ({
+            course: {
+                id: number;
+                title: string;
+                trainer: {
+                    name: string;
+                };
+            };
+            revenue: {
+                id: number;
+                discountAmt: number;
+                orderItemId: number;
+                basePrice: number;
+                netRevenue: number;
+                trainerShare: number;
+                platformShare: number;
+            } | null;
+        } & {
+            id: number;
+            price: number;
+            courseId: number;
+            orderId: number;
+        })[];
+    } & {
+        id: number;
+        createdAt: Date;
+        status: OrderStatus;
+        userId: number;
+        total: number;
+        couponId: number | null;
+        serviceFee: number;
+        discountAmt: number;
+    })[]>;
     create(userId: number, total: number, couponId: number | null, discountAmt: number, serviceFee: number, items: {
         courseId: number;
         price: number;
@@ -88,15 +127,6 @@ export declare class OrderRepository {
                 price: number;
                 thumbnail: string | null;
             };
-            revenue: {
-                id: number;
-                discountAmt: number;
-                orderItemId: number;
-                basePrice: number;
-                netRevenue: number;
-                trainerShare: number;
-                platformShare: number;
-            } | null;
         } & {
             id: number;
             price: number;

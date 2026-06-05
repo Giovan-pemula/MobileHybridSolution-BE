@@ -45,6 +45,21 @@ export class OrderRepository {
     });
   }
 
+  async findAllWithRevenue() {
+    return this.prisma.order.findMany({
+      include: {
+        user: { select: { id: true, name: true, email: true } },
+        items: {
+          include: {
+            course: { select: { id: true, title: true, trainer: { select: { name: true } } } },
+            revenue: true,
+          },
+        },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
   async create(
     userId: number,
     total: number,
@@ -90,7 +105,6 @@ export class OrderRepository {
                 thumbnail: true,
               },
             },
-            revenue: true,
           },
         },
       },

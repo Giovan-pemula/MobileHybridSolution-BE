@@ -51,16 +51,20 @@ export declare class OrderController {
         })[];
         message: string;
     }>;
-    createOrder(user: CurrentUserPayload, body: z.infer<typeof createOrderSchema>): Promise<{
-        data: {
-            snapToken: null;
-            snapRedirectUrl: null;
+    getAllOrdersWithRevenue(): Promise<{
+        data: ({
+            user: {
+                id: number;
+                name: string;
+                email: string;
+            };
             items: ({
                 course: {
                     id: number;
                     title: string;
-                    price: number;
-                    thumbnail: string | null;
+                    trainer: {
+                        name: string;
+                    };
                 };
                 revenue: {
                     id: number;
@@ -77,6 +81,41 @@ export declare class OrderController {
                 courseId: number;
                 orderId: number;
             })[];
+        } & {
+            id: number;
+            createdAt: Date;
+            status: import("../../generated/prisma/enums").OrderStatus;
+            userId: number;
+            total: number;
+            couponId: number | null;
+            serviceFee: number;
+            discountAmt: number;
+        })[];
+        message: string;
+    }>;
+    createOrder(user: CurrentUserPayload, body: z.infer<typeof createOrderSchema>): Promise<{
+        data: {
+            summary: {
+                subtotal: number;
+                discountAmt: number;
+                serviceFee: number;
+                total: number;
+            };
+            snapToken: null;
+            snapRedirectUrl: null;
+            items: ({
+                course: {
+                    id: number;
+                    title: string;
+                    price: number;
+                    thumbnail: string | null;
+                };
+            } & {
+                id: number;
+                price: number;
+                courseId: number;
+                orderId: number;
+            })[];
             id: number;
             createdAt: Date;
             status: import("../../generated/prisma/enums").OrderStatus;
@@ -86,6 +125,12 @@ export declare class OrderController {
             serviceFee: number;
             discountAmt: number;
         } | {
+            summary: {
+                subtotal: number;
+                discountAmt: number;
+                serviceFee: number;
+                total: number;
+            };
             snapToken: string;
             snapRedirectUrl: string;
             items: ({
@@ -95,15 +140,6 @@ export declare class OrderController {
                     price: number;
                     thumbnail: string | null;
                 };
-                revenue: {
-                    id: number;
-                    discountAmt: number;
-                    orderItemId: number;
-                    basePrice: number;
-                    netRevenue: number;
-                    trainerShare: number;
-                    platformShare: number;
-                } | null;
             } & {
                 id: number;
                 price: number;

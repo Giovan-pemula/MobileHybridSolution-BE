@@ -55,6 +55,20 @@ let OrderRepository = class OrderRepository {
             orderBy: { createdAt: 'desc' },
         });
     }
+    async findAllWithRevenue() {
+        return this.prisma.order.findMany({
+            include: {
+                user: { select: { id: true, name: true, email: true } },
+                items: {
+                    include: {
+                        course: { select: { id: true, title: true, trainer: { select: { name: true } } } },
+                        revenue: true,
+                    },
+                },
+            },
+            orderBy: { createdAt: 'desc' },
+        });
+    }
     async create(userId, total, couponId, discountAmt, serviceFee, items) {
         return this.prisma.order.create({
             data: {
@@ -83,7 +97,6 @@ let OrderRepository = class OrderRepository {
                                 thumbnail: true,
                             },
                         },
-                        revenue: true,
                     },
                 },
             },

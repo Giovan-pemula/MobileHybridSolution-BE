@@ -1,6 +1,7 @@
 import { AuthService } from './auth.service';
 import { loginSchema, registerSchema } from './auth.validation';
 import { z } from 'zod';
+import { CurrentUserPayload } from '../common/decorators/current-user.decorator';
 export declare class AuthController {
     private readonly authService;
     constructor(authService: AuthService);
@@ -44,11 +45,7 @@ export declare class AuthController {
         };
         message: string;
     }>;
-    refresh(refreshToken: string): Promise<{
-        message: string;
-        statusCode: number;
-        data?: undefined;
-    } | {
+    refresh(req: any): Promise<{
         data: {
             user: {
                 id: number;
@@ -60,13 +57,9 @@ export declare class AuthController {
             refreshToken: string;
         };
         message: string;
-        statusCode?: undefined;
     }>;
-    logout(userId: number): Promise<{
+    logout(user: CurrentUserPayload): Promise<{
         message: string;
-    } | {
-        message: string;
-        statusCode: number;
     }>;
 }
 //# sourceMappingURL=auth.controller.d.ts.map

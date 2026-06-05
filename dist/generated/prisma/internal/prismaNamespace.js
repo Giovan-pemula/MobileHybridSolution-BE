@@ -140,7 +140,8 @@ exports.UserScalarFieldEnum = {
     role: 'role',
     avatar: 'avatar',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    refreshToken: 'refreshToken'
 };
 exports.CategoryScalarFieldEnum = {
     id: 'id',

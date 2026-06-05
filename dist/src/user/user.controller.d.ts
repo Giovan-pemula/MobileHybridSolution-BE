@@ -110,6 +110,7 @@ export declare class UserController {
             avatar: string | null;
             createdAt: Date;
             updatedAt: Date;
+            refreshToken: string | null;
         };
         message: string;
     }>;
