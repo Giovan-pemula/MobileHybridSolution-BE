@@ -4,6 +4,9 @@ import { AuthService } from './auth.service';
 import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe';
 import { loginSchema, registerSchema } from './auth.validation';
 import { z } from 'zod';
+import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
+import { JwtRefreshGuard } from '../common/guards/jwt-refresh.guard';
+import { CurrentUser, CurrentUserPayload } from '../common/decorators/current-user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -34,21 +37,17 @@ export class AuthController {
   }
 
   @Post('refresh')
+  @UseGuards(JwtRefreshGuard)
   @HttpCode(HttpStatus.OK)
-  async refresh(@Body('refreshToken') refreshToken: string) {
-    if (!refreshToken) {
-      return { message: 'Refresh token is required', statusCode: 400 };
-    }
-    const result = await this.authService.refreshTokens(refreshToken);
+  async refresh(@Req() req: any) {
+    const result = await this.authService.refreshTokens(req.token);
     return { data: result, message: 'Token refreshed successfully' };
   }
 
   @Post('logout')
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
-  async logout(@Body('userId') userId: number) {
-    if (!userId) {
-      return { message: 'User ID is required', statusCode: 400 };
-    }
-    return await this.authService.logout(userId);
+  async logout(@CurrentUser() user: CurrentUserPayload) {
+    return await this.authService.logout(user.id);
   }
 }
