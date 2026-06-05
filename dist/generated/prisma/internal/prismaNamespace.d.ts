@@ -1715,6 +1715,7 @@ export declare const UserScalarFieldEnum: {
     readonly avatar: "avatar";
     readonly createdAt: "createdAt";
     readonly updatedAt: "updatedAt";
+    readonly refreshToken: "refreshToken";
 };
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
 export declare const CategoryScalarFieldEnum: {

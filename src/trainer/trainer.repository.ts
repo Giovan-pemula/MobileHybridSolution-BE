@@ -20,15 +20,15 @@ export class TrainerRepository {
       }),
     ]);
 
-    const revenue = await this.prisma.orderItem.aggregate({
-      where: { course: { trainerId } },
-      _sum: { price: true },
+    const revenue = await this.prisma.orderItemRevenue.aggregate({
+      where: { orderItem: { course: { trainerId } } },
+      _sum: { trainerShare: true },
     });
 
     return {
       totalCourses,
       totalStudents,
-      totalRevenue: revenue._sum.price || 0,
+      totalRevenue: revenue._sum.trainerShare || 0,
       latestCourses,
     };
   }
@@ -38,12 +38,16 @@ export class TrainerRepository {
       where: { trainerId },
       include: {
         _count: { select: { enrollments: true } },
-        orderItems: { select: { price: true } },
+        orderItems: {
+          select: {
+            revenue: { select: { trainerShare: true } },
+          },
+        },
       },
     });
 
     const salesData = courses.map((course) => {
-      const totalRevenue = course.orderItems.reduce((sum, item) => sum + item.price, 0);
+      const totalRevenue = course.orderItems.reduce((sum, item) => sum + (item.revenue?.trainerShare || 0), 0);
       return {
         courseId: course.id,
         title: course.title,

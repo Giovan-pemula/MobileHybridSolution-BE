@@ -45,7 +45,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const bcrypt = __importStar(require("bcryptjs"));
-const uuid_1 = require("uuid");
+const crypto_1 = require("crypto");
 const auth_repository_1 = require("./auth.repository");
 const jwt_1 = require("../utils/jwt");
 let AuthService = class AuthService {
@@ -97,7 +97,7 @@ let AuthService = class AuthService {
         let user = await this.authRepository.findByEmail(reqUser.email);
         if (!user) {
             // Create new user if not exists
-            const randomPassword = (0, uuid_1.v4)();
+            const randomPassword = (0, crypto_1.randomUUID)();
             const hashedPassword = await bcrypt.hash(randomPassword, 10);
             user = (await this.authRepository.create({
                 name: `${reqUser.firstName} ${reqUser.lastName}`.trim() || 'Google User',

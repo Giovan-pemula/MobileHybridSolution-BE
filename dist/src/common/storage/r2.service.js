@@ -47,7 +47,7 @@ exports.R2Service = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const client_s3_1 = require("@aws-sdk/client-s3");
-const uuid_1 = require("uuid");
+const crypto = __importStar(require("crypto")); // <-- Menggantikan import 'uuid'
 const path = __importStar(require("path"));
 let R2Service = R2Service_1 = class R2Service {
     configService;
@@ -79,7 +79,8 @@ let R2Service = R2Service_1 = class R2Service {
      */
     async uploadFile(file, folder = 'uploads') {
         const ext = path.extname(file.originalname).toLowerCase();
-        const key = `${folder}/${(0, uuid_1.v4)()}${ext}`;
+        // Gunakan crypto.randomUUID() bawaan Node.js
+        const key = `${folder}/${crypto.randomUUID()}${ext}`;
         const params = {
             Bucket: this.bucketName,
             Key: key,

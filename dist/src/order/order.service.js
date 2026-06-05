@@ -66,6 +66,9 @@ let OrderService = class OrderService {
     async getOrders(userId) {
         return this.orderRepository.findByUser(userId);
     }
+    async getAllOrdersForAdmin() {
+        return this.orderRepository.findAllWithRevenue();
+    }
     async createOrder(userId, courseIds, couponId) {
         const courses = await this.prisma.course.findMany({
             where: { id: { in: courseIds }, status: 'PUBLISHED' },
@@ -119,11 +122,17 @@ let OrderService = class OrderService {
             };
         });
         const order = await this.orderRepository.create(userId, finalTotal, couponId || null, totalCouponDiscount, serviceFee, items);
+        const summary = {
+            subtotal: cartTotal,
+            discountAmt: totalCouponDiscount,
+            serviceFee,
+            total: finalTotal,
+        };
         if (order.total === 0 || cartTotal === 0) {
             for (const course of courses) {
                 await this.enrollmentRepository.create(userId, course.id);
             }
-            return { ...order, snapToken: null, snapRedirectUrl: null };
+            return { ...order, summary, snapToken: null, snapRedirectUrl: null };
         }
         const user = await this.prisma.user.findUnique({ where: { id: userId } });
         if (!user)
@@ -166,6 +175,7 @@ let OrderService = class OrderService {
             const transaction = await midtrans_1.snap.createTransaction(payload);
             return {
                 ...order,
+                summary,
                 snapToken: transaction.token,
                 snapRedirectUrl: transaction.redirect_url,
             };

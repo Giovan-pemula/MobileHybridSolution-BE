@@ -32,6 +32,7 @@ export declare class UserRepository {
         avatar: string | null;
         createdAt: Date;
         updatedAt: Date;
+        refreshToken: string | null;
     } | null>;
     update(id: number, data: {
         name?: string;
@@ -56,6 +57,7 @@ export declare class UserRepository {
         avatar: string | null;
         createdAt: Date;
         updatedAt: Date;
+        refreshToken: string | null;
     }>;
 }
 //# sourceMappingURL=user.repository.d.ts.map

@@ -52,15 +52,19 @@ export declare class OrderService {
         serviceFee: number;
         discountAmt: number;
     })[]>;
-    createOrder(userId: number, courseIds: number[], couponId?: number): Promise<{
-        snapToken: null;
-        snapRedirectUrl: null;
+    getAllOrdersForAdmin(): Promise<({
+        user: {
+            id: number;
+            name: string;
+            email: string;
+        };
         items: ({
             course: {
                 id: number;
                 title: string;
-                price: number;
-                thumbnail: string | null;
+                trainer: {
+                    name: string;
+                };
             };
             revenue: {
                 id: number;
@@ -77,6 +81,38 @@ export declare class OrderService {
             courseId: number;
             orderId: number;
         })[];
+    } & {
+        id: number;
+        createdAt: Date;
+        status: OrderStatus;
+        userId: number;
+        total: number;
+        couponId: number | null;
+        serviceFee: number;
+        discountAmt: number;
+    })[]>;
+    createOrder(userId: number, courseIds: number[], couponId?: number): Promise<{
+        summary: {
+            subtotal: number;
+            discountAmt: number;
+            serviceFee: number;
+            total: number;
+        };
+        snapToken: null;
+        snapRedirectUrl: null;
+        items: ({
+            course: {
+                id: number;
+                title: string;
+                price: number;
+                thumbnail: string | null;
+            };
+        } & {
+            id: number;
+            price: number;
+            courseId: number;
+            orderId: number;
+        })[];
         id: number;
         createdAt: Date;
         status: OrderStatus;
@@ -86,6 +122,12 @@ export declare class OrderService {
         serviceFee: number;
         discountAmt: number;
     } | {
+        summary: {
+            subtotal: number;
+            discountAmt: number;
+            serviceFee: number;
+            total: number;
+        };
         snapToken: string;
         snapRedirectUrl: string;
         items: ({
@@ -95,15 +137,6 @@ export declare class OrderService {
                 price: number;
                 thumbnail: string | null;
             };
-            revenue: {
-                id: number;
-                discountAmt: number;
-                orderItemId: number;
-                basePrice: number;
-                netRevenue: number;
-                trainerShare: number;
-                platformShare: number;
-            } | null;
         } & {
             id: number;
             price: number;

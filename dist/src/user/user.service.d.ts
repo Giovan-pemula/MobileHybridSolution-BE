@@ -75,6 +75,7 @@ export declare class UserService {
         avatar: string | null;
         createdAt: Date;
         updatedAt: Date;
+        refreshToken: string | null;
     }>;
     uploadAvatar(id: number, file: Express.Multer.File): Promise<{
         id: number;

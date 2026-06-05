@@ -28,6 +28,7 @@ export type UserMinAggregateOutputType = {
     avatar: string | null;
     createdAt: Date | null;
     updatedAt: Date | null;
+    refreshToken: string | null;
 };
 export type UserMaxAggregateOutputType = {
     id: number | null;
@@ -38,6 +39,7 @@ export type UserMaxAggregateOutputType = {
     avatar: string | null;
     createdAt: Date | null;
     updatedAt: Date | null;
+    refreshToken: string | null;
 };
 export type UserCountAggregateOutputType = {
     id: number;
@@ -48,6 +50,7 @@ export type UserCountAggregateOutputType = {
     avatar: number;
     createdAt: number;
     updatedAt: number;
+    refreshToken: number;
     _all: number;
 };
 export type UserAvgAggregateInputType = {
@@ -65,6 +68,7 @@ export type UserMinAggregateInputType = {
     avatar?: true;
     createdAt?: true;
     updatedAt?: true;
+    refreshToken?: true;
 };
 export type UserMaxAggregateInputType = {
     id?: true;
@@ -75,6 +79,7 @@ export type UserMaxAggregateInputType = {
     avatar?: true;
     createdAt?: true;
     updatedAt?: true;
+    refreshToken?: true;
 };
 export type UserCountAggregateInputType = {
     id?: true;
@@ -85,6 +90,7 @@ export type UserCountAggregateInputType = {
     avatar?: true;
     createdAt?: true;
     updatedAt?: true;
+    refreshToken?: true;
     _all?: true;
 };
 export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -172,6 +178,7 @@ export type UserGroupByOutputType = {
     avatar: string | null;
     createdAt: Date;
     updatedAt: Date;
+    refreshToken: string | null;
     _count: UserCountAggregateOutputType | null;
     _avg: UserAvgAggregateOutputType | null;
     _sum: UserSumAggregateOutputType | null;
@@ -193,6 +200,7 @@ export type UserWhereInput = {
     avatar?: Prisma.StringNullableFilter<"User"> | string | null;
     createdAt?: Prisma.DateTimeFilter<"User"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string;
+    refreshToken?: Prisma.StringNullableFilter<"User"> | string | null;
     courses?: Prisma.CourseListRelationFilter;
     enrollments?: Prisma.EnrollmentListRelationFilter;
     ratings?: Prisma.RatingListRelationFilter;
@@ -216,6 +224,7 @@ export type UserOrderByWithRelationInput = {
     avatar?: Prisma.SortOrderInput | Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
+    refreshToken?: Prisma.SortOrderInput | Prisma.SortOrder;
     courses?: Prisma.CourseOrderByRelationAggregateInput;
     enrollments?: Prisma.EnrollmentOrderByRelationAggregateInput;
     ratings?: Prisma.RatingOrderByRelationAggregateInput;
@@ -242,6 +251,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
     avatar?: Prisma.StringNullableFilter<"User"> | string | null;
     createdAt?: Prisma.DateTimeFilter<"User"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string;
+    refreshToken?: Prisma.StringNullableFilter<"User"> | string | null;
     courses?: Prisma.CourseListRelationFilter;
     enrollments?: Prisma.EnrollmentListRelationFilter;
     ratings?: Prisma.RatingListRelationFilter;
@@ -265,6 +275,7 @@ export type UserOrderByWithAggregationInput = {
     avatar?: Prisma.SortOrderInput | Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
+    refreshToken?: Prisma.SortOrderInput | Prisma.SortOrder;
     _count?: Prisma.UserCountOrderByAggregateInput;
     _avg?: Prisma.UserAvgOrderByAggregateInput;
     _max?: Prisma.UserMaxOrderByAggregateInput;
@@ -283,6 +294,7 @@ export type UserScalarWhereWithAggregatesInput = {
     avatar?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null;
     createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string;
     updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string;
+    refreshToken?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null;
 };
 export type UserCreateInput = {
     name: string;
@@ -292,6 +304,7 @@ export type UserCreateInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
@@ -315,6 +328,7 @@ export type UserUncheckedCreateInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
@@ -337,6 +351,7 @@ export type UserUpdateInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
@@ -360,6 +375,7 @@ export type UserUncheckedUpdateInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
@@ -383,6 +399,7 @@ export type UserCreateManyInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
 };
 export type UserUpdateManyMutationInput = {
     name?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -392,6 +409,7 @@ export type UserUpdateManyMutationInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
 };
 export type UserUncheckedUpdateManyInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -402,6 +420,7 @@ export type UserUncheckedUpdateManyInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
 };
 export type UserCountOrderByAggregateInput = {
     id?: Prisma.SortOrder;
@@ -412,6 +431,7 @@ export type UserCountOrderByAggregateInput = {
     avatar?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
+    refreshToken?: Prisma.SortOrder;
 };
 export type UserAvgOrderByAggregateInput = {
     id?: Prisma.SortOrder;
@@ -425,6 +445,7 @@ export type UserMaxOrderByAggregateInput = {
     avatar?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
+    refreshToken?: Prisma.SortOrder;
 };
 export type UserMinOrderByAggregateInput = {
     id?: Prisma.SortOrder;
@@ -435,6 +456,7 @@ export type UserMinOrderByAggregateInput = {
     avatar?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
+    refreshToken?: Prisma.SortOrder;
 };
 export type UserSumOrderByAggregateInput = {
     id?: Prisma.SortOrder;
@@ -626,6 +648,7 @@ export type UserCreateWithoutCoursesInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
     wishlists?: Prisma.WishlistCreateNestedManyWithoutUserInput;
@@ -648,6 +671,7 @@ export type UserUncheckedCreateWithoutCoursesInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
     wishlists?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput;
@@ -682,6 +706,7 @@ export type UserUpdateWithoutCoursesInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
     wishlists?: Prisma.WishlistUpdateManyWithoutUserNestedInput;
@@ -704,6 +729,7 @@ export type UserUncheckedUpdateWithoutCoursesInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
     wishlists?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput;
@@ -725,6 +751,7 @@ export type UserCreateWithoutEnrollmentsInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
     ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
     wishlists?: Prisma.WishlistCreateNestedManyWithoutUserInput;
@@ -747,6 +774,7 @@ export type UserUncheckedCreateWithoutEnrollmentsInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
     ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
     wishlists?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput;
@@ -781,6 +809,7 @@ export type UserUpdateWithoutEnrollmentsInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
     ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
     wishlists?: Prisma.WishlistUpdateManyWithoutUserNestedInput;
@@ -803,6 +832,7 @@ export type UserUncheckedUpdateWithoutEnrollmentsInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
     ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
     wishlists?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput;
@@ -824,6 +854,7 @@ export type UserCreateWithoutRatingsInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
     wishlists?: Prisma.WishlistCreateNestedManyWithoutUserInput;
@@ -846,6 +877,7 @@ export type UserUncheckedCreateWithoutRatingsInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
     wishlists?: Prisma.WishlistUncheckedCreateNestedManyWithoutUserInput;
@@ -880,6 +912,7 @@ export type UserUpdateWithoutRatingsInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
     wishlists?: Prisma.WishlistUpdateManyWithoutUserNestedInput;
@@ -902,6 +935,7 @@ export type UserUncheckedUpdateWithoutRatingsInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
     wishlists?: Prisma.WishlistUncheckedUpdateManyWithoutUserNestedInput;
@@ -923,6 +957,7 @@ export type UserCreateWithoutWishlistsInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
@@ -945,6 +980,7 @@ export type UserUncheckedCreateWithoutWishlistsInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
@@ -979,6 +1015,7 @@ export type UserUpdateWithoutWishlistsInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
@@ -1001,6 +1038,7 @@ export type UserUncheckedUpdateWithoutWishlistsInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
@@ -1022,6 +1060,7 @@ export type UserCreateWithoutTrainerRequestInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
@@ -1044,6 +1083,7 @@ export type UserUncheckedCreateWithoutTrainerRequestInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
@@ -1078,6 +1118,7 @@ export type UserUpdateWithoutTrainerRequestInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
@@ -1100,6 +1141,7 @@ export type UserUncheckedUpdateWithoutTrainerRequestInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
@@ -1121,6 +1163,7 @@ export type UserCreateWithoutDiscussionsInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
@@ -1143,6 +1186,7 @@ export type UserUncheckedCreateWithoutDiscussionsInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
@@ -1177,6 +1221,7 @@ export type UserUpdateWithoutDiscussionsInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
@@ -1199,6 +1244,7 @@ export type UserUncheckedUpdateWithoutDiscussionsInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
@@ -1220,6 +1266,7 @@ export type UserCreateWithoutRepliesInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
@@ -1242,6 +1289,7 @@ export type UserUncheckedCreateWithoutRepliesInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
@@ -1276,6 +1324,7 @@ export type UserUpdateWithoutRepliesInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
@@ -1298,6 +1347,7 @@ export type UserUncheckedUpdateWithoutRepliesInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
@@ -1319,6 +1369,7 @@ export type UserCreateWithoutLessonCompletionsInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
@@ -1341,6 +1392,7 @@ export type UserUncheckedCreateWithoutLessonCompletionsInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
@@ -1375,6 +1427,7 @@ export type UserUpdateWithoutLessonCompletionsInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
@@ -1397,6 +1450,7 @@ export type UserUncheckedUpdateWithoutLessonCompletionsInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
@@ -1418,6 +1472,7 @@ export type UserCreateWithoutOrdersInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
@@ -1440,6 +1495,7 @@ export type UserUncheckedCreateWithoutOrdersInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
@@ -1474,6 +1530,7 @@ export type UserUpdateWithoutOrdersInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
@@ -1496,6 +1553,7 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
@@ -1517,6 +1575,7 @@ export type UserCreateWithoutUserXpInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
@@ -1539,6 +1598,7 @@ export type UserUncheckedCreateWithoutUserXpInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
@@ -1573,6 +1633,7 @@ export type UserUpdateWithoutUserXpInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
@@ -1595,6 +1656,7 @@ export type UserUncheckedUpdateWithoutUserXpInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
@@ -1616,6 +1678,7 @@ export type UserCreateWithoutXpHistoryInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
@@ -1638,6 +1701,7 @@ export type UserUncheckedCreateWithoutXpHistoryInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
@@ -1672,6 +1736,7 @@ export type UserUpdateWithoutXpHistoryInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
@@ -1694,6 +1759,7 @@ export type UserUncheckedUpdateWithoutXpHistoryInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
@@ -1715,6 +1781,7 @@ export type UserCreateWithoutLoginStreakInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
@@ -1737,6 +1804,7 @@ export type UserUncheckedCreateWithoutLoginStreakInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
@@ -1771,6 +1839,7 @@ export type UserUpdateWithoutLoginStreakInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
@@ -1793,6 +1862,7 @@ export type UserUncheckedUpdateWithoutLoginStreakInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
@@ -1814,6 +1884,7 @@ export type UserCreateWithoutCouponsInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingCreateNestedManyWithoutUserInput;
@@ -1836,6 +1907,7 @@ export type UserUncheckedCreateWithoutCouponsInput = {
     avatar?: string | null;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    refreshToken?: string | null;
     courses?: Prisma.CourseUncheckedCreateNestedManyWithoutTrainerInput;
     enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput;
     ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput;
@@ -1870,6 +1942,7 @@ export type UserUpdateWithoutCouponsInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput;
@@ -1892,6 +1965,7 @@ export type UserUncheckedUpdateWithoutCouponsInput = {
     avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    refreshToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     courses?: Prisma.CourseUncheckedUpdateManyWithoutTrainerNestedInput;
     enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput;
     ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput;
@@ -2010,6 +2084,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
     avatar?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
+    refreshToken?: boolean;
     courses?: boolean | Prisma.User$coursesArgs<ExtArgs>;
     enrollments?: boolean | Prisma.User$enrollmentsArgs<ExtArgs>;
     ratings?: boolean | Prisma.User$ratingsArgs<ExtArgs>;
@@ -2034,6 +2109,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
     avatar?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
+    refreshToken?: boolean;
 }, ExtArgs["result"]["user"]>;
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
@@ -2044,6 +2120,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
     avatar?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
+    refreshToken?: boolean;
 }, ExtArgs["result"]["user"]>;
 export type UserSelectScalar = {
     id?: boolean;
@@ -2054,8 +2131,9 @@ export type UserSelectScalar = {
     avatar?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
+    refreshToken?: boolean;
 };
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "avatar" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>;
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "avatar" | "createdAt" | "updatedAt" | "refreshToken", ExtArgs["result"]["user"]>;
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     courses?: boolean | Prisma.User$coursesArgs<ExtArgs>;
     enrollments?: boolean | Prisma.User$enrollmentsArgs<ExtArgs>;
@@ -2100,6 +2178,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
         avatar: string | null;
         createdAt: Date;
         updatedAt: Date;
+        refreshToken: string | null;
     }, ExtArgs["result"]["user"]>;
     composites: {};
 };
@@ -2475,6 +2554,7 @@ export interface UserFieldRefs {
     readonly avatar: Prisma.FieldRef<"User", 'String'>;
     readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>;
     readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>;
+    readonly refreshToken: Prisma.FieldRef<"User", 'String'>;
 }
 /**
  * User findUnique
