@@ -2,7 +2,7 @@ import { Controller, Post, Body, HttpCode, HttpStatus, Get, Req, UseGuards } fro
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe';
-import { loginSchema, registerSchema } from './auth.validation';
+import { loginSchema, registerSchema, googleMobileLoginSchema } from './auth.validation';
 import { z } from 'zod';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { JwtRefreshGuard } from '../common/guards/jwt-refresh.guard';
@@ -34,6 +34,13 @@ export class AuthController {
   async googleAuthRedirect(@Req() req: any) {
     const result = await this.authService.googleLogin(req.user);
     return { data: result, message: 'Google login successful' };
+  }
+
+  @Post('google/mobile')
+  @HttpCode(HttpStatus.OK)
+  async googleAuthMobile(@Body(new ZodValidationPipe(googleMobileLoginSchema)) body: z.infer<typeof googleMobileLoginSchema>) {
+    const result = await this.authService.googleLoginMobile(body.idToken);
+    return { data: result, message: 'Google mobile login successful' };
   }
 
   @Post('refresh')

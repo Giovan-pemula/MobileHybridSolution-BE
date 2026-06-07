@@ -5,6 +5,8 @@ import { AuthRepository } from './auth.repository';
 import { signToken, signRefreshToken, verifyRefreshToken } from '../utils/jwt';
 import { z } from 'zod';
 import { loginSchema, registerSchema } from './auth.validation';
+import { OAuth2Client } from 'google-auth-library';
+import { env } from '../config/env';
 
 type LoginPayload = z.infer<typeof loginSchema>;
 type RegisterPayload = z.infer<typeof registerSchema>;
@@ -83,6 +85,31 @@ export class AuthService {
       ...tokens,
       user: { id: user!.id, name: user!.name, email: user!.email, role: user!.role },
     };
+  }
+
+  async googleLoginMobile(idToken: string) {
+    const client = new OAuth2Client(env.GOOGLE_CLIENT_ID);
+    try {
+      const ticket = await client.verifyIdToken({
+        idToken,
+        audience: env.GOOGLE_CLIENT_ID,
+      });
+      const payload = ticket.getPayload();
+      
+      if (!payload || !payload.email) {
+        throw new UnauthorizedException('Invalid Google idToken payload');
+      }
+
+      const reqUser = {
+        email: payload.email,
+        firstName: payload.given_name || '',
+        lastName: payload.family_name || '',
+      };
+
+      return this.googleLogin(reqUser);
+    } catch (error) {
+      throw new UnauthorizedException('Failed to verify Google idToken');
+    }
   }
 
   async refreshTokens(refreshToken: string) {
