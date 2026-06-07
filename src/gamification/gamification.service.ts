@@ -40,22 +40,22 @@ export class GamificationService {
     let discountPct = 0;
 
     // Probabilities:
-    // 2% Discount -> 30%
-    // 5% Discount -> 40%
-    // 8% Discount -> 15%
-    // 10% Discount -> 10%
-    // 20% Discount -> 5%
+    // 5% Discount -> 30%
+    // 10% Discount -> 40%
+    // 20% Discount -> 15%
+    // 25% Discount -> 10%
+    // 30% Discount -> 5%
     
     if (random < 30) {
-      discountPct = 2;
-    } else if (random < 70) { // 30 + 40
-      discountPct = 5;
-    } else if (random < 85) { // 70 + 15
-      discountPct = 8;
-    } else if (random < 95) { // 85 + 10
-      discountPct = 10;
-    } else { // remaining 5%
+      discountPct = 5;  
+    } else if (random < 70) {
+      discountPct = 10; 
+    } else if (random < 85) {
       discountPct = 20;
+    } else if (random < 95) {
+      discountPct = 25; 
+    } else {
+      discountPct = 30; 
     }
 
     const coupon = await this.gamificationRepository.createCoupon(userId, discountPct);
