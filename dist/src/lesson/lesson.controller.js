@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LessonController = void 0;
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const lesson_service_1 = require("./lesson.service");
 const jwt_auth_guard_1 = require("../common/guards/jwt-auth.guard");
 const roles_guard_1 = require("../common/guards/roles.guard");
@@ -22,6 +23,60 @@ const current_user_decorator_1 = require("../common/decorators/current-user.deco
 const zod_validation_pipe_1 = require("../common/pipes/zod-validation.pipe");
 const lesson_validation_1 = require("./lesson.validation");
 const zod_1 = require("zod");
+class CreateLessonDto {
+    title;
+    videoUrl;
+    content;
+    order;
+    duration;
+}
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'Apa itu NestJS?' }),
+    __metadata("design:type", String)
+], CreateLessonDto.prototype, "title", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'https://youtube.com/...', required: false }),
+    __metadata("design:type", String)
+], CreateLessonDto.prototype, "videoUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'Teks materi...', required: false }),
+    __metadata("design:type", String)
+], CreateLessonDto.prototype, "content", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 1, required: false }),
+    __metadata("design:type", Number)
+], CreateLessonDto.prototype, "order", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 300, description: 'Durasi dalam detik', required: false }),
+    __metadata("design:type", Number)
+], CreateLessonDto.prototype, "duration", void 0);
+class UpdateLessonDto {
+    title;
+    videoUrl;
+    content;
+    order;
+    duration;
+}
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'NestJS Module System', required: false }),
+    __metadata("design:type", String)
+], UpdateLessonDto.prototype, "title", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ required: false }),
+    __metadata("design:type", String)
+], UpdateLessonDto.prototype, "videoUrl", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ required: false }),
+    __metadata("design:type", String)
+], UpdateLessonDto.prototype, "content", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ required: false }),
+    __metadata("design:type", Number)
+], UpdateLessonDto.prototype, "order", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ required: false }),
+    __metadata("design:type", Number)
+], UpdateLessonDto.prototype, "duration", void 0);
 let LessonController = class LessonController {
     lessonService;
     constructor(lessonService) {
@@ -43,6 +98,11 @@ let LessonController = class LessonController {
 exports.LessonController = LessonController;
 __decorate([
     (0, common_1.Post)('sections/:sectionId/lessons'),
+    (0, swagger_1.ApiOperation)({ summary: '[TRAINER/ADMIN] Buat lesson baru di dalam section' }),
+    (0, swagger_1.ApiParam)({ name: 'sectionId', description: 'ID section' }),
+    (0, swagger_1.ApiBody)({ type: CreateLessonDto }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'Lesson berhasil dibuat.' }),
+    (0, swagger_1.ApiResponse)({ status: 403, description: 'Akses ditolak.' }),
     __param(0, (0, common_1.Param)('sectionId', common_1.ParseIntPipe)),
     __param(1, (0, current_user_decorator_1.CurrentUser)()),
     __param(2, (0, common_1.Body)(new zod_validation_pipe_1.ZodValidationPipe(lesson_validation_1.createLessonSchema))),
@@ -52,6 +112,10 @@ __decorate([
 ], LessonController.prototype, "createLesson", null);
 __decorate([
     (0, common_1.Patch)('lessons/:id'),
+    (0, swagger_1.ApiOperation)({ summary: '[TRAINER/ADMIN] Update lesson' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID lesson' }),
+    (0, swagger_1.ApiBody)({ type: UpdateLessonDto }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Lesson berhasil diperbarui.' }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, current_user_decorator_1.CurrentUser)()),
     __param(2, (0, common_1.Body)(new zod_validation_pipe_1.ZodValidationPipe(lesson_validation_1.updateLessonSchema))),
@@ -61,6 +125,9 @@ __decorate([
 ], LessonController.prototype, "updateLesson", null);
 __decorate([
     (0, common_1.Delete)('lessons/:id'),
+    (0, swagger_1.ApiOperation)({ summary: '[TRAINER/ADMIN] Hapus lesson' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID lesson' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Lesson berhasil dihapus.' }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
@@ -68,6 +135,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], LessonController.prototype, "deleteLesson", null);
 exports.LessonController = LessonController = __decorate([
+    (0, swagger_1.ApiTags)('Lessons'),
+    (0, swagger_1.ApiBearerAuth)('access-token'),
     (0, common_1.Controller)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, roles_decorator_1.Roles)('TRAINER', 'ADMIN'),

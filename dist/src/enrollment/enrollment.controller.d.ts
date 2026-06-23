@@ -11,8 +11,8 @@ export declare class EnrollmentController {
             completedLessons: number;
             course: {
                 category: {
-                    id: number;
                     name: string;
+                    id: number;
                     createdAt: Date;
                     slug: string;
                 };
@@ -20,16 +20,16 @@ export declare class EnrollmentController {
                     sections: number;
                 };
                 trainer: {
-                    id: number;
                     name: string;
+                    id: number;
                     avatar: string | null;
                 };
             } & {
                 id: number;
                 createdAt: Date;
                 updatedAt: Date;
-                title: string;
                 description: string | null;
+                title: string;
                 price: number;
                 isFree: boolean;
                 thumbnail: string | null;
@@ -40,8 +40,8 @@ export declare class EnrollmentController {
             };
             id: number;
             createdAt: Date;
-            courseId: number;
             userId: number;
+            courseId: number;
         }[];
         message: string;
     }>;
@@ -49,22 +49,22 @@ export declare class EnrollmentController {
         data: {
             course: {
                 category: {
-                    id: number;
                     name: string;
+                    id: number;
                     createdAt: Date;
                     slug: string;
                 };
                 trainer: {
-                    id: number;
                     name: string;
+                    id: number;
                     avatar: string | null;
                 };
             } & {
                 id: number;
                 createdAt: Date;
                 updatedAt: Date;
-                title: string;
                 description: string | null;
+                title: string;
                 price: number;
                 isFree: boolean;
                 thumbnail: string | null;
@@ -76,8 +76,8 @@ export declare class EnrollmentController {
         } & {
             id: number;
             createdAt: Date;
-            courseId: number;
             userId: number;
+            courseId: number;
             progress: number;
             completed: boolean;
         };

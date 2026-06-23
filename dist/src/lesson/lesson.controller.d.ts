@@ -7,11 +7,11 @@ export declare class LessonController {
     constructor(lessonService: LessonService);
     createLesson(sectionId: number, user: CurrentUserPayload, body: z.infer<typeof createLessonSchema>): Promise<{
         data: {
+            order: number;
             id: number;
             title: string;
-            order: number;
-            youtubeUrl: string | null;
             duration: number | null;
+            youtubeUrl: string | null;
             isPreview: boolean;
             sectionId: number;
         };
@@ -19,11 +19,11 @@ export declare class LessonController {
     }>;
     updateLesson(id: number, user: CurrentUserPayload, body: z.infer<typeof updateLessonSchema>): Promise<{
         data: {
+            order: number;
             id: number;
             title: string;
-            order: number;
-            youtubeUrl: string | null;
             duration: number | null;
+            youtubeUrl: string | null;
             isPreview: boolean;
             sectionId: number;
         };
@@ -31,11 +31,11 @@ export declare class LessonController {
     }>;
     deleteLesson(id: number, user: CurrentUserPayload): Promise<{
         data: {
+            order: number;
             id: number;
             title: string;
-            order: number;
-            youtubeUrl: string | null;
             duration: number | null;
+            youtubeUrl: string | null;
             isPreview: boolean;
             sectionId: number;
         };

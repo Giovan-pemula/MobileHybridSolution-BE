@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LessonCompletionController = void 0;
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const lesson_completion_service_1 = require("./lesson-completion.service");
 const jwt_auth_guard_1 = require("../common/guards/jwt-auth.guard");
 const current_user_decorator_1 = require("../common/decorators/current-user.decorator");
@@ -35,6 +36,13 @@ let LessonCompletionController = class LessonCompletionController {
 exports.LessonCompletionController = LessonCompletionController;
 __decorate([
     (0, common_1.Post)('lessons/:lessonId/complete'),
+    (0, swagger_1.ApiOperation)({
+        summary: 'Toggle status selesai pada sebuah lesson',
+        description: 'Jika lesson belum selesai → ditandai selesai. Jika sudah selesai → ditandai belum selesai (toggle). Juga memicu perhitungan poin gamifikasi.',
+    }),
+    (0, swagger_1.ApiParam)({ name: 'lessonId', description: 'ID lesson yang ingin di-toggle status selesainya' }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'Status lesson berhasil diperbarui.' }),
+    (0, swagger_1.ApiResponse)({ status: 401, description: 'Token tidak valid.' }),
     __param(0, (0, common_1.Param)('lessonId', common_1.ParseIntPipe)),
     __param(1, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
@@ -43,12 +51,20 @@ __decorate([
 ], LessonCompletionController.prototype, "toggleLessonCompletion", null);
 __decorate([
     (0, common_1.Get)('analytics/learning'),
+    (0, swagger_1.ApiOperation)({
+        summary: 'Ambil analitik belajar pengguna yang login',
+        description: 'Mengembalikan statistik belajar: total lesson selesai, total jam belajar, progress per kursus, dan streak belajar.',
+    }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Analitik belajar berhasil diambil.' }),
+    (0, swagger_1.ApiResponse)({ status: 401, description: 'Token tidak valid.' }),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], LessonCompletionController.prototype, "getLearningAnalytics", null);
 exports.LessonCompletionController = LessonCompletionController = __decorate([
+    (0, swagger_1.ApiTags)('Lesson Completion'),
+    (0, swagger_1.ApiBearerAuth)('access-token'),
     (0, common_1.Controller)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     __metadata("design:paramtypes", [lesson_completion_service_1.LessonCompletionService])

@@ -20,9 +20,9 @@ export declare class OrderRepository {
     } & {
         id: number;
         createdAt: Date;
+        total: number;
         status: OrderStatus;
         userId: number;
-        total: number;
         couponId: number | null;
         serviceFee: number;
         discountAmt: number;
@@ -31,21 +31,21 @@ export declare class OrderRepository {
         items: ({
             course: {
                 category: {
-                    id: number;
                     name: string;
+                    id: number;
                     createdAt: Date;
                     slug: string;
                 };
                 trainer: {
-                    id: number;
                     name: string;
+                    id: number;
                 };
             } & {
                 id: number;
                 createdAt: Date;
                 updatedAt: Date;
-                title: string;
                 description: string | null;
+                title: string;
                 price: number;
                 isFree: boolean;
                 thumbnail: string | null;
@@ -63,17 +63,17 @@ export declare class OrderRepository {
     } & {
         id: number;
         createdAt: Date;
+        total: number;
         status: OrderStatus;
         userId: number;
-        total: number;
         couponId: number | null;
         serviceFee: number;
         discountAmt: number;
     })[]>;
     findAllWithRevenue(): Promise<({
         user: {
-            id: number;
             name: string;
+            id: number;
             email: string;
         };
         items: ({
@@ -87,11 +87,11 @@ export declare class OrderRepository {
             revenue: {
                 id: number;
                 discountAmt: number;
-                orderItemId: number;
                 basePrice: number;
                 netRevenue: number;
                 trainerShare: number;
                 platformShare: number;
+                orderItemId: number;
             } | null;
         } & {
             id: number;
@@ -102,9 +102,9 @@ export declare class OrderRepository {
     } & {
         id: number;
         createdAt: Date;
+        total: number;
         status: OrderStatus;
         userId: number;
-        total: number;
         couponId: number | null;
         serviceFee: number;
         discountAmt: number;
@@ -136,9 +136,9 @@ export declare class OrderRepository {
     } & {
         id: number;
         createdAt: Date;
+        total: number;
         status: OrderStatus;
         userId: number;
-        total: number;
         couponId: number | null;
         serviceFee: number;
         discountAmt: number;
@@ -149,8 +149,8 @@ export declare class OrderRepository {
                 id: number;
                 createdAt: Date;
                 updatedAt: Date;
-                title: string;
                 description: string | null;
+                title: string;
                 price: number;
                 isFree: boolean;
                 thumbnail: string | null;
@@ -168,9 +168,9 @@ export declare class OrderRepository {
     } & {
         id: number;
         createdAt: Date;
+        total: number;
         status: OrderStatus;
         userId: number;
-        total: number;
         couponId: number | null;
         serviceFee: number;
         discountAmt: number;

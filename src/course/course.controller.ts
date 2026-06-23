@@ -4,6 +4,10 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Request } from 'express';
+import {
+  ApiTags, ApiBearerAuth, ApiOperation, ApiResponse,
+  ApiParam, ApiQuery, ApiConsumes, ApiBody, ApiProperty,
+} from '@nestjs/swagger';
 import { CourseService } from './course.service';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../common/guards/roles.guard';
@@ -14,11 +18,36 @@ import { createCourseSchema, updateCourseSchema } from './course.validation';
 import { imageUploadOptions } from '../common/multer/multer.config';
 import { z } from 'zod';
 
+class CreateCourseDto {
+  @ApiProperty({ example: 'Belajar NestJS dari Nol' })            title: string;
+  @ApiProperty({ example: 'Kursus NestJS lengkap untuk pemula.' }) description: string;
+  @ApiProperty({ example: 150000 })                               price: number;
+  @ApiProperty({ example: 1, description: 'ID kategori' })        categoryId: number;
+}
+
+class UpdateCourseDto {
+  @ApiProperty({ example: 'NestJS Advanced', required: false })                                    title?: string;
+  @ApiProperty({ example: 'Deskripsi baru.', required: false })                                   description?: string;
+  @ApiProperty({ example: 200000, required: false })                                              price?: number;
+  @ApiProperty({ example: 'PUBLISHED', enum: ['DRAFT','PUBLISHED','ARCHIVED'], required: false }) status?: string;
+}
+
+class UploadThumbnailDto {
+  @ApiProperty({ type: 'string', format: 'binary', description: 'File gambar thumbnail' }) thumbnail: any;
+}
+
+@ApiTags('Courses')
 @Controller('courses')
 export class CourseController {
   constructor(private readonly courseService: CourseService) {}
 
   @Get()
+  @ApiOperation({ summary: 'Ambil semua kursus publik (PUBLISHED)', description: 'Mendukung filter via query: search, categoryId, page, limit.' })
+  @ApiQuery({ name: 'search',     required: false, description: 'Cari berdasarkan judul kursus' })
+  @ApiQuery({ name: 'categoryId', required: false, description: 'Filter berdasarkan ID kategori' })
+  @ApiQuery({ name: 'page',       required: false, example: '1' })
+  @ApiQuery({ name: 'limit',      required: false, example: '10' })
+  @ApiResponse({ status: 200, description: 'Daftar kursus berhasil diambil.' })
   async getCourses(@Query() query: Record<string, any>) {
     const result = await this.courseService.getAllCourses(query);
     return { data: result, message: 'Courses fetched successfully' };
@@ -27,17 +56,24 @@ export class CourseController {
   @Get('manage')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('TRAINER', 'ADMIN')
+  @ApiBearerAuth('access-token')
+  @ApiOperation({ summary: '[TRAINER/ADMIN] Ambil kursus untuk dikelola', description: 'TRAINER hanya melihat kursus miliknya sendiri. ADMIN melihat semua kursus.' })
+  @ApiResponse({ status: 200, description: 'Kursus berhasil diambil.' })
+  @ApiResponse({ status: 403, description: 'Akses ditolak.' })
   async getCoursesForAdmin(
     @Query() query: Record<string, any>,
     @CurrentUser() user: CurrentUserPayload,
   ) {
-    // Trainer only sees their own courses; Admin sees all
     if (user.role === 'TRAINER') query = { ...query, trainerId: String(user.id) };
     const result = await this.courseService.getAllCoursesForAdmin(query);
     return { data: result, message: 'Courses fetched successfully' };
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Ambil detail kursus berdasarkan ID', description: 'Jika pengguna sudah login & terdaftar, konten lesson akan ikut dikembalikan.' })
+  @ApiParam({ name: 'id', description: 'ID kursus' })
+  @ApiResponse({ status: 200, description: 'Detail kursus berhasil diambil.' })
+  @ApiResponse({ status: 404, description: 'Kursus tidak ditemukan.' })
   async getCourse(
     @Param('id', ParseIntPipe) id: number,
     @Req() req: Request,
@@ -54,6 +90,11 @@ export class CourseController {
   @Post()
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('TRAINER', 'ADMIN')
+  @ApiBearerAuth('access-token')
+  @ApiOperation({ summary: '[TRAINER/ADMIN] Buat kursus baru' })
+  @ApiBody({ type: CreateCourseDto })
+  @ApiResponse({ status: 201, description: 'Kursus berhasil dibuat.' })
+  @ApiResponse({ status: 403, description: 'Akses ditolak.' })
   async createCourse(
     @CurrentUser() user: CurrentUserPayload,
     @Body(new ZodValidationPipe(createCourseSchema)) body: z.infer<typeof createCourseSchema>,
@@ -65,6 +106,11 @@ export class CourseController {
   @Patch(':id')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('TRAINER', 'ADMIN')
+  @ApiBearerAuth('access-token')
+  @ApiOperation({ summary: '[TRAINER/ADMIN] Update kursus', description: 'Ubah detail kursus atau ubah status (DRAFT → PUBLISHED → ARCHIVED).' })
+  @ApiParam({ name: 'id', description: 'ID kursus' })
+  @ApiBody({ type: UpdateCourseDto })
+  @ApiResponse({ status: 200, description: 'Kursus berhasil diperbarui.' })
   async updateCourse(
     @Param('id', ParseIntPipe) id: number,
     @CurrentUser() user: CurrentUserPayload,
@@ -78,6 +124,12 @@ export class CourseController {
   @Get(':courseId/students')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('TRAINER', 'ADMIN')
+  @ApiBearerAuth('access-token')
+  @ApiOperation({ summary: '[TRAINER/ADMIN] Ambil daftar siswa dalam kursus' })
+  @ApiParam({ name: 'courseId', description: 'ID kursus' })
+  @ApiQuery({ name: 'page',  required: false, example: '1' })
+  @ApiQuery({ name: 'limit', required: false, example: '10' })
+  @ApiResponse({ status: 200, description: 'Daftar siswa berhasil diambil.' })
   async getCourseStudents(
     @Param('courseId', ParseIntPipe) courseId: number,
     @Query() query: Record<string, any>,
@@ -91,6 +143,12 @@ export class CourseController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('TRAINER', 'ADMIN')
   @UseInterceptors(FileInterceptor('thumbnail', imageUploadOptions()))
+  @ApiBearerAuth('access-token')
+  @ApiOperation({ summary: '[TRAINER/ADMIN] Upload thumbnail kursus', description: 'Gunakan `multipart/form-data` dengan field bernama `thumbnail`.' })
+  @ApiParam({ name: 'id', description: 'ID kursus' })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({ type: UploadThumbnailDto })
+  @ApiResponse({ status: 200, description: 'Thumbnail berhasil diupload.' })
   async uploadThumbnail(
     @Param('id', ParseIntPipe) id: number,
     @CurrentUser() user: CurrentUserPayload,

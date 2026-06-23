@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderController = void 0;
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const order_service_1 = require("./order.service");
 const jwt_auth_guard_1 = require("../common/guards/jwt-auth.guard");
 const roles_guard_1 = require("../common/guards/roles.guard");
@@ -22,6 +23,18 @@ const current_user_decorator_1 = require("../common/decorators/current-user.deco
 const zod_validation_pipe_1 = require("../common/pipes/zod-validation.pipe");
 const order_validation_1 = require("./order.validation");
 const zod_1 = require("zod");
+class CreateOrderDto {
+    courseIds;
+    couponId;
+}
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: [1, 2], description: 'Array ID kursus yang ingin dibeli', type: [Number] }),
+    __metadata("design:type", Array)
+], CreateOrderDto.prototype, "courseIds", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'DISC10', description: 'Kode kupon diskon (opsional)', required: false }),
+    __metadata("design:type", String)
+], CreateOrderDto.prototype, "couponId", void 0);
 let OrderController = class OrderController {
     orderService;
     constructor(orderService) {
@@ -52,6 +65,10 @@ exports.OrderController = OrderController;
 __decorate([
     (0, common_1.Get)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, swagger_1.ApiBearerAuth)('access-token'),
+    (0, swagger_1.ApiOperation)({ summary: 'Ambil riwayat order pengguna yang login' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Daftar order berhasil diambil.' }),
+    (0, swagger_1.ApiResponse)({ status: 401, description: 'Token tidak valid.' }),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -61,6 +78,10 @@ __decorate([
     (0, common_1.Get)('admin/revenue'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, roles_decorator_1.Roles)('ADMIN'),
+    (0, swagger_1.ApiBearerAuth)('access-token'),
+    (0, swagger_1.ApiOperation)({ summary: '[ADMIN] Ambil semua order beserta data revenue' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Data revenue berhasil diambil.' }),
+    (0, swagger_1.ApiResponse)({ status: 403, description: 'Akses ditolak, bukan ADMIN.' }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
@@ -68,6 +89,11 @@ __decorate([
 __decorate([
     (0, common_1.Post)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, swagger_1.ApiBearerAuth)('access-token'),
+    (0, swagger_1.ApiOperation)({ summary: 'Buat order baru (checkout kursus berbayar)', description: 'Membuat pesanan untuk satu atau lebih kursus berbayar. Mengembalikan Midtrans payment token untuk proses pembayaran di frontend.' }),
+    (0, swagger_1.ApiBody)({ type: CreateOrderDto }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'Order berhasil dibuat, payment token dari Midtrans dikembalikan.' }),
+    (0, swagger_1.ApiResponse)({ status: 401, description: 'Token tidak valid.' }),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __param(1, (0, common_1.Body)(new zod_validation_pipe_1.ZodValidationPipe(order_validation_1.createOrderSchema))),
     __metadata("design:type", Function),
@@ -76,6 +102,8 @@ __decorate([
 ], OrderController.prototype, "createOrder", null);
 __decorate([
     (0, common_1.Post)('webhook'),
+    (0, swagger_1.ApiOperation)({ summary: 'Midtrans payment webhook', description: 'Endpoint untuk menerima notifikasi status pembayaran dari Midtrans secara otomatis. **Tidak memerlukan autentikasi.**' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Webhook berhasil diproses.' }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -84,6 +112,10 @@ __decorate([
 __decorate([
     (0, common_1.Get)(':id/payment-status'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, swagger_1.ApiBearerAuth)('access-token'),
+    (0, swagger_1.ApiOperation)({ summary: 'Cek & sinkronisasi status pembayaran order', description: 'Mensinkronkan status order dengan Midtrans dan mengembalikan status terbaru.' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID order' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Status pembayaran berhasil diambil.' }),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __param(1, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
@@ -91,6 +123,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], OrderController.prototype, "getPaymentStatus", null);
 exports.OrderController = OrderController = __decorate([
+    (0, swagger_1.ApiTags)('Orders'),
     (0, common_1.Controller)('orders'),
     __metadata("design:paramtypes", [order_service_1.OrderService])
 ], OrderController);

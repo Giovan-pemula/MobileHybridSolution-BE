@@ -8,4 +8,7 @@ export declare const registerSchema: z.ZodObject<{
     email: z.ZodString;
     password: z.ZodString;
 }, z.core.$strip>;
+export declare const googleMobileLoginSchema: z.ZodObject<{
+    idToken: z.ZodString;
+}, z.core.$strip>;
 //# sourceMappingURL=auth.validation.d.ts.map

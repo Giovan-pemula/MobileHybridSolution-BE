@@ -8,16 +8,16 @@ export declare class RatingController {
     getCourseRatings(courseId: number): Promise<{
         data: ({
             user: {
-                id: number;
                 name: string;
+                id: number;
                 avatar: string | null;
             };
         } & {
+            rating: number;
             id: number;
             createdAt: Date;
-            courseId: number;
             userId: number;
-            rating: number;
+            courseId: number;
             review: string | null;
         })[];
         message: string;
@@ -25,16 +25,16 @@ export declare class RatingController {
     createRating(courseId: number, user: CurrentUserPayload, body: z.infer<typeof createRatingSchema>): Promise<{
         data: {
             user: {
-                id: number;
                 name: string;
+                id: number;
                 avatar: string | null;
             };
         } & {
+            rating: number;
             id: number;
             createdAt: Date;
-            courseId: number;
             userId: number;
-            rating: number;
+            courseId: number;
             review: string | null;
         };
         message: string;
@@ -42,27 +42,27 @@ export declare class RatingController {
     updateRating(id: number, user: CurrentUserPayload, body: z.infer<typeof updateRatingSchema>): Promise<{
         data: {
             user: {
-                id: number;
                 name: string;
+                id: number;
                 avatar: string | null;
             };
         } & {
+            rating: number;
             id: number;
             createdAt: Date;
-            courseId: number;
             userId: number;
-            rating: number;
+            courseId: number;
             review: string | null;
         };
         message: string;
     }>;
     deleteRating(id: number, user: CurrentUserPayload): Promise<{
         data: {
+            rating: number;
             id: number;
             createdAt: Date;
-            courseId: number;
             userId: number;
-            rating: number;
+            courseId: number;
             review: string | null;
         };
         message: string;
