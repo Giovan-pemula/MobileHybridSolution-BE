@@ -13,7 +13,6 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new ResponseInterceptor());
 
-  // ─── Swagger ─────────────────────────────────────────────────────────────────
   const config = new DocumentBuilder()
     .setTitle('Brainup API')
     .setDescription(
@@ -58,8 +57,6 @@ async function bootstrap() {
     },
     customSiteTitle: 'Brainup API Docs',
   });
-  // ─────────────────────────────────────────────────────────────────────────────
-
   const port = process.env['PORT'] || 3000;
   await app.listen(port);
   console.log(`🚀 Server running  → http://localhost:${port}`);

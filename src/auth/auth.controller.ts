@@ -11,8 +11,6 @@ import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { JwtRefreshGuard } from '../common/guards/jwt-refresh.guard';
 import { CurrentUser, CurrentUserPayload } from '../common/decorators/current-user.decorator';
 
-// ─── DTO Classes (untuk Swagger body schema) ─────────────────────────────────
-
 class LoginDto {
   @ApiProperty({ example: 'user@example.com' }) email: string;
   @ApiProperty({ example: 'password123' })      password: string;
@@ -27,8 +25,6 @@ class RegisterDto {
 class GoogleMobileDto {
   @ApiProperty({ description: 'Google ID Token dari Flutter/React Native' }) idToken: string;
 }
-
-// ─────────────────────────────────────────────────────────────────────────────
 
 @ApiTags('Auth')
 @Controller('auth')

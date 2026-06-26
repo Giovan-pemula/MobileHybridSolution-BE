@@ -6,7 +6,7 @@ import {
   DeleteObjectCommand,
   PutObjectCommandInput,
 } from '@aws-sdk/client-s3';
-import * as crypto from 'crypto'; // <-- Menggantikan import 'uuid'
+import * as crypto from 'crypto';
 import * as path from 'path';
 
 @Injectable()
@@ -34,15 +34,8 @@ export class R2Service {
     });
   }
 
-  /**
-   * Upload a file buffer to Cloudflare R2.
-   * @param file      - The Multer file object (from memory storage)
-   * @param folder    - Destination folder inside the bucket (e.g. 'avatars', 'thumbnails')
-   * @returns         - Public URL of the uploaded file
-   */
   async uploadFile(file: Express.Multer.File, folder: string = 'uploads'): Promise<string> {
     const ext = path.extname(file.originalname).toLowerCase();
-    // Gunakan crypto.randomUUID() bawaan Node.js
     const key = `${folder}/${crypto.randomUUID()}${ext}`; 
 
     const params: PutObjectCommandInput = {
@@ -64,13 +57,8 @@ export class R2Service {
     }
   }
 
-  /**
-   * Delete a file from Cloudflare R2 by its public URL.
-   * @param fileUrl - The public URL of the file to delete
-   */
   async deleteFile(fileUrl: string): Promise<void> {
     try {
-      // Extract the key from the public URL
       const key = fileUrl.replace(`${this.publicUrl}/`, '');
 
       await this.s3.send(

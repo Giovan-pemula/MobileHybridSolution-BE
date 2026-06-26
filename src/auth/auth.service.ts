@@ -69,14 +69,13 @@ export class AuthService {
     let user = await this.authRepository.findByEmail(reqUser.email);
 
     if (!user) {
-      // Create new user if not exists
       const randomPassword = randomUUID();
       const hashedPassword = await bcrypt.hash(randomPassword, 10);
       user = (await this.authRepository.create({
         name: `${reqUser.firstName} ${reqUser.lastName}`.trim() || 'Google User',
         email: reqUser.email,
         password: hashedPassword,
-      })) as any; // Cast because create returns specific fields but it's enough for generateTokens
+      })) as any; 
     }
 
     const tokens = await this.generateTokens(user!);

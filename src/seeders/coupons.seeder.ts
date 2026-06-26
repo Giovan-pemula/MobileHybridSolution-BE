@@ -14,7 +14,6 @@ async function seedCoupons(prisma: PrismaClient, userIds: number[]) {
       continue;
     }
 
-    // Seed 2 coupons for each user: one unused (10% discount), one used (20% discount)
     const coupons = [
       { userId, discountPct: 10, isUsed: false },
       { userId, discountPct: 20, isUsed: true, usedAt: new Date() },
