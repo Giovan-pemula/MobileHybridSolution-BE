@@ -32,10 +32,7 @@ export class GamificationService {
       throw new BadRequestException(`Not enough XP to spin. Required: ${SPIN_COST}, Current: ${xpRecord.xp}`);
     }
 
-    // Deduct XP
-    await this.gamificationRepository.deductXp(userId, SPIN_COST, 'GACHA_SPIN');
-
-    // Roll gacha
+    // Roll gacha to determine discount
     const random = Math.random() * 100; // 0 to 100
     let discountPct = 0;
 
@@ -58,7 +55,18 @@ export class GamificationService {
       discountPct = 30; 
     }
 
-    const coupon = await this.gamificationRepository.createCoupon(userId, discountPct);
+    // Execute atomic transaction: Deduct XP, Record History, and Create Coupon safely
+    let coupon;
+    try {
+      coupon = await this.gamificationRepository.executeSpinTransaction(
+        userId, 
+        SPIN_COST, 
+        discountPct, 
+        'GACHA_SPIN'
+      );
+    } catch (error) {
+      throw new BadRequestException('Failed to process spin. Please ensure you have enough XP and try again.');
+    }
     return {
       message: `Congratulations! You won a ${discountPct}% discount coupon!`,
       coupon,
