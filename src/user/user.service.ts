@@ -56,7 +56,6 @@ export class UserService {
     const user = await this.userRepository.findById(id);
     if (!user) throw new NotFoundException('User not found');
 
-    // Delete old avatar from R2 if it exists
     if (user.avatar) {
       await this.r2Service.deleteFile(user.avatar).catch(() => null);
     }

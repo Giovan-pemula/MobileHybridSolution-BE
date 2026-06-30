@@ -14,12 +14,27 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DiscussionController = void 0;
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const discussion_service_1 = require("./discussion.service");
 const jwt_auth_guard_1 = require("../common/guards/jwt-auth.guard");
 const current_user_decorator_1 = require("../common/decorators/current-user.decorator");
 const zod_validation_pipe_1 = require("../common/pipes/zod-validation.pipe");
 const discussion_validation_1 = require("./discussion.validation");
 const zod_1 = require("zod");
+class CreateDiscussionDto {
+    comment;
+}
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'Apakah materi ini mencakup deployment ke AWS?' }),
+    __metadata("design:type", String)
+], CreateDiscussionDto.prototype, "comment", void 0);
+class CreateReplyDto {
+    comment;
+}
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'Iya, akan dibahas di section terakhir!' }),
+    __metadata("design:type", String)
+], CreateReplyDto.prototype, "comment", void 0);
 let DiscussionController = class DiscussionController {
     discussionService;
     constructor(discussionService) {
@@ -41,6 +56,9 @@ let DiscussionController = class DiscussionController {
 exports.DiscussionController = DiscussionController;
 __decorate([
     (0, common_1.Get)('lessons/:lessonId/discussions'),
+    (0, swagger_1.ApiOperation)({ summary: 'Ambil semua diskusi pada sebuah lesson' }),
+    (0, swagger_1.ApiParam)({ name: 'lessonId', description: 'ID lesson' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Diskusi berhasil diambil.' }),
     __param(0, (0, common_1.Param)('lessonId', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
@@ -49,6 +67,12 @@ __decorate([
 __decorate([
     (0, common_1.Post)('lessons/:lessonId/discussions'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, swagger_1.ApiBearerAuth)('access-token'),
+    (0, swagger_1.ApiOperation)({ summary: 'Buat komentar / diskusi baru pada sebuah lesson' }),
+    (0, swagger_1.ApiParam)({ name: 'lessonId', description: 'ID lesson' }),
+    (0, swagger_1.ApiBody)({ type: CreateDiscussionDto }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'Diskusi berhasil dibuat.' }),
+    (0, swagger_1.ApiResponse)({ status: 401, description: 'Token tidak valid.' }),
     __param(0, (0, common_1.Param)('lessonId', common_1.ParseIntPipe)),
     __param(1, (0, current_user_decorator_1.CurrentUser)()),
     __param(2, (0, common_1.Body)(new zod_validation_pipe_1.ZodValidationPipe(discussion_validation_1.createDiscussionSchema))),
@@ -59,6 +83,12 @@ __decorate([
 __decorate([
     (0, common_1.Post)('discussions/:id/replies'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, swagger_1.ApiBearerAuth)('access-token'),
+    (0, swagger_1.ApiOperation)({ summary: 'Balas sebuah diskusi', description: 'Membuat balasan (reply) pada diskusi tertentu.' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID diskusi yang ingin dibalas' }),
+    (0, swagger_1.ApiBody)({ type: CreateReplyDto }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'Balasan berhasil dibuat.' }),
+    (0, swagger_1.ApiResponse)({ status: 401, description: 'Token tidak valid.' }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, current_user_decorator_1.CurrentUser)()),
     __param(2, (0, common_1.Body)(new zod_validation_pipe_1.ZodValidationPipe(discussion_validation_1.createReplySchema))),
@@ -67,6 +97,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], DiscussionController.prototype, "createReply", null);
 exports.DiscussionController = DiscussionController = __decorate([
+    (0, swagger_1.ApiTags)('Discussions'),
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [discussion_service_1.DiscussionService])
 ], DiscussionController);

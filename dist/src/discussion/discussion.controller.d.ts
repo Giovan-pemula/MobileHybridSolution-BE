@@ -8,14 +8,14 @@ export declare class DiscussionController {
     getDiscussions(lessonId: number): Promise<{
         data: ({
             user: {
-                id: number;
                 name: string;
+                id: number;
                 avatar: string | null;
             };
             replies: ({
                 user: {
-                    id: number;
                     name: string;
+                    id: number;
                     avatar: string | null;
                 };
             } & {
@@ -29,32 +29,32 @@ export declare class DiscussionController {
             id: number;
             createdAt: Date;
             userId: number;
-            lessonId: number;
             comment: string;
+            lessonId: number;
         })[];
         message: string;
     }>;
     createDiscussion(lessonId: number, user: CurrentUserPayload, body: z.infer<typeof createDiscussionSchema>): Promise<{
         data: {
             user: {
-                id: number;
                 name: string;
+                id: number;
                 avatar: string | null;
             };
         } & {
             id: number;
             createdAt: Date;
             userId: number;
-            lessonId: number;
             comment: string;
+            lessonId: number;
         };
         message: string;
     }>;
     createReply(id: number, user: CurrentUserPayload, body: z.infer<typeof createReplySchema>): Promise<{
         data: {
             user: {
-                id: number;
                 name: string;
+                id: number;
                 avatar: string | null;
             };
         } & {

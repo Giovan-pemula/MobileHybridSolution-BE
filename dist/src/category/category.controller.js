@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CategoryController = void 0;
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const category_service_1 = require("./category.service");
 const jwt_auth_guard_1 = require("../common/guards/jwt-auth.guard");
 const roles_guard_1 = require("../common/guards/roles.guard");
@@ -21,6 +22,20 @@ const roles_decorator_1 = require("../common/decorators/roles.decorator");
 const zod_validation_pipe_1 = require("../common/pipes/zod-validation.pipe");
 const category_validation_1 = require("./category.validation");
 const zod_1 = require("zod");
+class CreateCategoryDto {
+    name;
+}
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'Programming' }),
+    __metadata("design:type", String)
+], CreateCategoryDto.prototype, "name", void 0);
+class UpdateCategoryDto {
+    name;
+}
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'Web Development', required: false }),
+    __metadata("design:type", String)
+], UpdateCategoryDto.prototype, "name", void 0);
 let CategoryController = class CategoryController {
     categoryService;
     constructor(categoryService) {
@@ -50,12 +65,18 @@ let CategoryController = class CategoryController {
 exports.CategoryController = CategoryController;
 __decorate([
     (0, common_1.Get)(),
+    (0, swagger_1.ApiOperation)({ summary: 'Ambil semua kategori kursus' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Daftar kategori berhasil diambil.' }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], CategoryController.prototype, "getCategories", null);
 __decorate([
     (0, common_1.Get)(':id'),
+    (0, swagger_1.ApiOperation)({ summary: 'Ambil kategori berdasarkan ID' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID kategori' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Kategori berhasil diambil.' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Kategori tidak ditemukan.' }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
@@ -65,6 +86,11 @@ __decorate([
     (0, common_1.Post)(),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, roles_decorator_1.Roles)('ADMIN'),
+    (0, swagger_1.ApiBearerAuth)('access-token'),
+    (0, swagger_1.ApiOperation)({ summary: '[ADMIN] Buat kategori baru' }),
+    (0, swagger_1.ApiBody)({ type: CreateCategoryDto }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'Kategori berhasil dibuat.' }),
+    (0, swagger_1.ApiResponse)({ status: 403, description: 'Akses ditolak, bukan ADMIN.' }),
     __param(0, (0, common_1.Body)(new zod_validation_pipe_1.ZodValidationPipe(category_validation_1.createCategorySchema))),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -74,6 +100,11 @@ __decorate([
     (0, common_1.Patch)(':id'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, roles_decorator_1.Roles)('ADMIN'),
+    (0, swagger_1.ApiBearerAuth)('access-token'),
+    (0, swagger_1.ApiOperation)({ summary: '[ADMIN] Update kategori' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID kategori' }),
+    (0, swagger_1.ApiBody)({ type: UpdateCategoryDto }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Kategori berhasil diperbarui.' }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)(new zod_validation_pipe_1.ZodValidationPipe(category_validation_1.updateCategorySchema))),
     __metadata("design:type", Function),
@@ -84,12 +115,17 @@ __decorate([
     (0, common_1.Delete)(':id'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, roles_decorator_1.Roles)('ADMIN'),
+    (0, swagger_1.ApiBearerAuth)('access-token'),
+    (0, swagger_1.ApiOperation)({ summary: '[ADMIN] Hapus kategori' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID kategori' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Kategori berhasil dihapus.' }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], CategoryController.prototype, "deleteCategory", null);
 exports.CategoryController = CategoryController = __decorate([
+    (0, swagger_1.ApiTags)('Categories'),
     (0, common_1.Controller)('categories'),
     __metadata("design:paramtypes", [category_service_1.CategoryService])
 ], CategoryController);

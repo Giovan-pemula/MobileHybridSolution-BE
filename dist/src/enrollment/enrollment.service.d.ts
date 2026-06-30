@@ -13,8 +13,8 @@ export declare class EnrollmentService {
         completedLessons: number;
         course: {
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };
@@ -22,16 +22,16 @@ export declare class EnrollmentService {
                 sections: number;
             };
             trainer: {
-                id: number;
                 name: string;
+                id: number;
                 avatar: string | null;
             };
         } & {
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            title: string;
             description: string | null;
+            title: string;
             price: number;
             isFree: boolean;
             thumbnail: string | null;
@@ -42,28 +42,28 @@ export declare class EnrollmentService {
         };
         id: number;
         createdAt: Date;
-        courseId: number;
         userId: number;
+        courseId: number;
     }[]>;
     enrollInCourse(userId: number, courseId: number): Promise<{
         course: {
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };
             trainer: {
-                id: number;
                 name: string;
+                id: number;
                 avatar: string | null;
             };
         } & {
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            title: string;
             description: string | null;
+            title: string;
             price: number;
             isFree: boolean;
             thumbnail: string | null;
@@ -75,8 +75,8 @@ export declare class EnrollmentService {
     } & {
         id: number;
         createdAt: Date;
-        courseId: number;
         userId: number;
+        courseId: number;
         progress: number;
         completed: boolean;
     }>;

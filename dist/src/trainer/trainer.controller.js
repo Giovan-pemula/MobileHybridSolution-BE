@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TrainerController = void 0;
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const trainer_service_1 = require("./trainer.service");
 const jwt_auth_guard_1 = require("../common/guards/jwt-auth.guard");
 const roles_guard_1 = require("../common/guards/roles.guard");
@@ -36,6 +37,12 @@ let TrainerController = class TrainerController {
 exports.TrainerController = TrainerController;
 __decorate([
     (0, common_1.Get)('dashboard'),
+    (0, swagger_1.ApiOperation)({
+        summary: '[TRAINER/ADMIN] Ambil ringkasan dashboard trainer',
+        description: 'Mengembalikan statistik kursus yang dimiliki trainer: jumlah kursus, total siswa, total pendapatan, dan rating rata-rata.',
+    }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Data dashboard berhasil diambil.' }),
+    (0, swagger_1.ApiResponse)({ status: 403, description: 'Akses ditolak, bukan TRAINER atau ADMIN.' }),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -43,12 +50,20 @@ __decorate([
 ], TrainerController.prototype, "getTrainerDashboard", null);
 __decorate([
     (0, common_1.Get)('sales'),
+    (0, swagger_1.ApiOperation)({
+        summary: '[TRAINER/ADMIN] Ambil laporan penjualan kursus trainer',
+        description: 'Mengembalikan riwayat transaksi dan data pendapatan dari seluruh kursus yang dimiliki trainer.',
+    }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Data penjualan berhasil diambil.' }),
+    (0, swagger_1.ApiResponse)({ status: 403, description: 'Akses ditolak.' }),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], TrainerController.prototype, "getTrainerSales", null);
 exports.TrainerController = TrainerController = __decorate([
+    (0, swagger_1.ApiTags)('Trainer'),
+    (0, swagger_1.ApiBearerAuth)('access-token'),
     (0, common_1.Controller)('trainer'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
     (0, roles_decorator_1.Roles)('TRAINER', 'ADMIN'),

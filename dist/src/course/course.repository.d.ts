@@ -15,8 +15,8 @@ export declare class CourseRepository {
         courses: {
             averageRating: number;
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };
@@ -25,16 +25,16 @@ export declare class CourseRepository {
                 ratings: number;
             };
             trainer: {
-                id: number;
                 name: string;
+                id: number;
                 email: string;
                 avatar: string | null;
             };
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            title: string;
             description: string | null;
+            title: string;
             price: number;
             isFree: boolean;
             thumbnail: string | null;
@@ -47,8 +47,8 @@ export declare class CourseRepository {
     }>;
     findById(id: number): Promise<({
         category: {
-            id: number;
             name: string;
+            id: number;
             createdAt: Date;
             slug: string;
         };
@@ -60,33 +60,33 @@ export declare class CourseRepository {
             ratings: number;
         };
         trainer: {
-            id: number;
             name: string;
+            id: number;
             email: string;
             avatar: string | null;
         };
         sections: ({
             lessons: {
+                order: number;
                 id: number;
                 title: string;
-                order: number;
-                youtubeUrl: string | null;
                 duration: number | null;
+                youtubeUrl: string | null;
                 isPreview: boolean;
                 sectionId: number;
             }[];
         } & {
+            order: number;
             id: number;
             title: string;
             courseId: number;
-            order: number;
         })[];
     } & {
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        title: string;
         description: string | null;
+        title: string;
         price: number;
         isFree: boolean;
         thumbnail: string | null;
@@ -107,14 +107,14 @@ export declare class CourseRepository {
         status?: string;
     }): Promise<{
         category: {
-            id: number;
             name: string;
+            id: number;
             createdAt: Date;
             slug: string;
         };
         trainer: {
-            id: number;
             name: string;
+            id: number;
             email: string;
             avatar: string | null;
         };
@@ -122,8 +122,8 @@ export declare class CourseRepository {
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        title: string;
         description: string | null;
+        title: string;
         price: number;
         isFree: boolean;
         thumbnail: string | null;
@@ -134,14 +134,14 @@ export declare class CourseRepository {
     }>;
     update(id: number, data: any): Promise<{
         category: {
-            id: number;
             name: string;
+            id: number;
             createdAt: Date;
             slug: string;
         };
         trainer: {
-            id: number;
             name: string;
+            id: number;
             email: string;
             avatar: string | null;
         };
@@ -149,8 +149,8 @@ export declare class CourseRepository {
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        title: string;
         description: string | null;
+        title: string;
         price: number;
         isFree: boolean;
         thumbnail: string | null;
@@ -163,8 +163,8 @@ export declare class CourseRepository {
         id: number;
         createdAt: Date;
         updatedAt: Date;
-        title: string;
         description: string | null;
+        title: string;
         price: number;
         isFree: boolean;
         thumbnail: string | null;
@@ -176,16 +176,16 @@ export declare class CourseRepository {
     getStudents(courseId: number, skip: number, limit: number): Promise<{
         enrollments: ({
             user: {
-                id: number;
                 name: string;
+                id: number;
                 email: string;
                 avatar: string | null;
             };
         } & {
             id: number;
             createdAt: Date;
-            courseId: number;
             userId: number;
+            courseId: number;
             progress: number;
             completed: boolean;
         })[];
