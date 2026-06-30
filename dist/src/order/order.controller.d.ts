@@ -10,14 +10,14 @@ export declare class OrderController {
             items: ({
                 course: {
                     category: {
-                        name: string;
                         id: number;
+                        name: string;
                         createdAt: Date;
                         slug: string;
                     };
                     trainer: {
-                        name: string;
                         id: number;
+                        name: string;
                     };
                 } & {
                     id: number;
@@ -42,9 +42,9 @@ export declare class OrderController {
         } & {
             id: number;
             createdAt: Date;
-            total: number;
             status: import("../../generated/prisma/enums").OrderStatus;
             userId: number;
+            total: number;
             couponId: number | null;
             serviceFee: number;
             discountAmt: number;
@@ -54,8 +54,8 @@ export declare class OrderController {
     getAllOrdersWithRevenue(): Promise<{
         data: ({
             user: {
-                name: string;
                 id: number;
+                name: string;
                 email: string;
             };
             items: ({
@@ -69,11 +69,11 @@ export declare class OrderController {
                 revenue: {
                     id: number;
                     discountAmt: number;
+                    orderItemId: number;
                     basePrice: number;
                     netRevenue: number;
                     trainerShare: number;
                     platformShare: number;
-                    orderItemId: number;
                 } | null;
             } & {
                 id: number;
@@ -84,9 +84,9 @@ export declare class OrderController {
         } & {
             id: number;
             createdAt: Date;
-            total: number;
             status: import("../../generated/prisma/enums").OrderStatus;
             userId: number;
+            total: number;
             couponId: number | null;
             serviceFee: number;
             discountAmt: number;
@@ -118,9 +118,9 @@ export declare class OrderController {
             })[];
             id: number;
             createdAt: Date;
-            total: number;
             status: import("../../generated/prisma/enums").OrderStatus;
             userId: number;
+            total: number;
             couponId: number | null;
             serviceFee: number;
             discountAmt: number;
@@ -148,9 +148,9 @@ export declare class OrderController {
             })[];
             id: number;
             createdAt: Date;
-            total: number;
             status: import("../../generated/prisma/enums").OrderStatus;
             userId: number;
+            total: number;
             couponId: number | null;
             serviceFee: number;
             discountAmt: number;
@@ -196,9 +196,9 @@ export declare class OrderController {
         } & {
             id: number;
             createdAt: Date;
-            total: number;
             status: import("../../generated/prisma/enums").OrderStatus;
             userId: number;
+            total: number;
             couponId: number | null;
             serviceFee: number;
             discountAmt: number;

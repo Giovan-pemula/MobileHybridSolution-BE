@@ -4,14 +4,14 @@ export declare class DiscussionService {
     constructor(discussionRepository: DiscussionRepository);
     getDiscussionsByLesson(lessonId: number): Promise<({
         user: {
-            name: string;
             id: number;
+            name: string;
             avatar: string | null;
         };
         replies: ({
             user: {
-                name: string;
                 id: number;
+                name: string;
                 avatar: string | null;
             };
         } & {
@@ -30,8 +30,8 @@ export declare class DiscussionService {
     })[]>;
     createDiscussion(lessonId: number, userId: number, comment: string): Promise<{
         user: {
-            name: string;
             id: number;
+            name: string;
             avatar: string | null;
         };
     } & {
@@ -43,8 +43,8 @@ export declare class DiscussionService {
     }>;
     createReply(discussionId: number, userId: number, comment: string): Promise<{
         user: {
-            name: string;
             id: number;
+            name: string;
             avatar: string | null;
         };
     } & {

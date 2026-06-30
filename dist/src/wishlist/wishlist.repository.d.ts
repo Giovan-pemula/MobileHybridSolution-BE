@@ -5,8 +5,8 @@ export declare class WishlistRepository {
     findByUser(userId: number): Promise<({
         course: {
             category: {
-                name: string;
                 id: number;
+                name: string;
                 createdAt: Date;
                 slug: string;
             };
@@ -14,8 +14,8 @@ export declare class WishlistRepository {
                 enrollments: number;
             };
             trainer: {
-                name: string;
                 id: number;
+                name: string;
                 avatar: string | null;
             };
         } & {
@@ -34,25 +34,25 @@ export declare class WishlistRepository {
         };
     } & {
         id: number;
-        userId: number;
         courseId: number;
+        userId: number;
     })[]>;
     findByUserAndCourse(userId: number, courseId: number): Promise<{
         id: number;
-        userId: number;
         courseId: number;
+        userId: number;
     } | null>;
     create(userId: number, courseId: number): Promise<{
         course: {
             category: {
-                name: string;
                 id: number;
+                name: string;
                 createdAt: Date;
                 slug: string;
             };
             trainer: {
-                name: string;
                 id: number;
+                name: string;
                 avatar: string | null;
             };
         } & {
@@ -71,13 +71,13 @@ export declare class WishlistRepository {
         };
     } & {
         id: number;
-        userId: number;
         courseId: number;
+        userId: number;
     }>;
     delete(userId: number, courseId: number): Promise<{
         id: number;
-        userId: number;
         courseId: number;
+        userId: number;
     }>;
 }
 //# sourceMappingURL=wishlist.repository.d.ts.map

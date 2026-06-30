@@ -7,8 +7,8 @@ export declare class CategoryService {
             courses: number;
         };
     } & {
-        name: string;
         id: number;
+        name: string;
         createdAt: Date;
         slug: string;
     })[]>;
@@ -17,30 +17,30 @@ export declare class CategoryService {
             courses: number;
         };
     } & {
-        name: string;
         id: number;
+        name: string;
         createdAt: Date;
         slug: string;
     }>;
     createCategory(data: {
         name: string;
     }): Promise<{
-        name: string;
         id: number;
+        name: string;
         createdAt: Date;
         slug: string;
     }>;
     updateCategory(id: number, data: {
         name?: string;
     }): Promise<{
-        name: string;
         id: number;
+        name: string;
         createdAt: Date;
         slug: string;
     }>;
     deleteCategory(id: number): Promise<{
-        name: string;
         id: number;
+        name: string;
         createdAt: Date;
         slug: string;
     }>;
