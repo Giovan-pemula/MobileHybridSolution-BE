@@ -4,14 +4,14 @@ export declare class DiscussionRepository {
     constructor(prisma: PrismaService);
     findByLessonId(lessonId: number): Promise<({
         user: {
-            id: number;
             name: string;
+            id: number;
             avatar: string | null;
         };
         replies: ({
             user: {
-                id: number;
                 name: string;
+                id: number;
                 avatar: string | null;
             };
         } & {
@@ -25,19 +25,19 @@ export declare class DiscussionRepository {
         id: number;
         createdAt: Date;
         userId: number;
-        lessonId: number;
         comment: string;
+        lessonId: number;
     })[]>;
     findById(id: number): Promise<({
         user: {
-            id: number;
             name: string;
+            id: number;
             avatar: string | null;
         };
         replies: ({
             user: {
-                id: number;
                 name: string;
+                id: number;
                 avatar: string | null;
             };
         } & {
@@ -51,8 +51,8 @@ export declare class DiscussionRepository {
         id: number;
         createdAt: Date;
         userId: number;
-        lessonId: number;
         comment: string;
+        lessonId: number;
     }) | null>;
     create(data: {
         lessonId: number;
@@ -60,16 +60,16 @@ export declare class DiscussionRepository {
         comment: string;
     }): Promise<{
         user: {
-            id: number;
             name: string;
+            id: number;
             avatar: string | null;
         };
     } & {
         id: number;
         createdAt: Date;
         userId: number;
-        lessonId: number;
         comment: string;
+        lessonId: number;
     }>;
     createReply(data: {
         discussionId: number;
@@ -77,8 +77,8 @@ export declare class DiscussionRepository {
         comment: string;
     }): Promise<{
         user: {
-            id: number;
             name: string;
+            id: number;
             avatar: string | null;
         };
     } & {

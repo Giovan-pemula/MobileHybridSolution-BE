@@ -8,7 +8,6 @@ async function seedGamification(prisma: PrismaClient, userIds: number[]) {
   let couponCount = 0;
 
   for (const userId of userIds) {
-    // 1. Seed UserXp (e.g., 250 XP so they can spin gacha)
     await prisma.userXp.upsert({
       where: { userId },
       update: { xp: 250 },
@@ -16,7 +15,6 @@ async function seedGamification(prisma: PrismaClient, userIds: number[]) {
     });
     xpCount++;
 
-    // Seed some initial XP history to make it realistic
     const existingHistory = await prisma.xpHistory.findFirst({ where: { userId } });
     if (!existingHistory) {
       await prisma.xpHistory.createMany({
@@ -27,7 +25,6 @@ async function seedGamification(prisma: PrismaClient, userIds: number[]) {
       });
     }
 
-    // 2. Seed UserLoginStreak (e.g., 3 days streak)
     await prisma.userLoginStreak.upsert({
       where: { userId },
       update: {
@@ -42,7 +39,6 @@ async function seedGamification(prisma: PrismaClient, userIds: number[]) {
     });
     streakCount++;
 
-    // 3. Seed Coupons (one unused, one used)
     const existingCoupon = await prisma.coupon.findFirst({ where: { userId } });
     if (!existingCoupon) {
       const coupons = [

@@ -4,16 +4,16 @@ export declare class RatingService {
     constructor(ratingRepository: RatingRepository);
     getCourseRatings(courseId: number): Promise<({
         user: {
-            id: number;
             name: string;
+            id: number;
             avatar: string | null;
         };
     } & {
+        rating: number;
         id: number;
         createdAt: Date;
-        courseId: number;
         userId: number;
-        rating: number;
+        courseId: number;
         review: string | null;
     })[]>;
     createRating(userId: number, courseId: number, data: {
@@ -21,16 +21,16 @@ export declare class RatingService {
         review?: string;
     }): Promise<{
         user: {
-            id: number;
             name: string;
+            id: number;
             avatar: string | null;
         };
     } & {
+        rating: number;
         id: number;
         createdAt: Date;
-        courseId: number;
         userId: number;
-        rating: number;
+        courseId: number;
         review: string | null;
     }>;
     updateRating(id: number, userId: number, data: {
@@ -38,24 +38,24 @@ export declare class RatingService {
         review?: string;
     }): Promise<{
         user: {
-            id: number;
             name: string;
+            id: number;
             avatar: string | null;
         };
     } & {
+        rating: number;
         id: number;
         createdAt: Date;
-        courseId: number;
         userId: number;
-        rating: number;
+        courseId: number;
         review: string | null;
     }>;
     deleteRating(id: number, userId: number): Promise<{
+        rating: number;
         id: number;
         createdAt: Date;
-        courseId: number;
         userId: number;
-        rating: number;
+        courseId: number;
         review: string | null;
     }>;
 }

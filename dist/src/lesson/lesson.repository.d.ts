@@ -8,8 +8,8 @@ export declare class LessonRepository {
                 id: number;
                 createdAt: Date;
                 updatedAt: Date;
-                title: string;
                 description: string | null;
+                title: string;
                 price: number;
                 isFree: boolean;
                 thumbnail: string | null;
@@ -19,17 +19,17 @@ export declare class LessonRepository {
                 trainerId: number;
             };
         } & {
+            order: number;
             id: number;
             title: string;
             courseId: number;
-            order: number;
         };
     } & {
+        order: number;
         id: number;
         title: string;
-        order: number;
-        youtubeUrl: string | null;
         duration: number | null;
+        youtubeUrl: string | null;
         isPreview: boolean;
         sectionId: number;
     }) | null>;
@@ -41,11 +41,11 @@ export declare class LessonRepository {
         sectionId: number;
         order?: number;
     }): Promise<{
+        order: number;
         id: number;
         title: string;
-        order: number;
-        youtubeUrl: string | null;
         duration: number | null;
+        youtubeUrl: string | null;
         isPreview: boolean;
         sectionId: number;
     }>;
@@ -56,20 +56,20 @@ export declare class LessonRepository {
         isPreview?: boolean;
         order?: number;
     }): Promise<{
+        order: number;
         id: number;
         title: string;
-        order: number;
-        youtubeUrl: string | null;
         duration: number | null;
+        youtubeUrl: string | null;
         isPreview: boolean;
         sectionId: number;
     }>;
     delete(id: number): Promise<{
+        order: number;
         id: number;
         title: string;
-        order: number;
-        youtubeUrl: string | null;
         duration: number | null;
+        youtubeUrl: string | null;
         isPreview: boolean;
         sectionId: number;
     }>;

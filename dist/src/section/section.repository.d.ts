@@ -4,27 +4,27 @@ export declare class SectionRepository {
     constructor(prisma: PrismaService);
     findByCourseId(courseId: number): Promise<({
         lessons: {
+            order: number;
             id: number;
             title: string;
-            order: number;
-            youtubeUrl: string | null;
             duration: number | null;
+            youtubeUrl: string | null;
             isPreview: boolean;
             sectionId: number;
         }[];
     } & {
+        order: number;
         id: number;
         title: string;
         courseId: number;
-        order: number;
     })[]>;
     findById(id: number): Promise<({
         course: {
             id: number;
             createdAt: Date;
             updatedAt: Date;
-            title: string;
             description: string | null;
+            title: string;
             price: number;
             isFree: boolean;
             thumbnail: string | null;
@@ -34,44 +34,44 @@ export declare class SectionRepository {
             trainerId: number;
         };
         lessons: {
+            order: number;
             id: number;
             title: string;
-            order: number;
-            youtubeUrl: string | null;
             duration: number | null;
+            youtubeUrl: string | null;
             isPreview: boolean;
             sectionId: number;
         }[];
     } & {
+        order: number;
         id: number;
         title: string;
         courseId: number;
-        order: number;
     }) | null>;
     create(data: {
         title: string;
         courseId: number;
         order?: number;
     }): Promise<{
+        order: number;
         id: number;
         title: string;
         courseId: number;
-        order: number;
     }>;
     update(id: number, data: {
         title?: string;
         order?: number;
     }): Promise<{
+        order: number;
         id: number;
         title: string;
         courseId: number;
-        order: number;
     }>;
     delete(id: number): Promise<{
+        order: number;
         id: number;
         title: string;
         courseId: number;
-        order: number;
     }>;
 }
 //# sourceMappingURL=section.repository.d.ts.map

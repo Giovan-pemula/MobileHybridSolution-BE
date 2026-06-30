@@ -11,8 +11,8 @@ export declare class UserController {
     }): Promise<{
         data: {
             data: {
-                id: number;
                 name: string;
+                id: number;
                 email: string;
                 role: import("../../generated/prisma/enums").UserRole;
                 avatar: string | null;
@@ -30,8 +30,8 @@ export declare class UserController {
     }>;
     getProfile(currentUser: CurrentUserPayload): Promise<{
         data: {
-            id: number;
             name: string;
+            id: number;
             email: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
@@ -42,8 +42,8 @@ export declare class UserController {
     }>;
     updateProfile(body: z.infer<typeof updateProfileSchema>, currentUser: CurrentUserPayload): Promise<{
         data: {
-            id: number;
             name: string;
+            id: number;
             email: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
@@ -54,8 +54,8 @@ export declare class UserController {
     }>;
     uploadProfileAvatar(currentUser: CurrentUserPayload, file: Express.Multer.File): Promise<{
         data: {
-            id: number;
             name: string;
+            id: number;
             email: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
@@ -66,8 +66,8 @@ export declare class UserController {
     }>;
     getPublicProfile(id: number, currentUser: CurrentUserPayload): Promise<{
         data: {
-            id: number;
             name: string;
+            id: number;
             email: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
@@ -78,8 +78,8 @@ export declare class UserController {
     }>;
     updateUser(id: number, body: z.infer<typeof updateUserSchema>): Promise<{
         data: {
-            id: number;
             name: string;
+            id: number;
             email: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
@@ -90,8 +90,8 @@ export declare class UserController {
     }>;
     uploadAvatar(id: number, file: Express.Multer.File): Promise<{
         data: {
-            id: number;
             name: string;
+            id: number;
             email: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
@@ -102,8 +102,8 @@ export declare class UserController {
     }>;
     deleteUser(id: number): Promise<{
         data: {
-            id: number;
             name: string;
+            id: number;
             email: string;
             password: string;
             role: import("../../generated/prisma/enums").UserRole;
