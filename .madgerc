@@ -1,0 +1,14 @@
+{
+  "fileExtensions": ["ts"],
+  "excludeRegExp": [
+    "\\.spec\\.ts$",
+    "\\.test\\.ts$",
+    "^node_modules",
+    "^dist",
+    "^generated"
+  ],
+  "showCheckstyle": false,
+  "layout": "dot",
+  "graphVizPath": null,
+  "dependencyFilter": null
+}

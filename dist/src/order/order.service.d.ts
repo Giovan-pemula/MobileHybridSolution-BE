@@ -155,6 +155,15 @@ export declare class OrderService {
     handleWebhook(payload: any): Promise<{
         message: string;
     }>;
+    previewOrder(userId: number, courseIds: number[], couponId?: number): Promise<{
+        subtotal: number;
+        discountAmt: number;
+        serviceFee: number;
+        total: number;
+    }>;
+    bypassPayment(orderId: number, userId: number): Promise<{
+        message: string;
+    }>;
     syncPaymentStatus(userId: number, orderId: number): Promise<{
         items: ({
             course: {

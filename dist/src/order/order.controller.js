@@ -52,6 +52,14 @@ let OrderController = class OrderController {
         const order = await this.orderService.createOrder(user.id, body.courseIds, body.couponId);
         return { data: order, message: 'Order created successfully' };
     }
+    async previewOrder(user, body) {
+        const summary = await this.orderService.previewOrder(user.id, body.courseIds, body.couponId);
+        return { data: summary, message: 'Order preview calculated successfully' };
+    }
+    async bypassPayment(user, orderId) {
+        const result = await this.orderService.bypassPayment(orderId, user.id);
+        return { data: result, message: 'Order successfully bypassed and paid' };
+    }
     async handleWebhook(payload) {
         const result = await this.orderService.handleWebhook(payload);
         return { data: result, message: 'Webhook processed successfully' };
@@ -100,6 +108,24 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], OrderController.prototype, "createOrder", null);
+__decorate([
+    (0, common_1.Post)('preview'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    __param(0, (0, current_user_decorator_1.CurrentUser)()),
+    __param(1, (0, common_1.Body)(new zod_validation_pipe_1.ZodValidationPipe(order_validation_1.createOrderSchema))),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], OrderController.prototype, "previewOrder", null);
+__decorate([
+    (0, common_1.Post)(':id/bypass-pay'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    __param(0, (0, current_user_decorator_1.CurrentUser)()),
+    __param(1, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Number]),
+    __metadata("design:returntype", Promise)
+], OrderController.prototype, "bypassPayment", null);
 __decorate([
     (0, common_1.Post)('webhook'),
     (0, swagger_1.ApiOperation)({ summary: 'Midtrans payment webhook', description: 'Endpoint untuk menerima notifikasi status pembayaran dari Midtrans secara otomatis. **Tidak memerlukan autentikasi.**' }),

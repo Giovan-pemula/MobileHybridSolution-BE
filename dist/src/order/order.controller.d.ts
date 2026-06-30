@@ -157,6 +157,21 @@ export declare class OrderController {
         };
         message: string;
     }>;
+    previewOrder(user: CurrentUserPayload, body: z.infer<typeof createOrderSchema>): Promise<{
+        data: {
+            subtotal: number;
+            discountAmt: number;
+            serviceFee: number;
+            total: number;
+        };
+        message: string;
+    }>;
+    bypassPayment(user: CurrentUserPayload, orderId: number): Promise<{
+        data: {
+            message: string;
+        };
+        message: string;
+    }>;
     handleWebhook(payload: any): Promise<{
         data: {
             message: string;
