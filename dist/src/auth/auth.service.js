@@ -48,6 +48,8 @@ const bcrypt = __importStar(require("bcryptjs"));
 const crypto_1 = require("crypto");
 const auth_repository_1 = require("./auth.repository");
 const jwt_1 = require("../utils/jwt");
+const google_auth_library_1 = require("google-auth-library");
+const env_1 = require("../config/env");
 let AuthService = class AuthService {
     authRepository;
     constructor(authRepository) {
@@ -110,6 +112,28 @@ let AuthService = class AuthService {
             ...tokens,
             user: { id: user.id, name: user.name, email: user.email, role: user.role },
         };
+    }
+    async googleLoginMobile(idToken) {
+        const client = new google_auth_library_1.OAuth2Client(env_1.env.GOOGLE_CLIENT_ID);
+        try {
+            const ticket = await client.verifyIdToken({
+                idToken,
+                audience: env_1.env.GOOGLE_CLIENT_ID,
+            });
+            const payload = ticket.getPayload();
+            if (!payload || !payload.email) {
+                throw new common_1.UnauthorizedException('Invalid Google idToken payload');
+            }
+            const reqUser = {
+                email: payload.email,
+                firstName: payload.given_name || '',
+                lastName: payload.family_name || '',
+            };
+            return this.googleLogin(reqUser);
+        }
+        catch (error) {
+            throw new common_1.UnauthorizedException('Failed to verify Google idToken');
+        }
     }
     async refreshTokens(refreshToken) {
         try {

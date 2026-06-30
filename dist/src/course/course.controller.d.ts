@@ -11,8 +11,8 @@ export declare class CourseController {
             data: {
                 averageRating: number;
                 category: {
-                    id: number;
                     name: string;
+                    id: number;
                     createdAt: Date;
                     slug: string;
                 };
@@ -21,8 +21,8 @@ export declare class CourseController {
                     ratings: number;
                 };
                 trainer: {
-                    id: number;
                     name: string;
+                    id: number;
                     email: string;
                     avatar: string | null;
                 };
@@ -53,8 +53,8 @@ export declare class CourseController {
             data: {
                 averageRating: number;
                 category: {
-                    id: number;
                     name: string;
+                    id: number;
                     createdAt: Date;
                     slug: string;
                 };
@@ -63,8 +63,8 @@ export declare class CourseController {
                     ratings: number;
                 };
                 trainer: {
-                    id: number;
                     name: string;
+                    id: number;
                     email: string;
                     avatar: string | null;
                 };
@@ -94,8 +94,8 @@ export declare class CourseController {
         data: {
             averageRating: number;
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };
@@ -104,26 +104,26 @@ export declare class CourseController {
                 ratings: number;
             };
             trainer: {
-                id: number;
                 name: string;
+                id: number;
                 email: string;
                 avatar: string | null;
             };
             sections: ({
                 lessons: {
+                    order: number;
                     id: number;
                     title: string;
-                    order: number;
                     youtubeUrl: string | null;
                     duration: number | null;
                     isPreview: boolean;
                     sectionId: number;
                 }[];
             } & {
+                order: number;
                 id: number;
                 title: string;
                 courseId: number;
-                order: number;
             })[];
             id: number;
             createdAt: Date;
@@ -143,14 +143,14 @@ export declare class CourseController {
     createCourse(user: CurrentUserPayload, body: z.infer<typeof createCourseSchema>): Promise<{
         data: {
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };
             trainer: {
-                id: number;
                 name: string;
+                id: number;
                 email: string;
                 avatar: string | null;
             };
@@ -173,14 +173,14 @@ export declare class CourseController {
     updateCourse(id: number, user: CurrentUserPayload, body: z.infer<typeof updateCourseSchema>): Promise<{
         data: {
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };
             trainer: {
-                id: number;
                 name: string;
+                id: number;
                 email: string;
                 avatar: string | null;
             };
@@ -204,16 +204,16 @@ export declare class CourseController {
         data: {
             data: ({
                 user: {
-                    id: number;
                     name: string;
+                    id: number;
                     email: string;
                     avatar: string | null;
                 };
             } & {
                 id: number;
                 createdAt: Date;
-                courseId: number;
                 userId: number;
+                courseId: number;
                 progress: number;
                 completed: boolean;
             })[];
@@ -229,14 +229,14 @@ export declare class CourseController {
     uploadThumbnail(id: number, user: CurrentUserPayload, file: Express.Multer.File): Promise<{
         data: {
             category: {
-                id: number;
                 name: string;
+                id: number;
                 createdAt: Date;
                 slug: string;
             };
             trainer: {
-                id: number;
                 name: string;
+                id: number;
                 email: string;
                 avatar: string | null;
             };

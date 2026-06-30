@@ -8,46 +8,46 @@ export declare class SectionController {
     getSections(courseId: number): Promise<{
         data: ({
             lessons: {
+                order: number;
                 id: number;
                 title: string;
-                order: number;
                 youtubeUrl: string | null;
                 duration: number | null;
                 isPreview: boolean;
                 sectionId: number;
             }[];
         } & {
+            order: number;
             id: number;
             title: string;
             courseId: number;
-            order: number;
         })[];
         message: string;
     }>;
     createSection(courseId: number, user: CurrentUserPayload, body: z.infer<typeof createSectionSchema>): Promise<{
         data: {
+            order: number;
             id: number;
             title: string;
             courseId: number;
-            order: number;
         };
         message: string;
     }>;
     updateSection(id: number, user: CurrentUserPayload, body: z.infer<typeof updateSectionSchema>): Promise<{
         data: {
+            order: number;
             id: number;
             title: string;
             courseId: number;
-            order: number;
         };
         message: string;
     }>;
     deleteSection(id: number, user: CurrentUserPayload): Promise<{
         data: {
+            order: number;
             id: number;
             title: string;
             courseId: number;
-            order: number;
         };
         message: string;
     }>;

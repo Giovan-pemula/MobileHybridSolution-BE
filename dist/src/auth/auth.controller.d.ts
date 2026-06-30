@@ -1,5 +1,5 @@
 import { AuthService } from './auth.service';
-import { loginSchema, registerSchema } from './auth.validation';
+import { loginSchema, registerSchema, googleMobileLoginSchema } from './auth.validation';
 import { z } from 'zod';
 import { CurrentUserPayload } from '../common/decorators/current-user.decorator';
 export declare class AuthController {
@@ -33,6 +33,19 @@ export declare class AuthController {
     }>;
     googleAuth(): Promise<void>;
     googleAuthRedirect(req: any): Promise<{
+        data: {
+            user: {
+                id: number;
+                name: string;
+                email: string;
+                role: import("../../generated/prisma/enums").UserRole;
+            };
+            accessToken: string;
+            refreshToken: string;
+        };
+        message: string;
+    }>;
+    googleAuthMobile(body: z.infer<typeof googleMobileLoginSchema>): Promise<{
         data: {
             user: {
                 id: number;

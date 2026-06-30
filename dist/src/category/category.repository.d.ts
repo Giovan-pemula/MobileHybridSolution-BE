@@ -7,8 +7,8 @@ export declare class CategoryRepository {
             courses: number;
         };
     } & {
-        id: number;
         name: string;
+        id: number;
         createdAt: Date;
         slug: string;
     })[]>;
@@ -17,14 +17,14 @@ export declare class CategoryRepository {
             courses: number;
         };
     } & {
-        id: number;
         name: string;
+        id: number;
         createdAt: Date;
         slug: string;
     }) | null>;
     findBySlug(slug: string): Promise<{
-        id: number;
         name: string;
+        id: number;
         createdAt: Date;
         slug: string;
     } | null>;
@@ -32,8 +32,8 @@ export declare class CategoryRepository {
         name: string;
         slug: string;
     }): Promise<{
-        id: number;
         name: string;
+        id: number;
         createdAt: Date;
         slug: string;
     }>;
@@ -41,14 +41,14 @@ export declare class CategoryRepository {
         name?: string;
         slug?: string;
     }): Promise<{
-        id: number;
         name: string;
+        id: number;
         createdAt: Date;
         slug: string;
     }>;
     delete(id: number): Promise<{
-        id: number;
         name: string;
+        id: number;
         createdAt: Date;
         slug: string;
     }>;

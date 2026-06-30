@@ -8,8 +8,8 @@ export declare class TrainerRequestController {
     submitTrainerRequest(user: CurrentUserPayload, body: z.infer<typeof trainerRequestSchema>, cvFile: Express.Multer.File): Promise<{
         data: {
             user: {
-                id: number;
                 name: string;
+                id: number;
                 email: string;
             };
         } & {
@@ -26,8 +26,8 @@ export declare class TrainerRequestController {
     getTrainerRequests(status?: string): Promise<{
         data: ({
             user: {
-                id: number;
                 name: string;
+                id: number;
                 email: string;
                 role: import("../../generated/prisma/enums").UserRole;
                 avatar: string | null;
@@ -46,8 +46,8 @@ export declare class TrainerRequestController {
     verifyTrainer(id: number, body: z.infer<typeof verifyTrainerSchema>): Promise<{
         data: {
             user: {
-                id: number;
                 name: string;
+                id: number;
                 email: string;
                 role: import("../../generated/prisma/enums").UserRole;
             };

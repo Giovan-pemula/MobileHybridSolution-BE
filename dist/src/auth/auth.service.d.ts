@@ -37,6 +37,16 @@ export declare class AuthService {
         accessToken: string;
         refreshToken: string;
     }>;
+    googleLoginMobile(idToken: string): Promise<{
+        user: {
+            id: number;
+            name: string;
+            email: string;
+            role: import("../../generated/prisma/enums").UserRole;
+        };
+        accessToken: string;
+        refreshToken: string;
+    }>;
     refreshTokens(refreshToken: string): Promise<{
         user: {
             id: number;

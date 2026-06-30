@@ -13,14 +13,14 @@ export declare class OrderService {
         items: ({
             course: {
                 category: {
-                    id: number;
                     name: string;
+                    id: number;
                     createdAt: Date;
                     slug: string;
                 };
                 trainer: {
-                    id: number;
                     name: string;
+                    id: number;
                 };
             } & {
                 id: number;
@@ -45,17 +45,17 @@ export declare class OrderService {
     } & {
         id: number;
         createdAt: Date;
+        total: number;
         status: OrderStatus;
         userId: number;
-        total: number;
         couponId: number | null;
         serviceFee: number;
         discountAmt: number;
     })[]>;
     getAllOrdersForAdmin(): Promise<({
         user: {
-            id: number;
             name: string;
+            id: number;
             email: string;
         };
         items: ({
@@ -69,11 +69,11 @@ export declare class OrderService {
             revenue: {
                 id: number;
                 discountAmt: number;
-                orderItemId: number;
                 basePrice: number;
                 netRevenue: number;
                 trainerShare: number;
                 platformShare: number;
+                orderItemId: number;
             } | null;
         } & {
             id: number;
@@ -84,9 +84,9 @@ export declare class OrderService {
     } & {
         id: number;
         createdAt: Date;
+        total: number;
         status: OrderStatus;
         userId: number;
-        total: number;
         couponId: number | null;
         serviceFee: number;
         discountAmt: number;
@@ -115,9 +115,9 @@ export declare class OrderService {
         })[];
         id: number;
         createdAt: Date;
+        total: number;
         status: OrderStatus;
         userId: number;
-        total: number;
         couponId: number | null;
         serviceFee: number;
         discountAmt: number;
@@ -145,14 +145,23 @@ export declare class OrderService {
         })[];
         id: number;
         createdAt: Date;
+        total: number;
         status: OrderStatus;
         userId: number;
-        total: number;
         couponId: number | null;
         serviceFee: number;
         discountAmt: number;
     }>;
     handleWebhook(payload: any): Promise<{
+        message: string;
+    }>;
+    previewOrder(userId: number, courseIds: number[], couponId?: number): Promise<{
+        subtotal: number;
+        discountAmt: number;
+        serviceFee: number;
+        total: number;
+    }>;
+    bypassPayment(orderId: number, userId: number): Promise<{
         message: string;
     }>;
     syncPaymentStatus(userId: number, orderId: number): Promise<{
@@ -172,9 +181,9 @@ export declare class OrderService {
     } & {
         id: number;
         createdAt: Date;
+        total: number;
         status: OrderStatus;
         userId: number;
-        total: number;
         couponId: number | null;
         serviceFee: number;
         discountAmt: number;

@@ -11,8 +11,8 @@ export declare class TrainerRequestService {
         experience: string;
     }, cvFile: Express.Multer.File): Promise<{
         user: {
-            id: number;
             name: string;
+            id: number;
             email: string;
         };
     } & {
@@ -26,8 +26,8 @@ export declare class TrainerRequestService {
     }>;
     getAllRequests(status?: string): Promise<({
         user: {
-            id: number;
             name: string;
+            id: number;
             email: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
@@ -43,8 +43,8 @@ export declare class TrainerRequestService {
     })[]>;
     verifyTrainer(requestId: number, status: string): Promise<{
         user: {
-            id: number;
             name: string;
+            id: number;
             email: string;
             role: import("../../generated/prisma/enums").UserRole;
         };

@@ -40,6 +40,10 @@ let AuthController = class AuthController {
         const result = await this.authService.googleLogin(req.user);
         return { data: result, message: 'Google login successful' };
     }
+    async googleAuthMobile(body) {
+        const result = await this.authService.googleLoginMobile(body.idToken);
+        return { data: result, message: 'Google mobile login successful' };
+    }
     async refresh(req) {
         const result = await this.authService.refreshTokens(req.token);
         return { data: result, message: 'Token refreshed successfully' };
@@ -79,6 +83,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "googleAuthRedirect", null);
+__decorate([
+    (0, common_1.Post)('google/mobile'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    __param(0, (0, common_1.Body)(new zod_validation_pipe_1.ZodValidationPipe(auth_validation_1.googleMobileLoginSchema))),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "googleAuthMobile", null);
 __decorate([
     (0, common_1.Post)('refresh'),
     (0, common_1.UseGuards)(jwt_refresh_guard_1.JwtRefreshGuard),

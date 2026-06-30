@@ -9,8 +9,8 @@ export declare class UserService {
         limit?: string;
     }): Promise<{
         data: {
-            id: number;
             name: string;
+            id: number;
             email: string;
             role: import("../../generated/prisma/enums").UserRole;
             avatar: string | null;
@@ -25,8 +25,8 @@ export declare class UserService {
         };
     }>;
     getUserById(id: number): Promise<{
-        id: number;
         name: string;
+        id: number;
         email: string;
         role: import("../../generated/prisma/enums").UserRole;
         avatar: string | null;
@@ -34,8 +34,8 @@ export declare class UserService {
         updatedAt: Date;
     }>;
     getPublicProfile(id: number): Promise<{
-        id: number;
         name: string;
+        id: number;
         email: string;
         role: import("../../generated/prisma/enums").UserRole;
         avatar: string | null;
@@ -45,8 +45,8 @@ export declare class UserService {
     updateProfile(id: number, data: {
         name?: string;
     }): Promise<{
-        id: number;
         name: string;
+        id: number;
         email: string;
         role: import("../../generated/prisma/enums").UserRole;
         avatar: string | null;
@@ -58,8 +58,8 @@ export declare class UserService {
         email?: string;
         avatar?: string;
     }): Promise<{
-        id: number;
         name: string;
+        id: number;
         email: string;
         role: import("../../generated/prisma/enums").UserRole;
         avatar: string | null;
@@ -67,8 +67,8 @@ export declare class UserService {
         updatedAt: Date;
     }>;
     deleteUser(id: number): Promise<{
-        id: number;
         name: string;
+        id: number;
         email: string;
         password: string;
         role: import("../../generated/prisma/enums").UserRole;
@@ -78,8 +78,8 @@ export declare class UserService {
         refreshToken: string | null;
     }>;
     uploadAvatar(id: number, file: Express.Multer.File): Promise<{
-        id: number;
         name: string;
+        id: number;
         email: string;
         role: import("../../generated/prisma/enums").UserRole;
         avatar: string | null;
