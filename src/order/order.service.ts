@@ -218,6 +218,63 @@ export class OrderService {
     return { message: 'Webhook processed' };
   }
 
+  async previewOrder(userId: number, courseIds: number[], couponId?: number) {
+    const courses = await this.prisma.course.findMany({
+      where: { id: { in: courseIds }, status: 'PUBLISHED' },
+    });
+
+    if (courses.length !== courseIds.length) throw new NotFoundException('One or more courses not found');
+
+    let couponDiscountPct = 0;
+    if (couponId) {
+      const coupon = await this.prisma.coupon.findFirst({
+        where: { id: couponId, userId, isUsed: false },
+      });
+      if (!coupon) throw new NotFoundException('Coupon not found or already used');
+      couponDiscountPct = coupon.discountPct;
+    }
+
+    const cartTotal = courses.reduce((sum, course) => sum + (course.isFree ? 0 : course.price), 0);
+    const totalCouponDiscount = cartTotal * (couponDiscountPct / 100);
+    const serviceFee = 10000;
+    
+    const finalTotal = Math.max(0, cartTotal - totalCouponDiscount) + serviceFee;
+
+    return {
+      subtotal: cartTotal,
+      discountAmt: totalCouponDiscount,
+      serviceFee,
+      total: finalTotal,
+    };
+  }
+
+  async bypassPayment(orderId: number, userId: number) {
+    if (env.NODE_ENV === 'production') {
+      throw new ForbiddenException('Bypass payment is not available in production');
+    }
+
+    const order = await this.orderRepository.findById(orderId);
+    if (!order) throw new NotFoundException('Order not found');
+    if (order.userId !== userId) throw new ForbiddenException('Not your order');
+    
+    if ((order.status as OrderStatus) === OrderStatus.COMPLETED) {
+      return { message: 'Order already completed' };
+    }
+
+    await this.orderRepository.updateStatus(orderId, OrderStatus.COMPLETED);
+    
+    for (const item of order.items) {
+      const existing = await this.enrollmentRepository.findByUserAndCourse(order.userId, item.courseId);
+      if (!existing) {
+        await this.enrollmentRepository.create(order.userId, item.courseId);
+      }
+    }
+
+    await this.gamificationService.addXp(order.userId, 50 * order.items.length, 'COURSE_CHECKOUT');
+    
+    return { message: 'Payment bypassed and processed successfully' };
+  }
+
   async syncPaymentStatus(userId: number, orderId: number) {
     const order = await this.orderRepository.findById(orderId);
     if (!order) throw new NotFoundException('Order not found');

@@ -37,6 +37,26 @@ export class OrderController {
     return { data: order, message: 'Order created successfully' };
   }
 
+  @Post('preview')
+  @UseGuards(JwtAuthGuard)
+  async previewOrder(
+    @CurrentUser() user: CurrentUserPayload,
+    @Body(new ZodValidationPipe(createOrderSchema)) body: z.infer<typeof createOrderSchema>,
+  ) {
+    const summary = await this.orderService.previewOrder(user.id, body.courseIds, body.couponId);
+    return { data: summary, message: 'Order preview calculated successfully' };
+  }
+
+  @Post(':id/bypass-pay')
+  @UseGuards(JwtAuthGuard)
+  async bypassPayment(
+    @CurrentUser() user: CurrentUserPayload,
+    @Param('id', ParseIntPipe) orderId: number,
+  ) {
+    const result = await this.orderService.bypassPayment(orderId, user.id);
+    return { data: result, message: 'Order successfully bypassed and paid' };
+  }
+
   @Post('webhook')
   async handleWebhook(@Body() payload: any) {
     const result = await this.orderService.handleWebhook(payload);

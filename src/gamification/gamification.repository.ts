@@ -54,6 +54,34 @@ export class GamificationRepository {
     });
   }
 
+  async executeSpinTransaction(userId: number, amount: number, discountPct: number, activity: string) {
+    return this.prisma.$transaction(async (tx) => {
+      // 1. Atomic decrement check
+      // We use updateMany because it allows us to add `xp: { gte: amount }` as a where condition.
+      // If it finds 0 records, it means the user either doesn't exist or doesn't have enough XP.
+      const result = await tx.userXp.updateMany({
+        where: { userId, xp: { gte: amount } },
+        data: { xp: { decrement: amount } },
+      });
+
+      if (result.count === 0) {
+        throw new Error('Not enough XP or user not found');
+      }
+
+      // 2. Record the history
+      await tx.xpHistory.create({
+        data: { userId, amount: -amount, activity },
+      });
+
+      // 3. Create the coupon
+      const coupon = await tx.coupon.create({
+        data: { userId, discountPct },
+      });
+
+      return coupon;
+    });
+  }
+
   async createCoupon(userId: number, discountPct: number) {
     return this.prisma.coupon.create({
       data: { userId, discountPct },
